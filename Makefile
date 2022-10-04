@@ -40,15 +40,15 @@ LDLIBS = -lft
 #··············································································#
 
 SRCS_PARSE_PATH = parse
-SRCS_PAINT_PATH = paint
+SRCS_DRAW_PATH = draw
 
 SRCS_PARSE = checkmap.c utils.c
-SRCS_PAINT = 
+SRCS_DRAW = 
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
-			$(addprefix $(SRCS_PAINT_PATH)/, $(SRCS_PAINT)) \
+			$(addprefix $(SRCS_DRAW_PATH)/, $(SRCS_DRAW)) \
 			$(SRCS)
-OBJS_NAME_PATH = $(SRCS_PARSE_PATH) $(SRCS_PAINT_PATH)
+OBJS_NAME_PATH = $(SRCS_PARSE_PATH) $(SRCS_DRAW_PATH)
 OBJS_PATH = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME_PATH))
 OBJS_NAME = $(SRCS_NAME:%.c=%.o)
 OBJS = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME))

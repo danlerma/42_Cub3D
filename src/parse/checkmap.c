@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkmap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/04 12:10:57 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/10/04 12:21:02 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	init_map(t_map *map, int fd)
 	map->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
 	if (map->nsew == NULL)
 		error_exit("Malloc failed.");
-	map->bot = "220,100,0";
-	map->top = "225,30,0";
+	map->floor = "220,100,0";
+	map->sky = "225,30,0";
 }
 
 static void	read_map(char *file, t_map *map)
