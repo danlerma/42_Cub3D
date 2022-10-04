@@ -11,8 +11,9 @@
 # define MAGENTA "\033[1;35m"
 # define RESET "\033[0m"
 
-# include <libft.h>
+# include "../lbft/libft.h"
 # include <stdio.h>
 # include <general.h>
+# include <parse.h>
 
 #endif

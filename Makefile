@@ -42,7 +42,7 @@ LDLIBS = -lft
 SRCS_PARSE_PATH = parse
 SRCS_PAINT_PATH = paint
 
-SRCS_PARSE = 
+SRCS_PARSE = checkmap.c utils.c
 SRCS_PAINT = 
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
