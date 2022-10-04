@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 12:09:06 by dlerma-c          #+#    #+#             */
+/*   Updated: 2022/10/04 12:09:06 by dlerma-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 
 # define CUB3D_H
@@ -11,8 +23,9 @@
 # define MAGENTA "\033[1;35m"
 # define RESET "\033[0m"
 
-# include <libft.h>
+# include "../lbft/libft.h"
 # include <stdio.h>
 # include <general.h>
+# include <parse.h>
 
 #endif

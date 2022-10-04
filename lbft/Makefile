@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/08/07 13:40:36 by dlerma-c          #+#    #+#              #
-#    Updated: 2022/10/03 19:39:37 by dlerma-c         ###   ########.fr        #
+#    Created: 2022/10/04 12:06:37 by dlerma-c          #+#    #+#              #
+#    Updated: 2022/10/04 12:06:46 by dlerma-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,9 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c\
 		ft_strnstr.c ft_strrchr.c ft_substr.c ft_tolower.c\
 		ft_toupper.c ft_strtrim.c ft_split.c ft_itoa.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_strmapi.c \
-		ft_striteri.c ft_putendl_fd.c ft_putnbr_fd.c\
-		ft_free_malloc.c ft_print_errors.c ft_open_file.c
+		ft_striteri.c ft_putendl_fd.c ft_putnbr_fd.c \
+		ft_free_malloc.c ft_print_errors.c ft_open_file.c \
+		get_next_line.c get_next_line_utils.c
 
 OBJS = $(SRC:.c=.o)
 
