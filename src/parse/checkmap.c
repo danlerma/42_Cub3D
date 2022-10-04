@@ -1,46 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkmap.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
+/*   Updated: 2022/10/04 12:10:57 by dlerma-c         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
-static void	init_map(t_map **map)
+//TODO texturas
+static void	init_map(t_map *map, int fd)
 {
-	*map = (t_map *)ft_calloc(1 + 1, sizeof(t_map));
-	if (*map == NULL)
+	map->map = (char **)ft_calloc(fd_lines(fd) + 1, sizeof(char *));
+	if (map->map == NULL)
 		error_exit("Malloc failed.");
-	(*map)->map = (char **)ft_calloc(1 + 1, sizeof(char *));
-	if ((*map)->map == NULL)
+	map->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
+	if (map->nsew == NULL)
 		error_exit("Malloc failed.");
-	//TODO texturas
-	(*map)->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
-	if ((*map)->map == NULL)
-		error_exit("Malloc failed.");
-
-	(*map)->bot = "220,100,0";
-	(*map)->top = "225,30,0";
+	map->bot = "220,100,0";
+	map->top = "225,30,0";
 }
 
-static void	read_map(int fd, t_map **map)
+static void	read_map(char *file, t_map *map)
 {
-	// int		i;
+	int	i;
+	int	fd;
 
-	(*map)->map[0] = get_next_line(fd);
-	// i = 0;
-	// while (*map->map[i] != NULL)
-	// {
-	// 	printf(CYAN"%s"RESET, map->map[i]);
-	// 	i++;
-	// 	*map->map[i] = get_next_line(fd);
-	// }
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		error_exit("Something went wrong opening the file.");
+	map->map[0] = get_next_line(fd);
+	i = 0;
+	while (map->map[i] != NULL)
+	{
+		printf("%s", map->map[i]);
+		map->map[++i] = get_next_line(fd);
+	}
+	printf("\n");
+	close(fd);
 }
 
-
-t_map	*checkmap(char *file)
+t_map	check_map(char *file)
 {
-	t_map	*map;
+	t_map	map;
 	int		fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_exit("Something went wrong opening the file.");
-	init_map(&map);
-	read_map(fd, &map);
+	init_map(&map, fd);
+	close(fd);
+	read_map(file, &map);
 	return (map);
 }
