@@ -18,8 +18,8 @@ typedef struct s_map
 {
 	char	**map;
 	char	**nsew;
-	char	*bot;
-	char	*top;
+	char	*floor;
+	char	*sky;
 }t_map;
 
 #endif

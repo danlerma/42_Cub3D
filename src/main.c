@@ -12,7 +12,7 @@
 
 #include <cub3d.h>
 
-void leaks(void)
+void	leaks(void)
 {
 	system("leaks -q cub3D");
 }

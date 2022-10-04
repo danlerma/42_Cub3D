@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.h                                            :+:      :+:    :+:   */
+/*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/04 16:25:04 by dlerma-c         ###   ########.fr       */
+/*   Created: 2022/10/04 15:33:19 by dlerma-c          #+#    #+#             */
+/*   Updated: 2022/10/04 16:39:31 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
+#include <cub3d.h>
 
-# define PARSE_H
+void	check_file(char *file, t_map *map)
+{
+	int		i;
+	int		fd;
+	char	*line;
 
-// checkmap.c
-t_map	check_map(char *file);
-
-//check_file.c
-void	check_file(char *file, t_map *map);
-
-//init.c
-void	init_map(t_map *map, char *file);
-// void	init_parse(t_parse *parse);
-
-//utils.c
-void	error_exit(char *msg);
-void	free_map(t_map *map);
-size_t	fd_lines(int fd);
-
-#endif
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		error_exit("Something went wrong opening the file.");
+	line = get_next_line(fd);
+	i = 0;
+	while (line != NULL)
+	{
+		if (ft)
+		printf("%s", line);
+		line = get_next_line(fd);
+	}
+	printf("\n");
+	close(fd);
+}
