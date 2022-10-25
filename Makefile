@@ -42,8 +42,7 @@ LDLIBS = -lft
 SRCS_PARSE_PATH = parse
 SRCS_DRAW_PATH = draw
 
-SRCS_PARSE =	check_file.c \
-				check_map.c \
+SRCS_PARSE =	check_map.c \
 				utils.c \
 				init.c
 SRCS_DRAW = 

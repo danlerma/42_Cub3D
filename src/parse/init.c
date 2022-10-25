@@ -26,8 +26,6 @@ void	init_map(t_map *map, char *file)
 	map->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
 	if (map->nsew == NULL)
 		error_exit("Malloc failed.");
-	map->floor = "220,100,0";
-	map->sky = "225,30,0";
 	close(fd);
 }
 

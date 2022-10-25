@@ -25,6 +25,7 @@ int	main(int argc, char **argv)
 	if (argc != 2)
 		error_exit("Wrong arguments");
 	map = check_map(argv[1]);
+	show_map(&map);
 	free_map(&map);
 	return (0);
 }

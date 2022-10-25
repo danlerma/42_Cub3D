@@ -14,6 +14,11 @@
 
 # define PARSE_H
 
+typedef struct s_parse
+{
+	int	num_map;
+}t_parse;
+
 // checkmap.c
 t_map	check_map(char *file);
 
@@ -28,5 +33,6 @@ void	init_map(t_map *map, char *file);
 void	error_exit(char *msg);
 void	free_map(t_map *map);
 size_t	fd_lines(int fd);
+void	show_map(t_map *map);
 
 #endif

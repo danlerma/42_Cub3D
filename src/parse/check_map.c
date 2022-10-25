@@ -12,35 +12,78 @@
 
 #include <cub3d.h>
 
-// static void	read_map(char *file, t_map *map)
-// {
-// 	int	i;
-// 	int	fd;
+static int	identify_firs_char(char *line, t_map *map, int i)
+{
+	if (line[i] == 'F')
+		map->floor = ft_strdup(line);
+	else if (line[i] == 'C')
+		map->sky = ft_strdup(line);
+	else if (line[i] == 'N' && line[i + 1] == 'O')
+		map->nsew[0] = ft_strdup(line);
+	else if (line[i] == 'S' && line[i + 1] == 'O')
+		map->nsew[1] = ft_strdup(line);
+	else if (line[i] == 'E' && line[i + 1] == 'A')
+		map->nsew[2] = ft_strdup(line);
+	else if (line[i] == 'W' && line[i + 1] == 'E')
+		map->nsew[3] = ft_strdup(line);
+	else
+		error_exit("Wrong map.");
+	return (0);
+}
 
-// 	fd = open(file, O_RDONLY);
-// 	if (fd == -1)
-// 		error_exit("Something went wrong opening the file.");
-// 	map->map[0] = get_next_line(fd);
-// 	i = 0;
-// 	while (map->map[i] != NULL)
-// 	{ 
-// 		printf("%s", map->map[i]);
-// 		map->map[++i] = get_next_line(fd);
-// 	}
-// 	printf("\n");
-// 	close(fd);
-// }
+static void	identify_line(char *line, t_map *map, t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ' || line[i] == '\n')
+			i++;
+		else if (line[i] == '1' || line[i] == '0')
+		{
+			parse->num_map++;
+			break ;
+		}
+		else if (identify_firs_char(line, map, i) == 0)
+			break ;
+	}
+}
+
+static void	read_file(char *file, t_parse *parse, t_map *map)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		error_exit("Something went wrong opening the file.");
+	line = get_next_line(fd);
+	while (line != NULL)
+	{
+		if (parse->num_map == 0)
+			identify_line(line, map, parse);
+		else
+			parse->num_map++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+}
 
 t_map	check_map(char *file)
 {
 	t_map	map;
+	t_parse	parse;
 	char	*point;
 
 	point = ft_strchr(file, '.');
 	if (point == NULL || ft_strncmp(point, ".cub", ft_strlen(file)) != 0)
 		error_exit("Invalid format.\n");
 	init_map(&map, file);
-	check_file(file, &map);
-	// read_map(file, &map);
+	parse.num_map = 0;
+	read_file(file, &parse, &map);
+	printf("PARSE %d\n", parse.num_map);
 	return (map);
 }
