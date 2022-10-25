@@ -12,20 +12,40 @@
 
 #include <cub3d.h>
 
-//TODO texturas
-void	init_map(t_map *map, char *file)
+void	init(t_map *map, t_parse *parse, char *file)
 {
 	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_exit("Something went wrong opening the file.");
-	map->map = (char **)ft_calloc(fd_lines(fd) + 1, sizeof(char *));
-	if (map->map == NULL)
-		error_exit("Malloc failed.");
 	map->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
 	if (map->nsew == NULL)
 		error_exit("Malloc failed.");
 	close(fd);
+	
+	parse->init_map = 0;
+	parse->num_map = 0;
+	parse->pos_map = 0;
 }
 
+void	init_map(t_map *map, t_parse *parse, char *line)
+{
+	int	i;
+
+	i = 0;
+	// (void)map;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			i++;
+		else if (line[i] == '1' || line[i] == '0')
+		{
+			map->map[parse->pos_map] = ft_substr(line, 0, ft_strlen(line) - 1);
+			parse->pos_map++;
+			break ;
+		}
+		else
+			error_exit("Wrong map line.");
+	}
+}

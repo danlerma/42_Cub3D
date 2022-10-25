@@ -12,6 +12,34 @@
 
 #include <cub3d.h>
 
+static void	save_map(t_map *map, t_parse *parse, char *file)
+{
+	int		fd;
+	int		i;
+	int		pos;
+	char	*line;
+
+	map->map = (char **)ft_calloc(parse->num_map + 1, sizeof(char *));
+	if (map->map == NULL)
+		error_exit("Malloc failed.");
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		error_exit("Something went wrong opening the file.");
+	line = get_next_line(fd);
+	i = 0;
+	pos = 0;
+	while (line != NULL)
+	{
+		i++;
+		if (i >= parse->init_map)
+			init_map(map, parse, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+}
+
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
@@ -31,7 +59,7 @@ static int	identify_firs_char(char *line, t_map *map, int i)
 	return (0);
 }
 
-static void	identify_line(char *line, t_map *map, t_parse *parse)
+static void	identify_line(char *line, t_map *map, t_parse *parse, int num)
 {
 	int	i;
 
@@ -42,6 +70,7 @@ static void	identify_line(char *line, t_map *map, t_parse *parse)
 			i++;
 		else if (line[i] == '1' || line[i] == '0')
 		{
+			parse->init_map = num;
 			parse->num_map++;
 			break ;
 		}
@@ -53,16 +82,19 @@ static void	identify_line(char *line, t_map *map, t_parse *parse)
 static void	read_file(char *file, t_parse *parse, t_map *map)
 {
 	int		fd;
+	int		i;
 	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_exit("Something went wrong opening the file.");
 	line = get_next_line(fd);
+	i = 0;
 	while (line != NULL)
 	{
+		i++;
 		if (parse->num_map == 0)
-			identify_line(line, map, parse);
+			identify_line(line, map, parse, i);
 		else
 			parse->num_map++;
 		free(line);
@@ -81,9 +113,8 @@ t_map	check_map(char *file)
 	point = ft_strchr(file, '.');
 	if (point == NULL || ft_strncmp(point, ".cub", ft_strlen(file)) != 0)
 		error_exit("Invalid format.\n");
-	init_map(&map, file);
-	parse.num_map = 0;
+	init(&map, &parse, file);
 	read_file(file, &parse, &map);
-	printf("PARSE %d\n", parse.num_map);
+	save_map(&map, &parse, file);
 	return (map);
 }
