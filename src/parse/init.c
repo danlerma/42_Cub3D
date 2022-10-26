@@ -54,9 +54,6 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 			break ;
 		}
 		else
-		{
-			printf("%s %c\n", line, line[i]);
 			error_exit("Wrong map line.");
-		}
 	}
 }
