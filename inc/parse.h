@@ -43,4 +43,8 @@ void	error_exit(char *msg);
 void	free_map(t_map *map);
 void	show_map(t_map *map);
 
+//save.c
+void	save_other_data(t_map *map);
+void	save_map(t_map *map, t_parse *parse, char *file);
+
 #endif

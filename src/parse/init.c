@@ -23,12 +23,12 @@ void	init(t_map *map, t_parse *parse, char *file)
 	map->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
 	if (map->nsew == NULL)
 		error_exit("Malloc failed.");
-	map->nsew[0] = ft_strdup(NO);
-	map->nsew[1] = ft_strdup(SO);
-	map->nsew[2] = ft_strdup(EA);
-	map->nsew[3] = ft_strdup(WE);
-	map->floor = ft_strdup(FLOOR);
-	map->sky = ft_strdup(SKY);
+	map->nsew[0] = NULL;
+	map->nsew[1] = NULL;
+	map->nsew[2] = NULL;
+	map->nsew[3] = NULL;
+	map->floor = NULL;
+	map->sky = NULL;
 	parse->init_map = 0;
 	parse->num_map = 0;
 	parse->pos_map = 0;

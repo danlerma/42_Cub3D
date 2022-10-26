@@ -12,66 +12,20 @@
 
 #include <cub3d.h>
 
-static void	save_map(t_map *map, t_parse *parse, char *file)
-{
-	int		fd;
-	int		i;
-	int		pos;
-	char	*line;
-
-	map->map = (char **)ft_calloc(parse->num_map + 1, sizeof(char *));
-	if (map->map == NULL)
-		error_exit("Malloc failed.");
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		error_exit("Something went wrong opening the file.");
-	line = get_next_line(fd);
-	i = 0;
-	pos = 0;
-	while (line != NULL)
-	{
-		i++;
-		if (i >= parse->init_map)
-			init_map(map, parse, line);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-}
-
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
-	{
-		free(map->floor);
 		map->floor = ft_strdup(line);
-	}
 	else if (line[i] == 'C')
-	{
-		free(map->sky);
 		map->sky = ft_strdup(line);
-	}
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-	{
-		free(map->nsew[0]);
 		map->nsew[0] = ft_strdup(line);
-	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-	{
-		free(map->nsew[1]);
 		map->nsew[1] = ft_strdup(line);
-	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-	{
-		free(map->nsew[2]);
 		map->nsew[2] = ft_strdup(line);
-	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-	{
-		free(map->nsew[3]);
 		map->nsew[3] = ft_strdup(line);
-	}
 	else
 		error_exit("Wrong map.");
 	return (0);
@@ -134,5 +88,6 @@ t_map	check_map(char *file)
 	init(&map, &parse, file);
 	read_file(file, &parse, &map);
 	save_map(&map, &parse, file);
+	save_other_data(&map);
 	return (map);
 }
