@@ -14,12 +14,12 @@
 
 # define PARSE_H
 
-# define FLOOR "F 220,100,0"
-# define SKY "C 225,30,0"
-# define NO "NO ./ruta_a_la_textura_norte"
-# define SO "SO ./ruta_a_la_textura_sur"
-# define EA "EA ./ruta_a_la_textura_este"
-# define WE "WE ./ruta_a_la_textura_oeste"
+# define FLOOR "------ 220,100,0 ------"
+# define SKY "------ 225,30,0 ------"
+# define NO "------ ./ruta_a_la_textura_norte ------"
+# define SO "------ ./ruta_a_la_textura_sur ------"
+# define EA "------ ./ruta_a_la_textura_este ------"
+# define WE "------ ./ruta_a_la_textura_oeste ------"
 
 typedef struct s_parse
 {

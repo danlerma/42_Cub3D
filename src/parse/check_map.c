@@ -12,20 +12,34 @@
 
 #include <cub3d.h>
 
+static char	*assing_walls(char *line)
+{
+	char	**split;
+	char	*aux;
+
+	split = ft_split(line, ' ');
+	if (ft_strchr(split[1], '\n'))
+		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
+	else
+		aux = ft_strdup(split[1]);
+	ft_free_malloc(split);
+	return(aux);
+}
+
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
-		map->floor = ft_strdup(line);
+		map->floor = assing_walls(line);
 	else if (line[i] == 'C')
-		map->sky = ft_strdup(line);
+		map->sky = assing_walls(line);
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-		map->nsew[0] = ft_strdup(line);
+		map->nsew[0] = assing_walls(line);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		map->nsew[1] = ft_strdup(line);
+		map->nsew[1] = assing_walls(line);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		map->nsew[2] = ft_strdup(line);
+		map->nsew[2] = assing_walls(line);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		map->nsew[3] = ft_strdup(line);
+		map->nsew[3] = assing_walls(line);
 	else
 		error_exit("Wrong map.");
 	return (0);
