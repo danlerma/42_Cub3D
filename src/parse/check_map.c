@@ -87,7 +87,8 @@ t_map	check_map(char *file)
 		error_exit("Invalid format.\n");
 	init(&map, &parse, file);
 	read_file(file, &parse, &map);
-	save_map(&map, &parse, file);
+	if (parse.init_map != -1)
+		save_map(&map, &parse, file);
 	save_other_data(&map);
 	return (map);
 }

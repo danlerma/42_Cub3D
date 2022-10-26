@@ -26,6 +26,8 @@ void	save_other_data(t_map *map)
 		map->nsew[2] = ft_strdup(EA);
 	if (map->nsew[3] == NULL)
 		map->nsew[3] = ft_strdup(WE);
+	if (map->map == NULL)
+		error_exit("There is no map.");
 }
 
 void	save_map(t_map *map, t_parse *parse, char *file)

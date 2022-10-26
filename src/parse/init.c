@@ -29,7 +29,8 @@ void	init(t_map *map, t_parse *parse, char *file)
 	map->nsew[3] = NULL;
 	map->floor = NULL;
 	map->sky = NULL;
-	parse->init_map = 0;
+	map->map = NULL;
+	parse->init_map = -1;
 	parse->num_map = 0;
 	parse->pos_map = 0;
 }
@@ -53,6 +54,9 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 			break ;
 		}
 		else
+		{
+			printf("%s %c\n", line, line[i]);
 			error_exit("Wrong map line.");
+		}
 	}
 }
