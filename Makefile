@@ -41,8 +41,10 @@ LDLIBS = -lft
 
 SRCS_PARSE_PATH = parse
 SRCS_DRAW_PATH = draw
-
-SRCS_PARSE = checkmap.c utils.c
+SRCS_PARSE =	check_map.c \
+				utils.c \
+				init.c \
+				save.c
 SRCS_DRAW = 
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
