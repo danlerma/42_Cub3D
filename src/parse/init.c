@@ -19,11 +19,16 @@ void	init(t_map *map, t_parse *parse, char *file)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_exit("Something went wrong opening the file.");
+	close(fd);
 	map->nsew = (char **)ft_calloc(4 + 1, sizeof(char *));
 	if (map->nsew == NULL)
 		error_exit("Malloc failed.");
-	close(fd);
-	
+	map->nsew[0] = ft_strdup(NO);
+	map->nsew[1] = ft_strdup(SO);
+	map->nsew[2] = ft_strdup(EA);
+	map->nsew[3] = ft_strdup(WE);
+	map->floor = ft_strdup(FLOOR);
+	map->sky = ft_strdup(SKY);
 	parse->init_map = 0;
 	parse->num_map = 0;
 	parse->pos_map = 0;
@@ -34,14 +39,16 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 	int	i;
 
 	i = 0;
-	// (void)map;
 	while (line[i])
 	{
 		if (line[i] == ' ')
 			i++;
 		else if (line[i] == '1' || line[i] == '0')
 		{
-			map->map[parse->pos_map] = ft_substr(line, 0, ft_strlen(line) - 1);
+			if (ft_strchr(line, '\n'))
+				map->map[parse->pos_map] = ft_substr(line, 0, ft_strlen(line) - 1);
+			else
+				map->map[parse->pos_map] = ft_strdup(line);
 			parse->pos_map++;
 			break ;
 		}

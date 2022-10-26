@@ -43,17 +43,35 @@ static void	save_map(t_map *map, t_parse *parse, char *file)
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
+	{
+		free(map->floor);
 		map->floor = ft_strdup(line);
+	}
 	else if (line[i] == 'C')
+	{
+		free(map->sky);
 		map->sky = ft_strdup(line);
+	}
 	else if (line[i] == 'N' && line[i + 1] == 'O')
+	{
+		free(map->nsew[0]);
 		map->nsew[0] = ft_strdup(line);
+	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
+	{
+		free(map->nsew[1]);
 		map->nsew[1] = ft_strdup(line);
+	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
+	{
+		free(map->nsew[2]);
 		map->nsew[2] = ft_strdup(line);
+	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
+	{
+		free(map->nsew[3]);
 		map->nsew[3] = ft_strdup(line);
+	}
 	else
 		error_exit("Wrong map.");
 	return (0);
