@@ -23,16 +23,16 @@
 
 typedef struct s_parse
 {
-	int	init_map;
-	int	num_map;
-	int	pos_map;
+	int	init_map; //posicion donde empieza el mapa
+	int	num_map; //cantidad de lineas de mapa
+	int	pos_map; //posicion para guardar el mapa linea a linea
 }t_parse;
 
-// checkmap.c
-t_map	check_map(char *file);
-
 //check_file.c
-void	check_file(char *file, t_map *map);
+t_map	check_file(char *file);
+
+//check_map.c
+void	check_map(t_map *map, t_parse *parse);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);

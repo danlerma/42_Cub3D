@@ -21,10 +21,10 @@ int	main(int argc, char **argv)
 {
 	t_map	map;
 
-	atexit(leaks);
+	// atexit(leaks);
 	if (argc != 2)
 		error_exit("Wrong arguments");
-	map = check_map(argv[1]);
+	map = check_file(argv[1]);
 	show_map(&map);
 	free_map(&map);
 	return (0);

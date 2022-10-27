@@ -34,7 +34,6 @@ void	save_map(t_map *map, t_parse *parse, char *file)
 {
 	int		fd;
 	int		i;
-	int		pos;
 	char	*line;
 
 	map->map = (char **)ft_calloc(parse->num_map + 1, sizeof(char *));
@@ -45,7 +44,6 @@ void	save_map(t_map *map, t_parse *parse, char *file)
 		error_exit("Something went wrong opening the file.");
 	line = get_next_line(fd);
 	i = 0;
-	pos = 0;
 	while (line != NULL)
 	{
 		i++;
