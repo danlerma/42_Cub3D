@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:42:43 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/04 16:30:45 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/01 18:53:05 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	init(t_map *map, t_parse *parse, char *file)
 	parse->init_map = -1;
 	parse->num_map = 0;
 	parse->pos_map = 0;
+	parse->frst_chr = 0;
 }
 
 void	init_map(t_map *map, t_parse *parse, char *line)

@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/04 16:25:04 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/01 18:50:57 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_parse
 	int	init_map; //posicion donde empieza el mapa
 	int	num_map; //cantidad de lineas de mapa
 	int	pos_map; //posicion para guardar el mapa linea a linea
+	int	frst_chr; //primer caracter no espacio
 }t_parse;
 
 //check_file.c
