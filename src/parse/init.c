@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:42:43 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/01 18:53:05 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/02 16:37:31 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 		else if (line[i] == '1' || line[i] == '0')
 		{
 			if (ft_strchr(line, '\n'))
-				map->map[parse->pos_map] = ft_substr(line, 0, ft_strlen(line) - 1);
+				map->map[parse->pos_map] = ft_substr(line, 0,
+						ft_strlen(line) - 1);
 			else
 				map->map[parse->pos_map] = ft_strdup(line);
 			parse->pos_map++;
