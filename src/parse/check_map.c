@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/02 17:24:23 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:09:17 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 //caracter de en la posicion exacta antes , el caracter
 //tengo ue comprobar arriba y abajo
 
-// void	collapse(char this, char up, char down, char next)
-// {
-// 	// if ()
-// 	printf("%c(%d)    %c(%d)    %c(%d)    %c(%d)\n", this, this, up, up, down,down, next,next);
-// 	if (this == '0' && (next != '1' && next != '0'))
-// 		error_exit("Map is not closed.");
-// 	if (this == '0' && (up != '1' && up != '0'))
-// 		error_exit("Map is not closed.");
-// 	if (this == '0' && (down != '1' && down != '0'))
-// 		error_exit("Map is not closed.");
-// }
+void	collapse(char this, char up, char down, char next)
+{
+	// if ()
+	printf(RED"%c(%d)    %c(%d)    %c(%d)    %c(%d)\n"RESET, this, this, up, up, down,down, next,next);
+	if (this == '0' && (next != '1' && next != '0'))
+		error_exit("Map is not closed.");
+	if (this == '0' && (up != '1' && up != '0'))
+		error_exit("Map is not closed.");
+	if (this == '0' && (down != '1' && down != '0'))
+		error_exit("Map is not closed.");
+}
 
 // void	position()
 
@@ -43,17 +43,7 @@ static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 		{
 			if (parse->frst_chr == 0)
 				parse->frst_chr = i;
-			if (row[parse->frst_chr] != '1')
-				error_exit("Middle walls are not closed.");
-			if (row[i] == '0' && (row[i + 1] != '1' && row[i + 1] != '0' && row[i + 1] != 'N'
-				&& row[i + 1] != 'S' && row[i + 1] != 'E' && row[i + 1] != 'W'))
-				error_exit("LOL supongo que esta mal.");
-			if (row[i] == '0' && (prev[i] != '1' && prev[i] != '0' && prev[i] != 'N'
-				&& prev[i] != 'S' && prev[i] != 'E' && prev[i] != 'W'))
-				error_exit("Por arriba mal.");
-			if (row[i] == '0' && (next[i] != '1' && next[i] != '0' && next[i] != 'N'
-				&& next[i] != 'S' && next[i] != 'E' && next[i] != 'W'))
-				error_exit("Por abajo mal.");
+			collapse(row[i], prev[i], next[i], row[i + 1]);
 			i++;
 		}
 	}
