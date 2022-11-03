@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/02 16:31:34 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/03 17:06:13 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define SO "------ ./ruta_a_la_textura_sur ------"
 # define EA "------ ./ruta_a_la_textura_este ------"
 # define WE "------ ./ruta_a_la_textura_oeste ------"
+# define SPECIAL "NSEW01"
 
 typedef struct s_parse
 {
@@ -28,6 +29,7 @@ typedef struct s_parse
 	int	pos_map; //posicion para guardar el mapa linea a linea
 	int	frst_chr; //primer caracter no espacio
 	int	pj; //posicion de personaje (NSWE)
+	int	max_len; //maxima longitud de la linea mayor
 }t_parse;
 
 //check_file.c

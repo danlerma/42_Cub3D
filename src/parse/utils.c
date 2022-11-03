@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:41 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/04 12:08:42 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/03 15:54:15 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	show_map(t_map *map)
 	printf(CYAN"------------ MAP ------------\n"RESET);
 	while (map->map[i])
 	{
-		printf("%s\n", map->map[i]);
+		printf("%s#\n", map->map[i]);
 		i++;
 	}
 
