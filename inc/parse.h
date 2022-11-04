@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/03 17:06:13 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/04 14:52:09 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	init_map(t_map *map, t_parse *parse, char *line);
 void	error_exit(char *msg);
 void	free_map(t_map *map);
 void	show_map(t_map *map);
+int		count_last_char(char *str, char c);
 
 //save.c
 void	save_other_data(t_map *map);

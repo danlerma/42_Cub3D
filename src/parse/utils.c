@@ -6,11 +6,31 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:41 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/03 15:54:15 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:24:21 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+int	count_last_char(char *str, char c)
+{
+	int	i;
+	int	len;
+
+	i = 0;
+
+	if (str != NULL)
+	{
+		len = ft_strlen(str);
+		while (len > 0)
+		{
+			len--;
+			if (str[len] == c)
+				return (len);
+		}
+	}
+	return (-1);
+}
 
 void	show_map(t_map *map)
 {

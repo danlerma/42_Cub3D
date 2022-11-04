@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/03 17:09:17 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:13:14 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void	collapse(char this, char up, char down, char next)
 		error_exit("Map is not closed.");
 	if (this == '0' && (down != '1' && down != '0'))
 		error_exit("Map is not closed.");
-}
-
-// void	position()
+} 
 
 static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 {
