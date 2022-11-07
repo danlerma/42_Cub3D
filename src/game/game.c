@@ -61,22 +61,22 @@ t_player *init_player(t_map *map)
 	}
 	player->dir = (float)0;
 	if(map->map[(int)player->y][(int)player->x] == 'E')
-		player->dir += (M_PI / 2);
+		player->dir += (M_PI_2);
 	else if(map->map[(int)player->y][(int)player->x] == 'S')
 		player->dir += M_PI;
 	else if(map->map[(int)player->y][(int)player->x] == 'W')
-		player->dir += (3 * M_PI / 2);
+		player->dir += (3 * M_PI_2);
 	player->keys = init_keys();
 	return(player);
 }
 
 void init_game(t_play *game, t_map *map)
 {
-	// game->mlx = mlx_init();
-	// game->win = mlx_new_window();
-	game->map = map->map;
+	game->mlx = mlx_init();
+	game->win = mlx_new_window();
+	game->map = map;
 	game->player = init_player(map);
-	game->sprites = get_sprites(game, map);
+	// game->sprites = get_sprites(game, map);
 }
 
 void game(t_map *map)

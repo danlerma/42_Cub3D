@@ -24,6 +24,7 @@ typedef struct s_player
 	t_keys	*keys;
 }	t_player;
 
+
 typedef struct s_img
 {
 	void	*img;

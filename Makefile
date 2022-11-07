@@ -72,7 +72,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LBFT_PATH)
-	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) $(LDLIBS) -lmlx -framework OpenGL -framework AppKit
 
 debug: CFLAGS += -fsanitize=address -g3
 debug: $(NAME)
