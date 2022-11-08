@@ -80,7 +80,7 @@ debug: CFLAGS += -fsanitize=address -g3
 debug: $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ -lmlx -framework OpenGL -framework AppKit
 
 $(OBJS): | $(OBJ_PATH) $(OBJS_PATH)
 
