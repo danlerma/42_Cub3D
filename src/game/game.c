@@ -70,13 +70,48 @@ t_player *init_player(t_map *map)
 	return(player);
 }
 
+t_sprites *get_sprites(t_play *game, t_map *map)
+{
+	t_sprites *sprites;
+
+	sprites = malloc(sizeof(t_sprites) * 1);
+	sprites->north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
+			game->sprites->north.width, game->sprites->north.height);
+	sprites->south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
+			game->sprites->south.width, game->sprites->south.height);
+	sprites->east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
+			game->sprites->east.width, game->sprites->east.height);
+	sprites->west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
+			game->sprites->west.width, game->sprites->west.height); 		// gestionar tamaños cuando sepa que cojones
+
+	sprites->north.data_addr = mlx_get_data_addr(game->sprites->north.img, game->sprites->north.bbp,
+			game->sprites->north.size_line, game->sprites->north.endian);
+	sprites->south.data_addr = mlx_get_data_addr(game->sprites->south.img, game->sprites->south.bbp,
+			game->sprites->south.size_line, game->sprites->south.endian);
+	sprites->east.data_addr = mlx_get_data_addr(game->sprites->east.img, game->sprites->east.bbp,
+			game->sprites->east.size_line, game->sprites->east.endian);
+	sprites->west.data_addr =mlx_get_data_addre(game->sprites->west.img, game->sprites->west.bbp,
+			game->sprites->west.size_line, game->sprites->west.endian);
+}
+
 void init_game(t_play *game, t_map *map)
 {
 	game->mlx = mlx_init();
-	game->win = mlx_new_window();
+	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	game->map = map;
 	game->player = init_player(map);
-	// game->sprites = get_sprites(game, map);
+	game->sprites = get_sprites(game, map);
+	game->background.width = WIN_WIDTH;
+	game->background.height = WIN_HEIGHT;
+	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->background.data_addr = mlx_get_data_addr(game->background.img,
+			game->background.bbp, game->background.size_line, game->background.endian);
+	// game->minimap.width = MINIMAP_WIDTH;
+	// game->minimap.height = MINIMAP_HEIGHT;
+	// game->minimap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	// game->minimap.data_addr = mlx_get_data_addr(game->minimap.img,
+	// 		game->minimap.bbp, game->minimap.size_line, game->minimap.endian);
+	
 }
 
 void game(t_map *map)
@@ -85,10 +120,10 @@ void game(t_map *map)
 
 
 	init_game(&game, map);			//variables mlx + datos estructura general
-	printf("PROBANDO\n");
 	// mlx_loop_hook(mlx->mlx, play_game, game);	//función juego + struct juego
 	// mlx_hook(mlx->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
 	// mlx_hook(mlx->win, 2, 1L << 0, k_released, game);	//función gestión soltar teclas + struct juego
+	printf("PROBANDO\n");
 	// check_movement();
 	// mlx_hook(mlx->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
 	// mlx_loop(mlx->mlx);				//comprobar si hace falta

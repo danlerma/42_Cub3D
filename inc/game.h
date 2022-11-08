@@ -2,6 +2,9 @@
 
 # define GAME_H
 
+# define WIN_WIDTH 3200
+# define WIN_HEIGHT 1080
+
 # include <math.h>
 
 typedef struct s_keys
@@ -51,6 +54,8 @@ typedef struct s_play
 	t_map		*map;
 	t_player	*player;
 	t_sprites	*sprites;
+	t_img		background;
+	t_img		minimap;
 
 }	t_play;
 
