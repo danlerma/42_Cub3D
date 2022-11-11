@@ -27,5 +27,7 @@
 # include <stdio.h>
 # include <general.h>
 # include <parse.h>
+# include <game.h>
+# include <mlx.h>
 
 #endif

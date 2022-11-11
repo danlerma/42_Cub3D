@@ -40,17 +40,17 @@ LDLIBS = -lft
 #··············································································#
 
 SRCS_PARSE_PATH = parse
-SRCS_DRAW_PATH = draw
-SRCS_PARSE =	check_map.c \
-				utils.c \
-				init.c \
-				save.c
-SRCS_DRAW = 
+
+SRCS_GAME_PATH = game
+
+SRCS_PARSE = checkmap.c utils.c
+SRCS_GAME = game.c
+
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
-			$(addprefix $(SRCS_DRAW_PATH)/, $(SRCS_DRAW)) \
+			$(addprefix $(SRCS_GAME_PATH)/, $(SRCS_GAME)) \
 			$(SRCS)
-OBJS_NAME_PATH = $(SRCS_PARSE_PATH) $(SRCS_DRAW_PATH)
+OBJS_NAME_PATH = $(SRCS_PARSE_PATH) $(SRCS_GAME_PATH)
 OBJS_PATH = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME_PATH))
 OBJS_NAME = $(SRCS_NAME:%.c=%.o)
 OBJS = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME))
@@ -74,7 +74,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LBFT_PATH)
-	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) $(LDLIBS)
+	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) $(LDLIBS) -lmlx -framework OpenGL -framework AppKit
 
 debug: CFLAGS += -fsanitize=address -g3
 debug: $(NAME)
