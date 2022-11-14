@@ -14,7 +14,7 @@
 
 void	leaks(void)
 {
-	system("leaks -q cub3D");
+	system("leaks -q cub3D\n");
 }
 
 int	main(int argc, char **argv)

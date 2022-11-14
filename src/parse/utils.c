@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:41 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/04 15:24:21 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/14 14:43:37 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	count_last_char(char *str, char c)
 		{
 			len--;
 			if (str[len] == c)
-				return (len);
+				return (len + 1);
 		}
 	}
 	return (-1);
@@ -51,7 +51,7 @@ void	show_map(t_map *map)
 		printf("%s#\n", map->map[i]);
 		i++;
 	}
-
+	// printf("-_>%d\n", map->map[i][3]);
 }
 
 size_t	fd_lines(int fd)
