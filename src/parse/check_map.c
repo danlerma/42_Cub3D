@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/04 15:13:14 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/14 16:52:45 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 
 	i = 0;
 	start = 0;
+			printf(YELLOW"     THIS      UP      DOWN      NEXT\n"RESET);
 	while (row[i])
 	{
 		if (row[i] == ' ' && parse->frst_chr == 0)
@@ -41,6 +42,7 @@ static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 		{
 			if (parse->frst_chr == 0)
 				parse->frst_chr = i;
+			printf(YELLOW"%d -> "RESET, i);
 			collapse(row[i], prev[i], next[i], row[i + 1]);
 			i++;
 		}
