@@ -1,14 +1,12 @@
 #include <cub3d.h>
 
-// void draw_walls()
+// void	draw_walls()
 // {
 // 	raycasting();
 // 	bresenham();
-	
 // }
 
-
-// void play_game(t_play *game)
+// void	play_game(t_play *game)
 // {
 // 	mlx_clear_window(mlx->mlx, mlx->win);
 // 	draw_background();			//pinta fondo cielo y suelo		comprobar si esto hace un segfault en la primera vuelta
@@ -17,9 +15,9 @@
 // 	mlx_put_image_to_window();	//pproyectar dibujo en ventana
 // }
 
-t_keys *init_keys(void)
+t_keys	*init_keys(void)
 {
-	t_keys *keys;
+	t_keys	*keys;
 
 	keys = malloc(sizeof(t_keys) * 1);
 	if (keys == NULL)
@@ -32,15 +30,14 @@ t_keys *init_keys(void)
 	keys->a = 0;
 	keys->s = 0;
 	keys->d = 0;
-	return(keys);
+	return (keys);
 }
 
-
-t_player *init_player(t_map *map)
+t_player	*init_player(t_map *map)
 {
-	int i;
-	int j;
-	t_player *player;
+	int			i;
+	int			j;
+	t_player	*player;
 
 	player = malloc(sizeof(t_player) * 1);
 	if (player == NULL)
@@ -49,9 +46,9 @@ t_player *init_player(t_map *map)
 	while (map->map[++i])
 	{
 		j = -1;
-		while(map->map[i][++j])
+		while (map->map[i][++j])
 		{
-			if(map->map[i][j] == 'N' || map->map[i][j] == 'S'
+			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
 			|| map->map[i][j] == 'E' || map->map[i][j] == 'W')
 			{
 				player->x = (float)j;
@@ -60,19 +57,19 @@ t_player *init_player(t_map *map)
 		}
 	}
 	player->dir = (float)0;
-	if(map->map[(int)player->y][(int)player->x] == 'E')
+	if (map->map[(int)player->y][(int)player->x] == 'E')
 		player->dir += (M_PI_2);
-	else if(map->map[(int)player->y][(int)player->x] == 'S')
+	else if (map->map[(int)player->y][(int)player->x] == 'S')
 		player->dir += M_PI;
-	else if(map->map[(int)player->y][(int)player->x] == 'W')
+	else if (map->map[(int)player->y][(int)player->x] == 'W')
 		player->dir += (3 * M_PI_2);
 	player->keys = init_keys();
-	return(player);
+	return (player);
 }
 
-t_sprites *get_sprites(t_play *game, t_map *map)
+t_sprites	*get_sprites(t_play *game, t_map *map)
 {
-	t_sprites *sprites;
+	t_sprites	*sprites;
 
 	sprites = malloc(sizeof(t_sprites) * 1);
 	sprites->north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
@@ -82,8 +79,7 @@ t_sprites *get_sprites(t_play *game, t_map *map)
 	sprites->east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
 			&game->sprites->east.width, &game->sprites->east.height);
 	sprites->west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
-			&game->sprites->west.width, &game->sprites->west.height); 		// gestionar tamaños cuando sepa que cojones
-
+			&game->sprites->west.width, &game->sprites->west.height);		// gestionar tamaños cuando sepa que cojones
 	sprites->north.data_addr = mlx_get_data_addr(game->sprites->north.img, &game->sprites->north.bbp,
 			&game->sprites->north.size_line, &game->sprites->north.endian);
 	sprites->south.data_addr = mlx_get_data_addr(game->sprites->south.img, &game->sprites->south.bbp,
@@ -95,7 +91,7 @@ t_sprites *get_sprites(t_play *game, t_map *map)
 	return (sprites);
 }
 
-void init_game(t_play *game, t_map *map)
+void	init_game(t_play *game, t_map *map)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
@@ -112,13 +108,11 @@ void init_game(t_play *game, t_map *map)
 	// game->minimap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	// game->minimap.data_addr = mlx_get_data_addr(game->minimap.img,
 	// 		game->minimap.bbp, game->minimap.size_line, game->minimap.endian);
-	
 }
 
-void game(t_map *map)
+void	game(t_map *map)
 {
-	t_play game;
-
+	t_play	game;
 
 	init_game(&game, map);			//variables mlx + datos estructura general
 	// mlx_loop_hook(mlx->mlx, play_game, game);	//función juego + struct juego
@@ -128,7 +122,6 @@ void game(t_map *map)
 	// check_movement();
 	// mlx_hook(mlx->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
 	// mlx_loop(mlx->mlx);				//comprobar si hace falta
-
 }
 
 

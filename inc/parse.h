@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 14:00:16 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:36:22 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 # define PARSE_H
 
-# define FLOOR "------ 220,100,0 ------"
-# define SKY "------ 225,30,0 ------"
-# define NO "------ ./ruta_a_la_textura_norte ------"
-# define SO "------ ./ruta_a_la_textura_sur ------"
-# define EA "------ ./ruta_a_la_textura_este ------"
-# define WE "------ ./ruta_a_la_textura_oeste ------"
+# define FLOOR "150,200,15"
+# define SKY "180,30,50"
+# define NO "img/wall_north.xmp"
+# define SO "img/wall_south.xmp"
+# define EA "img/wall_east.xmp"
+# define WE "img/wall_west.xmp"
 # define VALID "10NSEW"
 
 typedef struct s_parse
 {
-	int	init_map; //posicion donde empieza el mapa
-	int	num_map; //cantidad de lineas de mapa
-	int	pos_map; //posicion para guardar el mapa linea a linea
-	int	frst_chr; //primer caracter no espacio
-	int	pj; //posicion de personaje (NSWE)
-	int	max_len; //maxima longitud de la linea mayor
+	int	init_map;
+	int	num_map;
+	int	pos_map;
+	int	frst_chr;
+	int	pj;
+	int	max_len;
 }t_parse;
 
 //check_file.c

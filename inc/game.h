@@ -5,8 +5,6 @@
 # define WIN_WIDTH 3200
 # define WIN_HEIGHT 1080
 
-# include <math.h>
-
 typedef struct s_keys
 {
 	int	up;
@@ -26,7 +24,6 @@ typedef struct s_player
 	float	dir;
 	t_keys	*keys;
 }	t_player;
-
 
 typedef struct s_img
 {
@@ -60,14 +57,9 @@ typedef struct s_play
 }	t_play;
 
 // main_game.c
-void game(t_map *map);
-
+void	game(t_map *map);
 
 // hooks.c
-int	close_window(t_play *game);
+int		close_window(t_play *game);
 
 #endif
-
-
-
-

@@ -25,6 +25,7 @@
 
 # include "../lbft/libft.h"
 # include <stdio.h>
+# include <math.h>
 # include <mlx.h>
 # include <general.h>
 # include <parse.h>

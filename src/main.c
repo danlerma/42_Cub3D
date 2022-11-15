@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 {
 	t_map	map;
 
-  atexit(leaks);
+	atexit(leaks);
 	if (argc != 2)
 		error_exit("Wrong arguments");
 	map = check_file(argv[1]);
