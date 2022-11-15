@@ -14,7 +14,7 @@
 
 void	leaks(void)
 {
-	system("leaks -q cub3D");
+	system("leaks -q cub3D\n");
 }
 
 int	main(int argc, char **argv)
@@ -24,7 +24,7 @@ int	main(int argc, char **argv)
   atexit(leaks);
 	if (argc != 2)
 		error_exit("Wrong arguments");
-	map = check_map(argv[1]);
+	map = check_file(argv[1]);
 	show_map(&map);
 	game(&map);
 	free_map(&map);

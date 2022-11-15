@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:19:20 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/26 12:19:27 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/03 16:55:38 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ void	save_other_data(t_map *map)
 
 void	save_map(t_map *map, t_parse *parse, char *file)
 {
+	char	*line;
 	int		fd;
 	int		i;
-	int		pos;
-	char	*line;
 
 	map->map = (char **)ft_calloc(parse->num_map + 1, sizeof(char *));
 	if (map->map == NULL)
@@ -45,7 +44,6 @@ void	save_map(t_map *map, t_parse *parse, char *file)
 		error_exit("Something went wrong opening the file.");
 	line = get_next_line(fd);
 	i = 0;
-	pos = 0;
 	while (line != NULL)
 	{
 		i++;
