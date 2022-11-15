@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:41 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:22:23 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:46:24 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,13 @@ void	show_map(t_map *map)
 
 	i = 0;
 	printf(CYAN"------------ NSEW ------------\n"RESET);
-	printf("map->nsew[0]-> %s\n", map->nsew[0]);
-	printf("map->nsew[1]-> %s\n", map->nsew[1]);
-	printf("map->nsew[2]-> %s\n", map->nsew[2]);
-	printf("map->nsew[3]-> %s\n", map->nsew[3]);
+	printf("map->nsew[0] -> %s\n", map->nsew[0]);
+	printf("map->nsew[1] -> %s\n", map->nsew[1]);
+	printf("map->nsew[2] -> %s\n", map->nsew[2]);
+	printf("map->nsew[3] -> %s\n", map->nsew[3]);
 	printf(CYAN"------------ F & C ------------\n"RESET);
 	printf("map->floor -> %s\n", map->floor);
-	printf("map->sky -> %s\n", map->sky);
+	printf("map->sky   -> %s\n", map->sky);
 	printf(CYAN"------------ MAP ------------\n"RESET);
 	while (map->map[i])
 	{

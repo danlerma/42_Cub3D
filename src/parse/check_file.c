@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:25:53 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/15 15:47:15 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ static void	read_file(t_parse *parse, t_map *map, int fd)
 			identify_line(line, map, parse, i);
 		else
 		{
-			if ((int)count_last_char(line, '1') > parse->max_len)
+			if (count_last_char(line, '1') > parse->max_len)
 				parse->max_len = count_last_char(line, '1');
 			parse->num_map++;
 		}
 		if (ft_strrchr(line, '\n') == NULL
-			&& ((int)count_last_char(line, '1') == parse->max_len))
+			&& (count_last_char(line, '1') == parse->max_len))
 			parse->max_len++;
 		free(line);
 		line = get_next_line(fd);
