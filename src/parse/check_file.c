@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/14 17:22:57 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:06:02 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ t_map	check_file(char *file)
 	if (parse.init_map != -1)
 		save_map(&map, &parse, file);
 	save_other_data(&map);
-	// check_map(&map, &parse);
-	
+	check_map(&map, &parse);
+	printf("%d\n", parse.pj);
 	return (map);
 }

@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/14 16:52:45 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:08:50 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,21 @@
 //caracter de en la posicion exacta antes , el caracter
 //tengo ue comprobar arriba y abajo
 
-void	collapse(char this, char up, char down, char next)
+int	collapse(char this, char up, char down, char next)
 {
-	// if ()
 	printf(RED"%c(%d)    %c(%d)    %c(%d)    %c(%d)\n"RESET, this, this, up, up, down,down, next,next);
-	if (this == '0' && (next != '1' && next != '0'))
-		error_exit("Map is not closed.");
-	if (this == '0' && (up != '1' && up != '0'))
-		error_exit("Map is not closed.");
-	if (this == '0' && (down != '1' && down != '0'))
-		error_exit("Map is not closed.");
+	if (ft_strchr(&VALID[1], this) != NULL)
+	{
+		if (ft_strchr(VALID, up) == NULL)
+			error_exit("UP WRONG");
+		if (ft_strchr(VALID, down) == NULL)
+			error_exit("DOWN WRONG");
+		if (ft_strchr(VALID, next) == NULL)
+			error_exit("NEXT WRONG");
+		if (ft_strchr(&VALID[2], this) != NULL)
+			return (1);
+	}
+	return (0);
 } 
 
 static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
@@ -43,7 +48,8 @@ static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 			if (parse->frst_chr == 0)
 				parse->frst_chr = i;
 			printf(YELLOW"%d -> "RESET, i);
-			collapse(row[i], prev[i], next[i], row[i + 1]);
+			if (collapse(row[i], prev[i], next[i], row[i + 1]) == 1)
+				parse->pj++;
 			i++;
 		}
 	}
@@ -78,4 +84,6 @@ void	check_map(t_map *map, t_parse *parse)
 		parse->frst_chr = 0;
 		parse->pos_map++;
 	}
+	if (parse->pj > 1 || parse->pj <= 0)
+		error_exit("PJ is wrong.");
 }

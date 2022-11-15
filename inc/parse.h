@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/04 14:52:09 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/15 14:00:16 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define SO "------ ./ruta_a_la_textura_sur ------"
 # define EA "------ ./ruta_a_la_textura_este ------"
 # define WE "------ ./ruta_a_la_textura_oeste ------"
-# define SPECIAL "NSEW01"
+# define VALID "10NSEW"
 
 typedef struct s_parse
 {
