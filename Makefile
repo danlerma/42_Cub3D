@@ -40,16 +40,19 @@ LDLIBS = -lft
 #··············································································#
 
 SRCS_PARSE_PATH = parse
+SRCS_PARSE =	check_map.c \
+				utils.c \
+				init.c \
+				save.c
 
 SRCS_GAME_PATH = game
-
-SRCS_PARSE = checkmap.c utils.c
 SRCS_GAME = game.c
 
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
 			$(addprefix $(SRCS_GAME_PATH)/, $(SRCS_GAME)) \
 			$(SRCS)
+
 OBJS_NAME_PATH = $(SRCS_PARSE_PATH) $(SRCS_GAME_PATH)
 OBJS_PATH = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME_PATH))
 OBJS_NAME = $(SRCS_NAME:%.c=%.o)
@@ -80,7 +83,7 @@ debug: CFLAGS += -fsanitize=address -g3
 debug: $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@ -lmlx -framework OpenGL -framework AppKit
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS): | $(OBJ_PATH) $(OBJS_PATH)
 

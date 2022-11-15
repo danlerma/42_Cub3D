@@ -76,22 +76,23 @@ t_sprites *get_sprites(t_play *game, t_map *map)
 
 	sprites = malloc(sizeof(t_sprites) * 1);
 	sprites->north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
-			game->sprites->north.width, game->sprites->north.height);
+			&game->sprites->north.width, &game->sprites->north.height);
 	sprites->south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
-			game->sprites->south.width, game->sprites->south.height);
+			&game->sprites->south.width, &game->sprites->south.height);
 	sprites->east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
-			game->sprites->east.width, game->sprites->east.height);
+			&game->sprites->east.width, &game->sprites->east.height);
 	sprites->west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
-			game->sprites->west.width, game->sprites->west.height); 		// gestionar tamaños cuando sepa que cojones
+			&game->sprites->west.width, &game->sprites->west.height); 		// gestionar tamaños cuando sepa que cojones
 
-	sprites->north.data_addr = mlx_get_data_addr(game->sprites->north.img, game->sprites->north.bbp,
-			game->sprites->north.size_line, game->sprites->north.endian);
-	sprites->south.data_addr = mlx_get_data_addr(game->sprites->south.img, game->sprites->south.bbp,
-			game->sprites->south.size_line, game->sprites->south.endian);
-	sprites->east.data_addr = mlx_get_data_addr(game->sprites->east.img, game->sprites->east.bbp,
-			game->sprites->east.size_line, game->sprites->east.endian);
-	sprites->west.data_addr =mlx_get_data_addre(game->sprites->west.img, game->sprites->west.bbp,
-			game->sprites->west.size_line, game->sprites->west.endian);
+	sprites->north.data_addr = mlx_get_data_addr(game->sprites->north.img, &game->sprites->north.bbp,
+			&game->sprites->north.size_line, &game->sprites->north.endian);
+	sprites->south.data_addr = mlx_get_data_addr(game->sprites->south.img, &game->sprites->south.bbp,
+			&game->sprites->south.size_line, &game->sprites->south.endian);
+	sprites->east.data_addr = mlx_get_data_addr(game->sprites->east.img, &game->sprites->east.bbp,
+			&game->sprites->east.size_line, &game->sprites->east.endian);
+	sprites->west.data_addr = mlx_get_data_addr(game->sprites->west.img, &game->sprites->west.bbp,
+			&game->sprites->west.size_line, &game->sprites->west.endian);
+	return (sprites);
 }
 
 void init_game(t_play *game, t_map *map)
@@ -105,7 +106,7 @@ void init_game(t_play *game, t_map *map)
 	game->background.height = WIN_HEIGHT;
 	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
-			game->background.bbp, game->background.size_line, game->background.endian);
+			&game->background.bbp, &game->background.size_line, &game->background.endian);
 	// game->minimap.width = MINIMAP_WIDTH;
 	// game->minimap.height = MINIMAP_HEIGHT;
 	// game->minimap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
