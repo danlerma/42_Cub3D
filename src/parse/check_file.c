@@ -6,13 +6,13 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:47:15 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:16:11 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static char	*assing_walls(char *line)
+static char	*assing_walls(char *line, int id)
 {
 	char	**split;
 	char	*aux;
@@ -22,6 +22,10 @@ static char	*assing_walls(char *line)
 		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
 	else
 		aux = ft_strdup(split[1]);
+	if (id == 0)
+		check_textures(aux, split[0], split[2]);
+	else
+		check_colors(aux, split[0], split[2]);
 	ft_free_malloc(split);
 	return (aux);
 }
@@ -29,17 +33,17 @@ static char	*assing_walls(char *line)
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
-		map->floor = assing_walls(line);
+		map->floor = assing_walls(line, 1);
 	else if (line[i] == 'C')
-		map->sky = assing_walls(line);
+		map->sky = assing_walls(line, 1);
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-		map->nsew[0] = assing_walls(line);
+		map->nsew[0] = assing_walls(line, 0);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		map->nsew[1] = assing_walls(line);
+		map->nsew[1] = assing_walls(line, 0);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		map->nsew[2] = assing_walls(line);
+		map->nsew[2] = assing_walls(line, 0);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		map->nsew[3] = assing_walls(line);
+		map->nsew[3] = assing_walls(line, 0);
 	else
 		error_exit("Wrong map.");
 	return (0);
