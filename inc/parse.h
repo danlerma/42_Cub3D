@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/16 15:14:52 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:19:46 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 # define PARSE_H
 
-# define FLOOR "150,200,15"
-# define SKY "180,30,50"
+# define FLOOR 1295376
+# define SKY 4431833
 # define NO "./img/wall_north.xpm"
 # define SO "./img/wall_south.xpm"
 # define EA "./img/wall_east.xpm"

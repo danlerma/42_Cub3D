@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:42:43 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:23:36 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:20:38 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	init(t_map *map, t_parse *parse, char *file)
 	map->nsew[1] = NULL;
 	map->nsew[2] = NULL;
 	map->nsew[3] = NULL;
-	map->floor = NULL;
-	map->sky = NULL;
+	map->floor = FLOOR;
+	map->sky = SKY;
 	map->map = NULL;
 	parse->init_map = -1;
 	parse->pj = 0;

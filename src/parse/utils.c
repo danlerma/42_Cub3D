@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:41 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:46:24 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:20:59 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void	show_map(t_map *map)
 	printf("map->nsew[2] -> %s\n", map->nsew[2]);
 	printf("map->nsew[3] -> %s\n", map->nsew[3]);
 	printf(CYAN"------------ F & C ------------\n"RESET);
-	printf("map->floor -> %s\n", map->floor);
-	printf("map->sky   -> %s\n", map->sky);
+	printf("map->floor -> %d\n", map->floor);
+	printf("map->sky   -> %d\n", map->sky);
 	printf(CYAN"------------ MAP ------------\n"RESET);
 	while (map->map[i])
 	{
@@ -71,8 +71,6 @@ void	free_map(t_map *map)
 {
 	free(ft_free_malloc(map->map));
 	free(ft_free_malloc(map->nsew));
-	free(map->floor);
-	free(map->sky);
 }
 
 void	error_exit(char *msg)
