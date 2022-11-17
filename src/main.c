@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 		error_exit("Wrong arguments");
 	map = check_file(argv[1]);
 	show_map(&map);
-	game(&map);
+	// game(&map);
 	free_map(&map);
 	return (0);
 }

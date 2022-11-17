@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:36:22 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:19:46 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 # define PARSE_H
 
-# define FLOOR "150,200,15"
-# define SKY "180,30,50"
-# define NO "img/wall_north.xmp"
-# define SO "img/wall_south.xmp"
-# define EA "img/wall_east.xmp"
-# define WE "img/wall_west.xmp"
+# define FLOOR 1295376
+# define SKY 4431833
+# define NO "./img/wall_north.xpm"
+# define SO "./img/wall_south.xpm"
+# define EA "./img/wall_east.xpm"
+# define WE "./img/wall_west.xpm"
 # define VALID "10NSEW"
 
 typedef struct s_parse
@@ -37,6 +37,10 @@ t_map	check_file(char *file);
 
 //check_map.c
 void	check_map(t_map *map, t_parse *parse);
+
+//check_img.c
+void	check_textures(char *texture, char *name, char *check);
+void	check_colors(char *color, char *name, char *check);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);
