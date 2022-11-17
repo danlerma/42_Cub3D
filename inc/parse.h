@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/10/04 16:25:04 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:49:10 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 
 # define PARSE_H
 
-# define FLOOR "------ 220,100,0 ------"
-# define SKY "------ 225,30,0 ------"
-# define NO "------ ./ruta_a_la_textura_norte ------"
-# define SO "------ ./ruta_a_la_textura_sur ------"
-# define EA "------ ./ruta_a_la_textura_este ------"
-# define WE "------ ./ruta_a_la_textura_oeste ------"
+# define FLOOR "150,200,15"
+# define SKY "180,30,50"
+# define NO "./img/wall_north.xmp"
+# define SO "./img/wall_south.xmp"
+# define EA "./img/wall_east.xmp"
+# define WE "./img/wall_west.xmp"
+# define VALID "10NSEW"
 
 typedef struct s_parse
 {

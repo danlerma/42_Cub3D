@@ -5,6 +5,9 @@
 # define WIN_WIDTH 3200
 # define WIN_HEIGHT 1080
 
+# define COLOR_MIENTRAS_SUELO 13041721
+# define COLOR_MIENTRAS_CIELO 31888
+
 # include <math.h>
 
 typedef struct s_keys
@@ -45,6 +48,8 @@ typedef struct s_sprites
 	t_img	south;
 	t_img	east;
 	t_img	west;
+	int		floor;
+	int		sky;
 }	t_sprites;
 
 typedef struct s_play
