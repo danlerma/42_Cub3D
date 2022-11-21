@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:32:30 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/21 17:49:04 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:57:32 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	check_colors(char *color, char *name, char *check)
 {
 	if ((check != NULL && *check != '\n') || ft_strlen(name) > 1)
 		error_exit("Wrong colors.");
-	
 	(void)color;
 	(void)name;
 	return (0);
