@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 15:28:06 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:15:19 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	loop_frst_lst_rows(char *row)
 	{
 		if (row[i] == ' ')
 			i++;
-		else if (row[i] != '1' && row[i] != ' ')
+		else if (row[i] != '1' && row[i] != ' ' && row[i] != '\0')
 			error_exit("Invalid character in a wall.");
 		i++;
 	}

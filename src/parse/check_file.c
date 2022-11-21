@@ -6,13 +6,13 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/16 15:16:11 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 15:14:55 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static char	*assing_walls(char *line, int id)
+static char	*assing_walls(char *line)
 {
 	char	**split;
 	char	*aux;
@@ -22,28 +22,41 @@ static char	*assing_walls(char *line, int id)
 		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
 	else
 		aux = ft_strdup(split[1]);
-	if (id == 0)
-		check_textures(aux, split[0], split[2]);
-	else
-		check_colors(aux, split[0], split[2]);
+	check_textures(aux, split[0], split[2]);
 	ft_free_malloc(split);
 	return (aux);
+}
+
+static int	assing_colors(char *line)
+{
+	char	**split;
+	char	*aux;
+
+	split = ft_split(line, ' ');
+	if (ft_strchr(split[1], '\n'))
+		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
+	else
+		aux = ft_strdup(split[1]);
+	check_colors(aux, split[0], split[2]);
+	ft_free_malloc(split);
+	free(aux);
+	return (0);
 }
 
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
-		map->floor = assing_walls(line, 1);
+		map->floor = assing_colors(line);
 	else if (line[i] == 'C')
-		map->sky = assing_walls(line, 1);
+		map->sky = assing_colors(line);
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-		map->nsew[0] = assing_walls(line, 0);
+		map->nsew[0] = assing_walls(line);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		map->nsew[1] = assing_walls(line, 0);
+		map->nsew[1] = assing_walls(line);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		map->nsew[2] = assing_walls(line, 0);
+		map->nsew[2] = assing_walls(line);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		map->nsew[3] = assing_walls(line, 0);
+		map->nsew[3] = assing_walls(line);
 	else
 		error_exit("Wrong map.");
 	return (0);
@@ -69,7 +82,7 @@ static void	identify_line(char *line, t_map *map, t_parse *parse, int num)
 			break ;
 	}
 }
-
+//PROBLEMAS DE LONGITUD EN FIRST_LAST
 static void	read_file(t_parse *parse, t_map *map, int fd)
 {
 	int		i;
@@ -88,8 +101,7 @@ static void	read_file(t_parse *parse, t_map *map, int fd)
 				parse->max_len = count_last_char(line, '1');
 			parse->num_map++;
 		}
-		if (ft_strrchr(line, '\n') == NULL
-			&& (count_last_char(line, '1') == parse->max_len))
+		if (ft_strrchr(line, '\n') == NULL)
 			parse->max_len++;
 		free(line);
 		line = get_next_line(fd);
