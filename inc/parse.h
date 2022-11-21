@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/16 15:19:46 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:46:47 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_map	check_file(char *file);
 void	check_map(t_map *map, t_parse *parse);
 
 //check_img.c
-void	check_textures(char *texture, char *name, char *check);
-void	check_colors(char *color, char *name, char *check);
+int		assing_colors(char *line);
+char	*assing_walls(char *line);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);

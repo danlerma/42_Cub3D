@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/21 15:15:19 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 17:28:37 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 //caracter de en la posicion exacta antes , el caracter
 //tengo ue comprobar arriba y abajo
 
-int	collapse(char this, char up, char down, char next)
+static int	collapse(char this, char up, char down, char next)
 {
 	if (ft_strchr(&VALID[1], this) != NULL)
 	{
