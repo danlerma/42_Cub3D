@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/01 17:23:18 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 14:08:50 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:30:57 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	collapse(char this, char up, char down, char next)
 {
-	printf(RED"%c(%d)    %c(%d)    %c(%d)    %c(%d)\n"RESET, this, this, up, up, down,down, next,next);
+	// printf(RED"%c(%d)    %c(%d)    %c(%d)    %c(%d)\n"RESET, this, this, up, up, down,down, next,next);
 	if (ft_strchr(&VALID[1], this) != NULL)
 	{
 		if (ft_strchr(VALID, up) == NULL)
@@ -38,7 +38,7 @@ static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 
 	i = 0;
 	start = 0;
-			printf(YELLOW"     THIS      UP      DOWN      NEXT\n"RESET);
+			// printf(YELLOW"     THIS      UP      DOWN      NEXT\n"RESET);
 	while (row[i])
 	{
 		if (row[i] == ' ' && parse->frst_chr == 0)
@@ -47,7 +47,7 @@ static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 		{
 			if (parse->frst_chr == 0)
 				parse->frst_chr = i;
-			printf(YELLOW"%d -> "RESET, i);
+			// printf(YELLOW"%d -> "RESET, i);
 			if (collapse(row[i], prev[i], next[i], row[i + 1]) == 1)
 				parse->pj++;
 			i++;
@@ -75,7 +75,7 @@ void	check_map(t_map *map, t_parse *parse)
 	parse->pos_map = 0;
 	while (parse->pos_map < parse->num_map)
 	{
-		printf(GREEN"LINEA %d\n"RESET, parse->pos_map);
+		// printf(GREEN"LINEA %d\n"RESET, parse->pos_map);
 		if (parse->pos_map == 0 || parse->pos_map == parse->num_map - 1)
 			loop_frst_lst_rows(map->map[parse->pos_map]);
 		else

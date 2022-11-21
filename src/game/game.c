@@ -44,14 +44,16 @@ void draw_background(t_img *background, int floor, int sky)
 	}
 }
 
-void play_game(t_play *game)
+int play_game(void *g)
 {
+	t_play *game = g;
 	mlx_clear_window(game->mlx, game->win);
-	draw_background(&game->background, game->sprites->floor, game->sprites->sky);
+	draw_background(&game->background, COLOR_MIENTRAS_SUELO, COLOR_MIENTRAS_CIELO);
 	// draw_walls();				//pinta paredes
 	// draw_minimap();				//pinta minimapa
-	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);
+	// mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);
 	// mlx_put_image_to_window();	//pproyectar dibujo en ventana
+	return (0);
 }
 
 t_keys *init_keys(void)
@@ -108,11 +110,11 @@ t_player *init_player(t_map *map)
 }
 
 
-// comprobar que formato de comas sea valido
-// hacer splt
-// comprobar que haya 3 valores
-// comprobar quue son todo dígitos
-// comprobar que están entre 0 y 255
+// // comprobar que formato de comas sea valido
+// // hacer splt
+// // comprobar que haya 3 valores
+// // comprobar quue son todo dígitos
+// // comprobar que están entre 0 y 255
 
 
 t_sprites *get_sprites(t_play *game, t_map *map)
@@ -126,9 +128,10 @@ t_sprites *get_sprites(t_play *game, t_map *map)
 	// (void)game;
 
 	game->sprites->north.width = 0;
-	printf("------> %d\n", game->sprites->north.width);
+	game->sprites->north.height = 0;
+	printf("------> %s %d\n",map->nsew[0], game->sprites->north.width);
 	sprites->north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
-			&game->sprites->north.width, &game->sprites->north.height);
+			0,0);
 	// sprites->south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
 	// 		&game->sprites->south.width, &game->sprites->south.height);
 	// sprites->east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
@@ -136,8 +139,8 @@ t_sprites *get_sprites(t_play *game, t_map *map)
 	// sprites->west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
 	// 		&game->sprites->west.width, &game->sprites->west.height); 		// gestionar tamaños cuando sepa que cojones
 
-	sprites->north.data_addr = mlx_get_data_addr(game->sprites->north.img, &game->sprites->north.bbp,
-			&game->sprites->north.size_line, &game->sprites->north.endian);
+	// sprites->north.data_addr = mlx_get_data_addr(game->sprites->north.img, &game->sprites->north.bbp,
+	// 		&game->sprites->north.size_line, &game->sprites->north.endian);
 	// sprites->south.data_addr = mlx_get_data_addr(game->sprites->south.img, &game->sprites->south.bbp,
 	// 		&game->sprites->south.size_line, &game->sprites->south.endian);
 	// sprites->east.data_addr = mlx_get_data_addr(game->sprites->east.img, &game->sprites->east.bbp,
@@ -175,10 +178,10 @@ void game(t_map *map)
 
 	ft_bzero(&game, sizeof(t_play));
 	init_game(&game, map);			//variables mlx + datos estructura general
-	// mlx_loop_hook(mlx->mlx, play_game, game);	//función juego + struct juego
+	// mlx_loop_hook(game.mlx, play_game, &game);	//función juego + struct juego
 	// mlx_hook(mlx->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
 	// mlx_hook(mlx->win, 2, 1L << 0, k_released, game);	//función gestión soltar teclas + struct juego
-	printf("PROBANDO\n");
+	printf("\n\n PROBANDO\n");
 	// check_movement();
 	// mlx_hook(mlx->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
 	// mlx_loop(mlx->mlx);				//comprobar si hace falta

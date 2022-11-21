@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 14:06:02 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/21 12:33:01 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,6 @@ t_map	check_file(char *file)
 		save_map(&map, &parse, file);
 	save_other_data(&map);
 	check_map(&map, &parse);
-	printf("%d\n", parse.pj);
+	// printf("%d\n", parse.pj);
 	return (map);
 }
