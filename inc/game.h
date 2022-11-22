@@ -2,8 +2,8 @@
 
 # define GAME_H
 
-# define WIN_WIDTH 3200
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
 # define COLOR_MIENTRAS_SUELO 13041721
 # define COLOR_MIENTRAS_CIELO 31888
 
@@ -54,7 +54,7 @@ typedef struct s_play
 	void		*win;
 	t_map		*map;
 	t_player	*player;
-	t_sprites	*sprites;
+	t_sprites	sprites;
 	t_img		background;
 	t_img		minimap;
 
