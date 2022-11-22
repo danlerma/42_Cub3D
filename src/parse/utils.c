@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:41 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/14 17:38:33 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:20:59 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,7 @@
 
 int	count_last_char(char *str, char c)
 {
-	int	i;
 	int	len;
-
-	i = 0;
 
 	if (str != NULL)
 	{
@@ -38,20 +35,19 @@ void	show_map(t_map *map)
 
 	i = 0;
 	printf(CYAN"------------ NSEW ------------\n"RESET);
-	printf("map->nsew[0]-> %s\n", map->nsew[0]);
-	printf("map->nsew[1]-> %s\n", map->nsew[1]);
-	printf("map->nsew[2]-> %s\n", map->nsew[2]);
-	printf("map->nsew[3]-> %s\n", map->nsew[3]);
+	printf("map->nsew[0] -> %s\n", map->nsew[0]);
+	printf("map->nsew[1] -> %s\n", map->nsew[1]);
+	printf("map->nsew[2] -> %s\n", map->nsew[2]);
+	printf("map->nsew[3] -> %s\n", map->nsew[3]);
 	printf(CYAN"------------ F & C ------------\n"RESET);
-	printf("map->floor -> %s\n", map->floor);
-	printf("map->sky -> %s\n", map->sky);
+	printf("map->floor -> %d\n", map->floor);
+	printf("map->sky   -> %d\n", map->sky);
 	printf(CYAN"------------ MAP ------------\n"RESET);
 	while (map->map[i])
 	{
 		printf("%s#\n", map->map[i]);
 		i++;
 	}
-	// printf("-_>%d\n", map->map[i][3]);
 }
 
 size_t	fd_lines(int fd)
@@ -75,8 +71,6 @@ void	free_map(t_map *map)
 {
 	free(ft_free_malloc(map->map));
 	free(ft_free_malloc(map->nsew));
-	free(map->floor);
-	free(map->sky);
 }
 
 void	error_exit(char *msg)

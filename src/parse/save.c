@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 12:19:20 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/03 16:55:38 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:20:45 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 void	save_other_data(t_map *map)
 {
-	if (map->floor == NULL)
-		map->floor = ft_strdup(FLOOR);
-	if (map->sky == NULL)
-		map->sky = ft_strdup(SKY);
 	if (map->nsew[0] == NULL)
 		map->nsew[0] = ft_strdup(NO);
 	if (map->nsew[1] == NULL)

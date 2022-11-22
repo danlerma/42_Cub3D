@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:42:43 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/15 14:04:33 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:14:59 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,17 @@ void	init(t_map *map, t_parse *parse, char *file)
 	map->nsew[1] = NULL;
 	map->nsew[2] = NULL;
 	map->nsew[3] = NULL;
-	map->floor = NULL;
-	map->sky = NULL;
+	map->floor = FLOOR;
+	map->sky = SKY;
 	map->map = NULL;
 	parse->init_map = -1;
 	parse->pj = 0;
 	parse->num_map = 0;
 	parse->pos_map = 0;
 	parse->frst_chr = 0;
+	parse->color = (int *)ft_calloc(3 + 1, sizeof(int));
+	if (parse->color == NULL)
+		error_exit("Malloc failed.");
 }
 
 void	init_map(t_map *map, t_parse *parse, char *line)
@@ -48,12 +51,11 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 			i++;
 		else if (line[i] == '1' || line[i] == '0')
 		{
-			map->map[parse->pos_map] = (char *) ft_calloc(parse->max_len + 1, sizeof(char));
-			ft_memset(map->map[parse->pos_map], 32, parse->max_len);
-			if (ft_strchr(line, '\n'))
-				ft_memcpy(map->map[parse->pos_map], line, count_last_char(line, '1'));
-			else
-				ft_memcpy(map->map[parse->pos_map], line, count_last_char(line, '1'));
+			map->map[parse->pos_map] = (char *) ft_calloc(parse->max_len + 1,
+					sizeof(char));
+			ft_memset(map->map[parse->pos_map], ' ', parse->max_len - 1);
+			ft_memcpy(map->map[parse->pos_map], line,
+				count_last_char(line, '1'));
 			parse->pos_map++;
 			break ;
 		}
