@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 16:17:51 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:18:38 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:55:14 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static int	index_to_base(char c, int base_len, char *base)
 	return (-1);
 }
 
-unsigned long	ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
-	int				i;
-	int				base_len;
-	unsigned long	num;
+	int	i;
+	int	base_len;
+	int	num;
 
 	base_len = ft_strlen(base);
 	i = 0;

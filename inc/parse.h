@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:18:47 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:54:58 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ int		assing_colors(char *line, t_parse *parse);
 char	*assing_walls(char *line);
 
 //to_hex.c
-int	transform_numbers(t_parse *parse);
+int		transform_numbers(t_parse *parse);
 
 //to_int.c
-unsigned long	ft_atoi_base(char *str, char *base);
+int		ft_atoi_base(char *str, char *base);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);

@@ -4,8 +4,9 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 720
-# define COLOR_MIENTRAS_SUELO 13041721
-# define COLOR_MIENTRAS_CIELO 31888
+# define MINI_MAP 20
+# define BACK 5066061
+# define FRONT 14671839
 
 typedef struct s_keys
 {
