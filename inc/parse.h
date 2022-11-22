@@ -6,7 +6,7 @@
 /*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/21 17:46:47 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:18:47 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # define FLOOR 1295376
 # define SKY 4431833
+# define HEX "0123456789abcdef"
 # define NO "./img/wall_north.xpm"
 # define SO "./img/wall_south.xpm"
 # define EA "./img/wall_east.xpm"
@@ -24,12 +25,14 @@
 
 typedef struct s_parse
 {
-	int	init_map;
-	int	num_map;
-	int	pos_map;
-	int	frst_chr;
-	int	pj;
-	int	max_len;
+	int		init_map;
+	int		num_map;
+	int		pos_map;
+	int		frst_chr;
+	int		pj;
+	int		max_len;
+	int		*color;
+	char	*hex;
 }t_parse;
 
 //check_file.c
@@ -39,8 +42,14 @@ t_map	check_file(char *file);
 void	check_map(t_map *map, t_parse *parse);
 
 //check_img.c
-int		assing_colors(char *line);
+int		assing_colors(char *line, t_parse *parse);
 char	*assing_walls(char *line);
+
+//to_hex.c
+int	transform_numbers(t_parse *parse);
+
+//to_int.c
+unsigned long	ft_atoi_base(char *str, char *base);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);

@@ -6,18 +6,18 @@
 /*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/21 12:33:01 by pdel-pin         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:20:09 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
-static int	identify_firs_char(char *line, t_map *map, int i)
+static int	identify_firs_char(char *line, t_map *map, t_parse *parse, int i)
 {
 	if (line[i] == 'F')
-		map->floor = assing_colors(line);
+		map->floor = assing_colors(line, parse);
 	else if (line[i] == 'C')
-		map->sky = assing_colors(line);
+		map->sky = assing_colors(line, parse);
 	else if (line[i] == 'N' && line[i + 1] == 'O')
 		map->nsew[0] = assing_walls(line);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
@@ -47,7 +47,7 @@ static void	identify_line(char *line, t_map *map, t_parse *parse, int num)
 			parse->max_len = count_last_char(line, '1');
 			break ;
 		}
-		else if (identify_firs_char(line, map, i) == 0)
+		else if (identify_firs_char(line, map, parse, i) == 0)
 			break ;
 	}
 }
@@ -98,5 +98,7 @@ t_map	check_file(char *file)
 		save_map(&map, &parse, file);
 	save_other_data(&map);
 	check_map(&map, &parse);
+	free(parse.color);
+	free(parse.hex);
 	return (map);
 }
