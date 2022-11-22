@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:32:30 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 13:28:04 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:15:54 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	check_textures(char *texture, char *name, char *check)
 		error_exit("Invalid format.");
 }
 
-static void	check_numbers(char **colors, t_parse *parse)
+static int	check_numbers(char **colors, t_parse *parse)
 {
 	int	i;
 	int	y;
@@ -47,13 +47,14 @@ static void	check_numbers(char **colors, t_parse *parse)
 	}
 	if (i != 3)
 		error_exit("Wrong number of colors.");
-	transform_numbers(parse);
+	return (transform_numbers(parse));
 }
 
 static int	check_colors(char *color, char *name, char *chk, t_parse *parse)
 {
 	char	**colors;
 	char	*point;
+	int		nbr;
 
 	if ((chk != NULL && *chk != '\n') || ft_strlen(name) > 1 || color[0] == ',')
 		error_exit("Wrong colors.");
@@ -63,9 +64,9 @@ static int	check_colors(char *color, char *name, char *chk, t_parse *parse)
 	point = ft_strrchr(color, ',');
 	if (point[1] == '\0')
 		error_exit("Es distinto a null");
-	check_numbers(colors, parse);
+	nbr = check_numbers(colors, parse);
 	ft_free_malloc(colors);
-	return (0);
+	return (nbr);
 }
 
 char	*assing_walls(char *line)

@@ -44,6 +44,7 @@ SRCS_PARSE =	check_map.c \
 				check_file.c \
 				check_img.c \
 				to_hex.c \
+				to_int.c \
 				utils.c \
 				init.c \
 				save.c

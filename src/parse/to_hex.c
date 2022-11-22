@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:25:54 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 15:07:17 by pdel-pin         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:18:21 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static char	*cond_hex(int y, char *hex)
 	return (aux);
 }
 
-void	transform_numbers(t_parse *parse)
+int	transform_numbers(t_parse *parse)
 {
 	char	*hex;
 	char	*aux;
@@ -101,9 +101,9 @@ void	transform_numbers(t_parse *parse)
 
 	i = 0;
 	parse->hex = ft_strdup("");
-	while (parse->color[i])
+	while (i < 3)
 	{
-		hex = hex_char(parse->color[i], UPPER_HEX);
+		hex = hex_char(parse->color[i], HEX);
 		y = ft_strlen(hex);
 		aux = cond_hex(y, hex);
 		free(parse->hex);
@@ -112,55 +112,5 @@ void	transform_numbers(t_parse *parse)
 		free(aux);
 		i++;
 	}
+	return (ft_atoi_base(parse->hex, HEX));
 }
-
-// static int	ft_isspace(int c)
-// {
-// 	if (c == '\t' || c == '\n' || c == '\v'
-// 		|| c == '\f' || c == '\r' || c == ' ')
-// 		return (1);
-// 	return (0);
-// }
-
-// static int	index_to_base(char c, int base_len, char *base)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (i < base_len)
-// 	{
-// 		if (base[i] == c)
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (0);
-// }
-
-// unsigned long	ft_atoi_base(char *str, char *base)
-// {
-// 	int				i;
-// 	int				base_len;
-// 	unsigned long	num;
-
-// 	base_len = ft_strlen(base);
-// 	if (base_len != 16)
-// 		print_error();
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		str[i] = ft_tolower(str[i]);
-// 		i++;
-// 	}
-// 	i = 0;
-// 	while (ft_isspace(str[i]) != 0)
-// 		i++;
-// 	if (str[i] == 48 && str[i + 1] == 120)
-// 		i += 2;
-// 	num = 0;
-// 	while (index_to_base(str[i], base_len, base) != 0)
-// 	{
-// 		num = num * base_len + index_to_base(str[i], base_len, base);
-// 		i++;
-// 	}
-// 	return (num);
-// }

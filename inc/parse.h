@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 14:41:51 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:18:47 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # define FLOOR 1295376
 # define SKY 4431833
-# define UPPER_HEX "0123456789ABCDEF"
+# define HEX "0123456789abcdef"
 # define NO "./img/wall_north.xpm"
 # define SO "./img/wall_south.xpm"
 # define EA "./img/wall_east.xpm"
@@ -46,7 +46,10 @@ int		assing_colors(char *line, t_parse *parse);
 char	*assing_walls(char *line);
 
 //to_hex.c
-void	transform_numbers(t_parse *parse);
+int	transform_numbers(t_parse *parse);
+
+//to_int.c
+unsigned long	ft_atoi_base(char *str, char *base);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);
