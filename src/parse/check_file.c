@@ -12,37 +12,6 @@
 
 #include <cub3d.h>
 
-static char	*assing_walls(char *line)
-{
-	char	**split;
-	char	*aux;
-
-	split = ft_split(line, ' ');
-	if (ft_strchr(split[1], '\n'))
-		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
-	else
-		aux = ft_strdup(split[1]);
-	check_textures(aux, split[0], split[2]);
-	ft_free_malloc(split);
-	return (aux);
-}
-
-static int	assing_colors(char *line)
-{
-	char	**split;
-	char	*aux;
-
-	split = ft_split(line, ' ');
-	if (ft_strchr(split[1], '\n'))
-		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
-	else
-		aux = ft_strdup(split[1]);
-	check_colors(aux, split[0], split[2]);
-	ft_free_malloc(split);
-	free(aux);
-	return (0);
-}
-
 static int	identify_firs_char(char *line, t_map *map, int i)
 {
 	if (line[i] == 'F')
@@ -82,7 +51,7 @@ static void	identify_line(char *line, t_map *map, t_parse *parse, int num)
 			break ;
 	}
 }
-//PROBLEMAS DE LONGITUD EN FIRST_LAST
+
 static void	read_file(t_parse *parse, t_map *map, int fd)
 {
 	int		i;
