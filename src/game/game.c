@@ -138,11 +138,7 @@ void	init_game(t_play *game, t_map *map)
 	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
 			&game->background.bbp, &game->background.size_line, &game->background.endian);
-	// game->minimap.width = MINIMAP_WIDTH;
-	// game->minimap.height = MINIMAP_HEIGHT;
-	// game->minimap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	// game->minimap.data_addr = mlx_get_data_addr(game->minimap.img,
-	// 		game->minimap.bbp, game->minimap.size_line, game->minimap.endian);
+	minimap(game, map);
 }
 
 void	game(t_map *map)

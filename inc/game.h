@@ -67,4 +67,7 @@ void	game(t_map *map);
 // hooks.c
 int		close_window(t_play *game);
 
+//minimap.c
+void	minimap(t_play *game, t_map *map);
+
 #endif
