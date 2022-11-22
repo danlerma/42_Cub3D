@@ -19,7 +19,7 @@ void	pixel_put(t_img *background, int i, int j, int color)
 	}
 }
 
-void draw_background(t_play *game, t_img background, int floor, int sky)
+void draw_background(t_img background, int floor, int sky)
 {
 	int i;
 	int j;
@@ -34,20 +34,64 @@ void draw_background(t_play *game, t_img background, int floor, int sky)
 		i = 0;
 		while(i < WIN_WIDTH)
 		{
-			mlx_pixel_put(game->mlx, game->win, i, j, color);
-			(void)background;
-			// pixel_put(&background, i, j, color);
+			// mlx_pixel_put(game->mlx, game->win, i, j, color);
+			// (void)background;
+			pixel_put(&background, i, j, color);
 			i++;
 		}
 		j++;
 	}
 }
 
+void move_player(int key, t_play *game)
+{
+	float	new_x;
+	float	new_y;
+
+	if(key == KEY_A)
+	{
+		new_x = game->player->x + cos(game->player->dir) * SPEED;
+		new_y = game->player->y + sin(game->player->dir) * SPEED;
+		if ()
+	}
+
+
+
+}
+
+void move_view(int key, t_play *game)
+{
+	if(key == KEY_LEFT)
+		game->player->dir -= ROTATION;
+	if(key == KEY_RIGHT)
+		game->player->dir += ROTATION;
+}
+
+void handle_keys(t_play *game)
+{
+	// if(game->player->keys->up)
+	// 	move_view();
+	// if(game->player->keys->down)
+	// 	move_view();
+	if(game->player->keys->left)
+		move_view(KEY_LEFT, game);
+	if(game->player->keys->right)
+		move_view(KEY_RIGHT, game);
+	if(game->player->keys->w)
+		move_player(KEY_W, game);
+	if(game->player->keys->a)
+		move_player(KEY_A, game);
+	if(game->player->keys->s)
+		move_player(KEY_S, game);
+	if(game->player->keys->d)
+		move_player(KEY_D, game);
+}
+
 int play_game(t_play *game)
 {
-	// t_play *game = g;
 	mlx_clear_window(game->mlx, game->win);
-	draw_background(game, game->background, game->sprites.floor, game->sprites.sky);
+	draw_background(game->background, game->sprites.floor, game->sprites.sky);
+	handle_keys(game);
 	// draw_walls();				//pinta paredes
 	// draw_minimap();				//pinta minimapa
 	// mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);
@@ -135,13 +179,12 @@ void	get_sprites(t_play *game, t_map *map)
 
 void	init_game(t_play *game, t_map *map)
 {
+	// ft_bzero(game, sizeof(t_play));
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	game->map = map;
 	game->player = init_player(map);
 	get_sprites(game, map);
-	game->background.width = WIN_WIDTH;
-	game->background.height = WIN_HEIGHT;
 	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
 			&game->background.bbp, &game->background.size_line, &game->background.endian);
@@ -152,22 +195,15 @@ void	init_game(t_play *game, t_map *map)
 	// 		game->minimap.bbp, game->minimap.size_line, game->minimap.endian);
 }
 
-void	game(t_map *map)
+void	do_game(t_map *map, t_play *game)
 {
-	t_play game;
-
-	ft_bzero(&game, sizeof(t_play));
-	init_game(&game, map);			//variables mlx + datos estructura general
-	mlx_loop_hook(game.mlx, play_game, &game);	//función juego + struct juego
-	// mlx_hook(mlx->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
-	// mlx_hook(mlx->win, 2, 1L << 0, k_released, game);	//función gestión soltar teclas + struct juego
-	printf("\n\n PROBANDO\n");
-	// check_movement();
-	// mlx_hook(mlx->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
-	mlx_loop(game.mlx);				//comprobar si hace falta
+	init_game(game, map);			//variables mlx + datos estructura general
+	mlx_loop_hook(game->mlx, play_game, game);	//función juego + struct juego
+	mlx_hook(game->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
+	mlx_hook(game->win, 2, 1L << 0, k_released, game);	//función gestión soltar teclas + struct juego
+	mlx_hook(game->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
+	mlx_loop(game->mlx);				//comprobar si hace falta
 }
-
-
 
 
 /*

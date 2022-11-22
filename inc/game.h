@@ -2,10 +2,26 @@
 
 # define GAME_H
 
-# define WIN_WIDTH 1080
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 100
+# define WIN_HEIGHT 100
+// # define WIN_WIDTH 1920
+// # define WIN_HEIGHT 1080
+// # define WIN_WIDTH 1080
+// # define WIN_HEIGHT 720
 # define COLOR_MIENTRAS_SUELO 13041721
 # define COLOR_MIENTRAS_CIELO 31888
+# define SPEED 0.04
+# define ROTATION 0.05
+
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_W 13
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_ESC 53
 
 typedef struct s_keys
 {
@@ -18,6 +34,14 @@ typedef struct s_keys
 	int	s;
 	int	d;
 }	t_keys;
+
+typedef struct s_pos
+{
+	float	pos_x;
+	float	pos_y;
+	float	dir_x;
+	float	dir_y;
+}	t_pos;
 
 typedef struct s_player
 {
@@ -61,9 +85,13 @@ typedef struct s_play
 }	t_play;
 
 // main_game.c
-void	game(t_map *map);
+void	do_game(t_map *map, t_play *game);
 
 // hooks.c
 int		close_window(t_play *game);
+int		k_pressed(int key, t_play *game);
+int		k_released(int key, t_play *game);
 
 #endif
+
+
