@@ -4,9 +4,9 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 720
-# define MINI_MAP 20
-# define BACK 5066061
-# define FRONT 14671839
+# define MINI_MAP 175
+# define BACK 0x393939
+# define FRONT 0xC6C6C6
 
 typedef struct s_keys
 {
@@ -32,7 +32,7 @@ typedef struct s_img
 {
 	void	*img;
 	char	*data_addr;
-	int		bbp;
+	int		bpp;
 	int		endian;
 	int		size_line;
 	int		width;
@@ -68,6 +68,7 @@ void	game(t_map *map);
 int		close_window(t_play *game);
 
 //minimap.c
-void	minimap(t_play *game, t_map *map);
+void	minimap(t_play *game);
+int		endian(void);
 
 #endif

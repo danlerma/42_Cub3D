@@ -54,6 +54,6 @@ dkms.conf
 .DS_Store
 *.png
 cub3D
-42_Printf
 .vscode
 minilibx-linux
+42_*

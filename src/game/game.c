@@ -7,7 +7,7 @@ void	pixel_put(t_img *background, int i, int j, int color)
 	if (i >= 0 && i < background->width && j >= 0 && j < background->height)
 	{
 		dst = background->data_addr + (j * background->size_line
-				+ i * (background->bbp / 8));
+				+ i * (background->bpp / 8));
 		*(unsigned int *)dst = color;
 	}
 }
@@ -42,7 +42,7 @@ int	play_game(t_play *game)
 	mlx_clear_window(game->mlx, game->win);
 	draw_background(game, game->background, game->sprites.floor, game->sprites.sky);
 	// draw_walls();				//pinta paredes
-	// draw_minimap();				//pinta minimapa
+	minimap(game);
 	// mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);
 	// mlx_put_image_to_window();	//pproyectar dibujo en ventana
 	return (0);
@@ -114,13 +114,13 @@ void	get_sprites(t_play *game, t_map *map)
 	game->sprites.west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
 			&game->sprites.west.width, &game->sprites.west.height); 		// gestionar tamaños cuando sepa que cojones
 
-	game->sprites.north.data_addr = mlx_get_data_addr(game->sprites.north.img, &game->sprites.north.bbp,
+	game->sprites.north.data_addr = mlx_get_data_addr(game->sprites.north.img, &game->sprites.north.bpp,
 			&game->sprites.north.size_line, &game->sprites.north.endian);
-	game->sprites.south.data_addr = mlx_get_data_addr(game->sprites.south.img, &game->sprites.south.bbp,
+	game->sprites.south.data_addr = mlx_get_data_addr(game->sprites.south.img, &game->sprites.south.bpp,
 			&game->sprites.south.size_line, &game->sprites.south.endian);
-	game->sprites.east.data_addr = mlx_get_data_addr(game->sprites.east.img, &game->sprites.east.bbp,
+	game->sprites.east.data_addr = mlx_get_data_addr(game->sprites.east.img, &game->sprites.east.bpp,
 			&game->sprites.east.size_line, &game->sprites.east.endian);
-	game->sprites.west.data_addr = mlx_get_data_addr(game->sprites.west.img, &game->sprites.west.bbp,
+	game->sprites.west.data_addr = mlx_get_data_addr(game->sprites.west.img, &game->sprites.west.bpp,
 			&game->sprites.west.size_line, &game->sprites.west.endian);
 	game->sprites.floor = map->floor; // sprites->floor = get_color(map->floor);
 	game->sprites.sky = map->sky; // sprites->sky = get_color(map->sky);
@@ -137,8 +137,12 @@ void	init_game(t_play *game, t_map *map)
 	game->background.height = WIN_HEIGHT;
 	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
-			&game->background.bbp, &game->background.size_line, &game->background.endian);
-	minimap(game, map);
+			&game->background.bpp, &game->background.size_line, &game->background.endian);
+	game->minimap.width = MINI_MAP;
+	game->minimap.height = MINI_MAP;
+	game->minimap.bpp = 32;
+	game->minimap.endian = endian();
+	game->minimap.size_line = game->minimap.width * (game->minimap.bpp / 8);
 }
 
 void	game(t_map *map)
