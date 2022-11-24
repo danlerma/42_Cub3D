@@ -131,6 +131,7 @@ void	init_game(t_play *game, t_map *map)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	game->map = map;
+	game->map->max_len = map->max_len - 1;
 	game->player = init_player(map);
 	get_sprites(game, map);
 	game->background.width = WIN_WIDTH;

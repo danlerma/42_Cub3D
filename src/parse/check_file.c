@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:20:09 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:49:31 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	identify_line(char *line, t_map *map, t_parse *parse, int num)
 		{
 			parse->init_map = num;
 			parse->num_map++;
-			parse->max_len = count_last_char(line, '1');
+			map->max_len = count_last_char(line, '1');
 			break ;
 		}
 		else if (identify_firs_char(line, map, parse, i) == 0)
@@ -66,12 +66,12 @@ static void	read_file(t_parse *parse, t_map *map, int fd)
 			identify_line(line, map, parse, i);
 		else
 		{
-			if (count_last_char(line, '1') > parse->max_len)
-				parse->max_len = count_last_char(line, '1');
+			if (count_last_char(line, '1') > map->max_len)
+				map->max_len = count_last_char(line, '1');
 			parse->num_map++;
 		}
 		if (ft_strrchr(line, '\n') == NULL)
-			parse->max_len++;
+			map->max_len++;
 		free(line);
 		line = get_next_line(fd);
 	}

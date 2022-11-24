@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:54:58 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:46:27 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_parse
 	int		pos_map;
 	int		frst_chr;
 	int		pj;
-	int		max_len;
 	int		*color;
 	char	*hex;
 }t_parse;

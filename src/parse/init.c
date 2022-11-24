@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:42:43 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 13:14:59 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/24 13:45:38 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 			i++;
 		else if (line[i] == '1' || line[i] == '0')
 		{
-			map->map[parse->pos_map] = (char *) ft_calloc(parse->max_len + 1,
+			map->map[parse->pos_map] = (char *) ft_calloc(map->max_len + 1,
 					sizeof(char));
-			ft_memset(map->map[parse->pos_map], ' ', parse->max_len - 1);
+			ft_memset(map->map[parse->pos_map], ' ', map->max_len - 1);
 			ft_memcpy(map->map[parse->pos_map], line,
 				count_last_char(line, '1'));
 			parse->pos_map++;

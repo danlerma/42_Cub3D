@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:02:02 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/23 15:46:16 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:42:02 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,40 @@ static void	cond_endian(t_play *game, int pixel, int color)
 	}
 }
 
-static void	draw_colors(t_play *game, int color)
+static void	draw_minimap(t_play *game, int color)
+{
+	int	x;
+	int	y;
+	int	posx;
+	int	posy;
+	int	pixel;
+	int	scale;
+
+	y = 0;
+	posy = 0;
+	scale = game->minimap.width / game->map->max_len;
+	if (scale == 1)
+		scale++;
+	while (y < game->minimap.height)
+	{
+		x = 0;
+		posx = 0;
+		while (x < game->minimap.width)
+		{
+			pixel = (x * 4) + (y * game->minimap.size_line);
+			if (x % scale != 0 && y % scale != 0)
+			{
+				cond_endian(game, pixel, color);
+				posx = 0;
+			}
+			posx++;
+			x++;
+		}
+		y++;
+	}
+}
+
+static void	draw_back_minimap(t_play *game, int color)
 {
 	int	x;
 	int	y;
@@ -71,6 +104,8 @@ void	minimap(t_play *game)
 	game->minimap.data_addr = mlx_get_data_addr(game->minimap.img,
 			&game->minimap.bpp, &game->minimap.size_line,
 			&game->minimap.endian);
-	draw_colors(game, BACK);
-	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img, 0, 0);
+	draw_back_minimap(game, BACK);
+	draw_minimap(game, FRONT);
+	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img,
+		(WIN_WIDTH - MINI_MAP), 0);
 }

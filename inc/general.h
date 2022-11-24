@@ -20,6 +20,7 @@ typedef struct s_map
 	char	**nsew;
 	int		floor;
 	int		sky;
+	int		max_len;
 }t_map;
 
 #endif
