@@ -4,7 +4,8 @@
 
 # define WIN_WIDTH 1080
 # define WIN_HEIGHT 720
-# define MINI_MAP 200
+# define MINI_MAP 150
+# define SCALE 10
 # define PLAYER 0xC00DFC
 # define BACK 0x434343
 # define FRONT 0xC6C6C6
