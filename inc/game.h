@@ -2,10 +2,10 @@
 
 # define GAME_H
 
-# define WIN_WIDTH 100
-# define WIN_HEIGHT 100
-// # define WIN_WIDTH 1920
-// # define WIN_HEIGHT 1080
+// # define WIN_WIDTH 100
+// # define WIN_HEIGHT 100
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 // # define WIN_WIDTH 1080
 // # define WIN_HEIGHT 720
 # define COLOR_MIENTRAS_SUELO 13041721
@@ -55,7 +55,7 @@ typedef struct s_img
 {
 	void	*img;
 	char	*data_addr;
-	int		bbp;
+	int		bpp;
 	int		endian;
 	int		size_line;
 	int		width;
