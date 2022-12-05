@@ -2,8 +2,6 @@
 
 # define GAME_H
 
-// # define WIN_WIDTH 100
-// # define WIN_HEIGHT 100
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 // # define WIN_WIDTH 1080
@@ -48,7 +46,7 @@ typedef struct s_player
 	float	x;
 	float	y;
 	float	dir;
-	t_keys	*keys;
+	t_keys	keys;
 }	t_player;
 
 typedef struct s_img
