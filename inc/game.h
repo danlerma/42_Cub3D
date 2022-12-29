@@ -6,8 +6,6 @@
 # define WIN_HEIGHT 1080
 // # define WIN_WIDTH 1080
 // # define WIN_HEIGHT 720
-# define COLOR_MIENTRAS_SUELO 13041721
-# define COLOR_MIENTRAS_CIELO 31888
 # define SPEED 0.04
 # define ROTATION 0.05
 
@@ -20,6 +18,10 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_ESC 53
+
+# define TDMAP_FLOOR 13157810
+# define TDMAP_WALL 5066061
+# define TDMAP_PLAYER 13905262
 
 typedef struct s_keys
 {
@@ -75,9 +77,10 @@ typedef struct s_play
 	void		*mlx;
 	void		*win;
 	t_map		*map;
-	t_player	*player;
+	t_player	player;
 	t_sprites	sprites;
 	t_img		background;
+	t_img		tdmap;		// eliminar después, solo para visualización de movimiento
 	t_img		minimap;
 
 }	t_play;
@@ -89,6 +92,10 @@ void	do_game(t_map *map, t_play *game);
 int		close_window(t_play *game);
 int		k_pressed(int key, t_play *game);
 int		k_released(int key, t_play *game);
+
+/* utils.c */
+int	ft_double_len(char **str);
+
 
 #endif
 

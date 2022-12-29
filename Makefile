@@ -50,6 +50,7 @@ SRCS_PARSE =	check_map.c \
 SRCS_GAME_PATH = game
 SRCS_GAME = game.c \
 			hooks.c \
+			utils.c \
 
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
