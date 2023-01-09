@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pauladelpinoramirez <pauladelpinoramire    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/12/29 17:06:33 by pdel-pin         ###   ########.fr       */
+/*   Updated: 2023/01/04 10:48:56 by pauladelpin      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 # define PARSE_H
 
-# define FLOOR 1295376
-# define SKY 4431833
+# define FLOOR 15396333
+# define SKY 15990683
 # define NO "./img/wall_north.xpm"
 # define SO "./img/wall_south.xpm"
 # define EA "./img/wall_east.xpm"

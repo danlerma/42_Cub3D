@@ -2,10 +2,10 @@
 
 # define GAME_H
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-// # define WIN_WIDTH 1080
-// # define WIN_HEIGHT 720
+// # define WIN_WIDTH 1920
+// # define WIN_HEIGHT 1080
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
 # define SPEED 0.04
 # define ROTATION 0.05
 
@@ -19,9 +19,12 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
+# define SCALE 2
 # define TDMAP_FLOOR 13157810
 # define TDMAP_WALL 5066061
 # define TDMAP_PLAYER 13905262
+# define TDMAP_SIZE 100
+# define TDMAP_SIZE_MAX 120
 
 typedef struct s_keys
 {
@@ -42,6 +45,13 @@ typedef struct s_pos
 	float	dir_x;
 	float	dir_y;
 }	t_pos;
+
+
+typedef struct s_coord
+{
+	float x;
+	float y;
+}	t_coord;
 
 typedef struct s_player
 {
@@ -98,5 +108,3 @@ int	ft_double_len(char **str);
 
 
 #endif
-
-

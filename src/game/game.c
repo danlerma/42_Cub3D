@@ -1,12 +1,23 @@
 #include <cub3d.h>
 
-void	pixel_put(t_img *background, int i, int j, int color)
+void	pixel_put(t_img *img, int i, int j, int color)
 {
 	char	*dst;
 
 	if (i >= 0 && i < WIN_WIDTH && j >= 0 && j < WIN_HEIGHT)
 	{
-		dst = background->data_addr + (j * background->size_line + i * (background->bpp / 8));
+		dst = img->data_addr + (j * img->size_line + i * (img->bpp / 8));
+		*(unsigned int *)dst = color;
+	}
+}
+
+void	pixel_put_tdmap(t_img *img, int i, int j, int color)
+{
+	char	*dst;
+
+	if (i >= 0 && i < fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE && j >= 0 && j < fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE)
+	{
+		dst = img->data_addr + (j * img->size_line + i * (img->bpp / 8));
 		*(unsigned int *)dst = color;
 	}
 }
@@ -85,76 +96,73 @@ void draw_background(t_img background, int floor, int sky)
 	}
 }
 
-void paint_tile(t_img tdmap, int tile, int i, int j, int color)
+void draw_player(t_img tdmap, t_player player, float tile_size, t_coord origin)
 {
-	// int x;
-	// int y;
+	t_coord iter;
+	int size;
 
-	(void)tdmap;
-	(void)tile;
-	(void)i;
-	(void)j;
-	(void)color;
+	iter.y = -1;
+	size = 5;
+	player.x = player.x * tile_size + origin.x - size/2;
+	player.y = player.y * tile_size + origin.y - size/2;
+	while (++iter.y < size)
+	{
+		iter.x = -1;
+		while (++iter.x < size)
+			pixel_put(&tdmap, iter.x + player.x, iter.y + player.y, TDMAP_PLAYER);
+	}
 }
 
-// void paint_player(t_img tdmap, int tile, int color)
-// {
-// 	int	border;
-// 	int	player;
-
-// 	border = tile / 3;
-// 	player = tile - (2 * border);
-// 	while 
-// }
-
-void draw_tdmap(t_play *game, t_img tdmap, t_map *map)
+void draw_tdmap(t_img tdmap, t_map *map, t_player player)
 {
-	int	i;
-	int	j;
-	int	tile_size;
-	int	size;
+	t_coord center;
+	t_coord size;
+	t_coord	origin;
+	t_coord end;
+	t_coord iter;
+	float tile_size;
 
-	(void)game;
-	tile_size = WIN_WIDTH / ft_strlen(map->map[0]);
-	if ((WIN_HEIGHT / ft_double_len(map->map)) < tile_size)
-		tile_size = WIN_HEIGHT / ft_double_len(map->map);
-
-	i = 0;
-	j = 0;
-	size = 0;
-	while (j < ft_double_len(map->map) && j < (int)ft_strlen(map->map[0]))
+	tile_size = (fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE) / fmax(ft_strlen(map->map[0]), ft_double_len(map->map));
+	size.x = ft_strlen(map->map[0]) * tile_size;
+	size.y = ft_double_len(map->map) * tile_size;
+	center.x = fmax(WIN_HEIGHT,WIN_WIDTH)/SCALE/2;
+	center.y = fmax(WIN_HEIGHT,WIN_WIDTH)/SCALE/2;
+	end.x = origin.x + size.x;
+	end.y = origin.y + size.y;
+	origin.y = center.y - (size.y/2);
+	iter.y = 0;
+	while (iter.y < end.y)
 	{
-		i = 0;
-		while (i < (int)ft_strlen(map->map[0]) && i < ft_double_len(map->map))
+		origin.x = center.x - (size.x/2);
+		iter.x = 0;
+		while (iter.x < end.x)
 		{
-			printf("%d, %d\n", i, j);
-			if (map->map[j][i] == '0')
-				paint_tile(tdmap, tile_size, i, j, TDMAP_FLOOR);
-			if (map->map[j][i] == '1')
-				paint_tile(tdmap, tile_size, i, j, TDMAP_WALL);
-			// else
-			// 	paint_player(tdmap, tile_size, TDMAP_PLAYER);
-			i++;
+			if (map->map[(int)(iter.y/tile_size)][(int)(iter.x/tile_size)] == '0')
+				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_FLOOR);
+			else if (map->map[(int)(iter.y/tile_size)][(int)(iter.x/tile_size)] == '1'
+				|| map->map[(int)(iter.y/tile_size)][(int)(iter.x/tile_size)] == 32)
+				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_WALL);
+			else
+				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_FLOOR);
+			iter.x++;
 		}
-		j++;
+		iter.y++;
 	}
-	// printf("map size -> %zu, %d\n", ft_strlen(map->map[0]), ft_double_len(map->map));
-	// printf("tile size -> %d, %d\n", tile_size_x, tile_size_y);
-
+	draw_player(tdmap, player, tile_size, origin);
 }
 
 static int play_game(t_play *game)
 {
 	mlx_clear_window(game->mlx, game->win);
-	// draw_background(game->background, game->map->floor, game->map->sky);
-	draw_tdmap(game, game->tdmap, game->map);
+	draw_background(game->background, game->map->floor, game->map->sky);
+	draw_tdmap(game->tdmap, game->map, game->player);
 	// printf("%f - %f \n", game->player.x, game->player.y);
 	// check_view(game);
 	// draw_walls();				//pinta paredes
 	// draw_minimap();				//pinta minimapa
 	
-	// mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	//pproyectar dibujo en ventana
-	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, 0, 0);	//proyectar mapa 2d en ventana
+	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	//pproyectar dibujo en ventana
+	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - fmax(WIN_HEIGHT,WIN_WIDTH)/SCALE, 10);	//proyectar mapa 2d en ventana
 	return (0);
 }
 
@@ -240,7 +248,8 @@ void	init_game(t_play *game, t_map *map)
 			&game->background.bpp, &game->background.size_line, &game->background.endian);
 
 	// luego borrar, solo para visualización de movimiento
-	game->tdmap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->tdmap.img = mlx_new_image(game->mlx, fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE, fmax(WIN_WIDTH,WIN_WIDTH)/SCALE);
+	// game->tdmap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->tdmap.size_line = game->tdmap.width * (game->tdmap.bpp / 8);
 	game->tdmap.data_addr = mlx_get_data_addr(game->tdmap.img,
 			&game->tdmap.bpp, &game->tdmap.size_line, &game->tdmap.endian);
@@ -262,3 +271,6 @@ void	do_game(t_map *map, t_play *game)
 	mlx_hook(game->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
 	mlx_loop(game->mlx);				//comprobar si hace falta
 }
+
+
+
