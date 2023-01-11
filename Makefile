@@ -6,7 +6,7 @@
 #    By: pauladelpinoramirez <pauladelpinoramire    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/08 10:12:01 by dlerma-c          #+#    #+#              #
-#    Updated: 2023/01/04 16:23:08 by pauladelpin      ###   ########.fr        #
+#    Updated: 2023/01/09 18:26:46 by pauladelpin      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,8 @@ SRCS_PARSE =	check_map.c \
 
 SRCS_GAME_PATH = game
 SRCS_GAME = game.c \
+			init_game.c \
+			tdmap.c \
 			hooks.c \
 			utils.c \
 

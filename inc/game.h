@@ -26,6 +26,9 @@
 # define TDMAP_SIZE 100
 # define TDMAP_SIZE_MAX 120
 
+# define ANGLE_SIXTY 1.0472
+# define ANGLE_THIRTY 0.523599
+
 typedef struct s_keys
 {
 	int	up;
@@ -105,6 +108,18 @@ int		k_released(int key, t_play *game);
 
 /* utils.c */
 int	ft_double_len(char **str);
+
+/* tdmap.c */
+void draw_tdmap(t_img tdmap, t_map *map, t_player player);
+void draw_player(t_img tdmap, t_player player, float tile_size, t_coord origin);
+void	pixel_put(t_img *img, int i, int j, int color);
+void draw_background(t_img background, int floor, int sky);
+
+/* init_game.c */
+void	init_game(t_play *game, t_map *map);
+void	get_sprites(t_play *game, t_map *map);
+t_player	init_player(t_map *map);
+t_keys	init_keys(void);
 
 
 #endif

@@ -49,3 +49,5 @@ int	k_released(int key, t_play *game)
 		game->player.keys.right = 0;
 	return (0);
 }
+
+
