@@ -2,10 +2,10 @@
 
 # define GAME_H
 
-// # define WIN_WIDTH 1920
-// # define WIN_HEIGHT 1080
-# define WIN_WIDTH 1080
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+// # define WIN_WIDTH 1080
+// # define WIN_HEIGHT 720
 # define SPEED 0.04
 # define ROTATION 0.05
 
@@ -23,8 +23,6 @@
 # define TDMAP_FLOOR 13157810
 # define TDMAP_WALL 5066061
 # define TDMAP_PLAYER 13905262
-# define TDMAP_SIZE 100
-# define TDMAP_SIZE_MAX 120
 
 # define ANGLE_SIXTY 1.0472
 # define ANGLE_THIRTY 0.523599
@@ -111,7 +109,7 @@ int	ft_double_len(char **str);
 
 /* tdmap.c */
 void draw_tdmap(t_img tdmap, t_map *map, t_player player);
-void draw_player(t_img tdmap, t_player player, float tile_size, t_coord origin);
+void draw_player(t_img tdmap, t_player player, t_coord tile, t_coord origin);
 void	pixel_put(t_img *img, int i, int j, int color);
 void draw_background(t_img background, int floor, int sky);
 
@@ -120,6 +118,9 @@ void	init_game(t_play *game, t_map *map);
 void	get_sprites(t_play *game, t_map *map);
 t_player	init_player(t_map *map);
 t_keys	init_keys(void);
+
+/* draw */
+void draw_walls(t_play *game);
 
 
 #endif

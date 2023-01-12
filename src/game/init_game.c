@@ -81,7 +81,10 @@ void	init_game(t_play *game, t_map *map)
 			&game->background.bpp, &game->background.size_line, &game->background.endian);
 
 	// luego borrar, solo para visualización de movimiento
-	game->tdmap.img = mlx_new_image(game->mlx, fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE, fmax(WIN_WIDTH,WIN_WIDTH)/SCALE);
+	// game->tdmap.img = mlx_new_image(game->mlx, WIN_HEIGHT/SCALE, WIN_WIDTH/SCALE);
+	game->tdmap.img = mlx_new_image(game->mlx, WIN_WIDTH/SCALE, WIN_HEIGHT/SCALE);
+	// game->tdmap.img = mlx_new_image(game->mlx, fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE, fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE);
+	// game->tdmap.img = mlx_new_image(game->mlx, fmin(WIN_HEIGHT, WIN_WIDTH)/SCALE, fmin(WIN_HEIGHT, WIN_WIDTH)/SCALE);
 	game->tdmap.size_line = game->tdmap.width * (game->tdmap.bpp / 8);
 	game->tdmap.data_addr = mlx_get_data_addr(game->tdmap.img,
 			&game->tdmap.bpp, &game->tdmap.size_line, &game->tdmap.endian);

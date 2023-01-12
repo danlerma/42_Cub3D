@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pauladelpinoramirez <pauladelpinoramire    +#+  +:+       +#+         #
+#    By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/08 10:12:01 by dlerma-c          #+#    #+#              #
-#    Updated: 2023/01/09 18:26:46 by pauladelpin      ###   ########.fr        #
+#    Updated: 2023/01/11 12:31:54 by pdel-pin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS_GAME_PATH = game
 SRCS_GAME = game.c \
 			init_game.c \
 			tdmap.c \
+			draw.c \
 			hooks.c \
 			utils.c \
 

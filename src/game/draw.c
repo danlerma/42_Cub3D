@@ -1,16 +1,16 @@
 #include <cub3d.h>
 
-void put_walls(t_play *game, t_img text, t_coord ray, int count)
-{
-	int i;
-	float j;
-	float y;
-	int color;
-	t_coord wall;
+// void put_walls(t_play *game, t_img text, t_coord ray, int count)
+// {
+// 	int i;
+// 	float j;
+// 	float y;
+// 	int color;
+// 	t_coord wall;
 
-	y =
+// 	y =
 
-}
+// }
 
 t_img get_text(t_play *game, t_coord ray, float ray_angle)
 {
@@ -23,6 +23,7 @@ t_img get_text(t_play *game, t_coord ray, float ray_angle)
 		x *= -1;
 	if (y < 0)
 		y *= -1;
+	ft_bzero(&text, sizeof(t_img));
 	if (game->map->map[(int)(ray.y - y)][(int)ray.x] != '1')
 		text = game->sprites.north;
 	else if (game->map->map[(int)(ray.y + y)][(int)ray.x] != '1')
@@ -45,7 +46,8 @@ void wall_dist(t_play *game, int count, float ray_angle, t_coord ray)
 	dist = dist * cos(ray_angle - game->player.dir);
 	wall = WIN_HEIGHT * 2 / 3 / dist;
 	text = get_text(game, ray, ray_angle);
-	put_walls(game, text, ray, count);
+	// put_walls(game, text, ray, count);
+	(void)count;
 }
 
 void draw_walls(t_play *game)

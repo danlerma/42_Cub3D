@@ -52,9 +52,9 @@ static int play_game(t_play *game)
 	draw_background(game->background, game->map->floor, game->map->sky);
 	draw_tdmap(game->tdmap, game->map, game->player);
 	// check_view(game);
-	// draw_walls();				//pinta paredes
+	// draw_walls(game);
 	// draw_minimap();				//pinta minimapa
-	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	//pproyectar dibujo en ventana
+	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	// proyectar dibujo en ventana
 	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - fmax(WIN_HEIGHT,WIN_WIDTH)/SCALE, 10);	//proyectar mapa 2d en ventana
 	return (0);
 }
