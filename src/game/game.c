@@ -55,7 +55,7 @@ static int play_game(t_play *game)
 	// draw_walls(game);
 	// draw_minimap();				//pinta minimapa
 	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	// proyectar dibujo en ventana
-	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - fmax(WIN_HEIGHT,WIN_WIDTH)/SCALE, 10);	//proyectar mapa 2d en ventana
+	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - game->tdmap.width, 10);	//proyectar mapa 2d en ventana
 	return (0);
 }
 
@@ -69,4 +69,3 @@ void	do_game(t_map *map, t_play *game)
 	mlx_hook(game->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
 	mlx_loop(game->mlx);				//comprobar si hace falta
 }
-

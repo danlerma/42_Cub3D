@@ -80,11 +80,15 @@ void	init_game(t_play *game, t_map *map)
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
 			&game->background.bpp, &game->background.size_line, &game->background.endian);
 
-	// luego borrar, solo para visualización de movimiento
-	// game->tdmap.img = mlx_new_image(game->mlx, WIN_HEIGHT/SCALE, WIN_WIDTH/SCALE);
-	game->tdmap.img = mlx_new_image(game->mlx, WIN_WIDTH/SCALE, WIN_HEIGHT/SCALE);
-	// game->tdmap.img = mlx_new_image(game->mlx, fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE, fmax(WIN_HEIGHT, WIN_WIDTH)/SCALE);
-	// game->tdmap.img = mlx_new_image(game->mlx, fmin(WIN_HEIGHT, WIN_WIDTH)/SCALE, fmin(WIN_HEIGHT, WIN_WIDTH)/SCALE);
+	int size;
+
+	// game->tdmap.width = WIN_WIDTH/SCALE/ft_strlen(map->map[0]);
+	// game->tdmap.height = WIN_HEIGHT/SCALE/ft_double_len(map->map);
+	size = fmin(WIN_WIDTH/SCALE/ft_strlen(map->map[0]), WIN_HEIGHT/SCALE/ft_double_len(map->map));
+	game->tdmap.width = size * ft_strlen(map->map[0]);
+	game->tdmap.height = size * ft_double_len(map->map);
+	// printf("%d\t%d\n", game->tdmap.width, game->tdmap.height);
+	game->tdmap.img = mlx_new_image(game->mlx, game->tdmap.width, game->tdmap.height);
 	game->tdmap.size_line = game->tdmap.width * (game->tdmap.bpp / 8);
 	game->tdmap.data_addr = mlx_get_data_addr(game->tdmap.img,
 			&game->tdmap.bpp, &game->tdmap.size_line, &game->tdmap.endian);
