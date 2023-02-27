@@ -2,7 +2,7 @@
 
 t_keys	init_keys(void)
 {
-	t_keys keys;
+	t_keys	keys;
 
 	keys.up = 0;
 	keys.down = 0;
@@ -42,6 +42,7 @@ t_player	init_player(t_map *map)
 		player.dir += M_PI;
 	else if (map->map[(int)player.y][(int)player.x] == 'W')
 		player.dir += (3 * M_PI_2);
+	player.view = player.dir;
 	player.keys = init_keys();
 	return (player);
 }
@@ -70,6 +71,8 @@ void	get_sprites(t_play *game, t_map *map)
 
 void	init_game(t_play *game, t_map *map)
 {
+	int	size;
+
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	game->map = map;
@@ -79,23 +82,11 @@ void	init_game(t_play *game, t_map *map)
 	game->background.size_line = game->background.width * (game->background.bpp / 8);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
 			&game->background.bpp, &game->background.size_line, &game->background.endian);
-
-	int size;
-
-	// game->tdmap.width = WIN_WIDTH/SCALE/ft_strlen(map->map[0]);
-	// game->tdmap.height = WIN_HEIGHT/SCALE/ft_double_len(map->map);
-	size = fmin(WIN_WIDTH/SCALE/ft_strlen(map->map[0]), WIN_HEIGHT/SCALE/ft_double_len(map->map));
+	size = fmin(WIN_WIDTH / SCALE / ft_strlen(map->map[0]), WIN_HEIGHT / SCALE / ft_double_len(map->map));
 	game->tdmap.width = size * ft_strlen(map->map[0]);
 	game->tdmap.height = size * ft_double_len(map->map);
-	// printf("%d\t%d\n", game->tdmap.width, game->tdmap.height);
 	game->tdmap.img = mlx_new_image(game->mlx, game->tdmap.width, game->tdmap.height);
 	game->tdmap.size_line = game->tdmap.width * (game->tdmap.bpp / 8);
 	game->tdmap.data_addr = mlx_get_data_addr(game->tdmap.img,
 			&game->tdmap.bpp, &game->tdmap.size_line, &game->tdmap.endian);
-
-	// game->minimap.width = MINIMAP_WIDTH;
-	// game->minimap.height = MINIMAP_HEIGHT;
-	// game->minimap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	// game->minimap.data_addr = mlx_get_data_addr(game->minimap.img,
-	// 		game->minimap.bpp, game->minimap.size_line, game->minimap.endian);
 }

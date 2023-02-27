@@ -11,15 +11,15 @@ void	pixel_put(t_img *img, int i, int j, int color)
 	}
 }
 
-void draw_player(t_img tdmap, t_player player, float tile, t_coord origin)
+void	draw_player(t_img tdmap, t_player player, float tile, t_coord origin)
 {
-	t_coord iter;
-	int size;
+	t_coord	iter;
+	int		size;
 
 	iter.y = -1;
 	size = 5;
-	player.x = player.x * tile + origin.x - size/2;
-	player.y = player.y * tile + origin.y - size/2;
+	player.x = player.x * tile + origin.x - size / 2;
+	player.y = player.y * tile + origin.y - size / 2;
 	while (++iter.y < size)
 	{
 		iter.x = -1;
@@ -28,25 +28,25 @@ void draw_player(t_img tdmap, t_player player, float tile, t_coord origin)
 	}
 }
 
-void draw_tdmap(t_img tdmap, t_map *map, t_player player)
+void	draw_tdmap(t_img tdmap, t_map *map, t_player player)
 {
 	t_coord	origin;
-	t_coord iter;
-	float tile_size;
+	t_coord	iter;
+	float	tile;
 
-	tile_size = tdmap.width / ft_strlen(map->map[0]);
-	origin.y = tdmap.height/2 - (tdmap.height/2);
-	origin.x = tdmap.width/2 - (tdmap.width/2);
+	tile = tdmap.width / ft_strlen(map->map[0]);
+	origin.y = tdmap.height / 2 - (tdmap.height / 2);
+	origin.x = tdmap.width / 2 - (tdmap.width / 2);
 	iter.y = 0;
 	while (iter.y < (origin.y + tdmap.height))
 	{
 		iter.x = 0;
 		while (iter.x < (origin.x + tdmap.width))
 		{
-			if (map->map[(int)(iter.y/tile_size)][(int)(iter.x/tile_size)] == '0')
+			if (map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == '0')
 				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_FLOOR);
-			else if (map->map[(int)(iter.y/tile_size)][(int)(iter.x/tile_size)] == '1'
-				|| map->map[(int)(iter.y/tile_size)][(int)(iter.x/tile_size)] == 32)
+			else if (map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == '1'
+				|| map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == 32)
 				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_WALL);
 			else
 				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_FLOOR);
@@ -54,23 +54,23 @@ void draw_tdmap(t_img tdmap, t_map *map, t_player player)
 		}
 		iter.y++;
 	}
-	draw_player(tdmap, player, tile_size, origin);
+	draw_player(tdmap, player, tile, origin);
 }
 
-void draw_background(t_img background, int floor, int sky)
+void	draw_background(t_img background, int floor, int sky)
 {
-	int i;
-	int j;
-	int color;
+	int	i;
+	int	j;
+	int	color;
 
 	j = 0;
 	color = sky;
-	while(j < WIN_HEIGHT)
+	while (j < WIN_HEIGHT)
 	{
-		if(j == WIN_HEIGHT / 2)
+		if (j == WIN_HEIGHT / 2)
 			color = floor;
 		i = 0;
-		while(i < WIN_WIDTH)
+		while (i < WIN_WIDTH)
 		{
 			pixel_put(&background, i, j, color);
 			i++;

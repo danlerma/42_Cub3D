@@ -1,25 +1,30 @@
 #include <cub3d.h>
 
-// void	move_player(int key, t_play *game, float angle)
-// {
-// 	int		dir;
-// 	float	new_x;
-// 	float	new_y;
-// 	float	check_x;
-// 	float	check_y;
+void	move_player(int key, t_play *game, float angle)
+{
+	int		dir;
+	t_coord	new;
 
-// 	dir = 1;
-// 	if (key == KEY_A || key == KEY_S)
-// 		dir = -1;
-// 	new_x = game->player.x + (dir * cos(angle));
-// 	new_y = game->player.y + (dir * sin(angle));
-// 	check_x = game->player.x + MARGIN + new_x;
-// 	check_y = game->player.y + MARGIN + new_y;
-// 	if (game->map->map[(int)check_y][(int)check_x + MARGIN] != '1')
-// 		game->player.y = new_y;
-// 	if (game->map->map[(int)check_y + MARGIN][(int)check_x] != '1')
-// 		game->player.x = new_x;
-// }
+	dir = 1;
+	if (key == KEY_A || key == KEY_W)
+		dir = -1;
+	new.x = game->player.x + (cos(angle) * dir * SPEED);
+	new.y = game->player.y + (sin(angle) * dir * SPEED);
+	if (game->map->map[(int)new.y][(int)(game->player.x)] != '1')
+		game->player.y = new.y;
+	if (game->map->map[(int)(game->player.y)][(int)new.x] != '1')
+		game->player.x = new.x;
+}
+
+void move_view(int key, t_play *game)
+{
+	int dir;
+
+	dir = 1;
+	if (key == KEY_LEFT)
+		dir = -1;
+	game->player.view += (dir * SPEED);
+}
 
 void	check_view(t_play *game)
 {
@@ -27,33 +32,27 @@ void	check_view(t_play *game)
 	// 	move_view();
 	// if(game->player.keys->down)
 	// 	move_view();
-	// if (game->player.keys.left)
-	// 	move_view(KEY_LEFT, game);
-	// if (game->player.keys.right)
-	// 	move_view(KEY_RIGHT, game);
-	// printf("-------------> %d\n", game->player.keys.a);
+	if (game->player.keys.left)
+		move_view(KEY_LEFT, game);
+	if (game->player.keys.right)
+		move_view(KEY_RIGHT, game);
 	if (game->player.keys.w)
-		printf("move up\n");
-		// move_player(KEY_W, game, game->player.dir);
+		move_player(KEY_W, game, game->player.dir + M_PI_2);
 	if (game->player.keys.a)
-		printf("move letf\n");
-		// move_player(KEY_A, game, game->player.dir + M_PI/2);
+		move_player(KEY_A, game, game->player.dir);
 	if (game->player.keys.s)
-		printf("move down\n");
-		// move_player(KEY_S, game, game->player.dir);
+		move_player(KEY_S, game, game->player.dir + M_PI_2);
 	if (game->player.keys.d)
-		printf("move right\n");
-		// move_player(KEY_D, game, game->player.dir + M_PI/2);
+		move_player(KEY_D, game, game->player.dir);
 }
 
 static int play_game(t_play *game)
 {
 	mlx_clear_window(game->mlx, game->win);
 	draw_background(game->background, game->map->floor, game->map->sky);
-	draw_tdmap(game->tdmap, game->map, game->player);
-	// check_view(game);
+	check_view(game);
 	// draw_walls(game);
-	// draw_minimap();				//pinta minimapa
+	draw_tdmap(game->tdmap, game->map, game->player);
 	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	// proyectar dibujo en ventana
 	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - game->tdmap.width, 10);	//proyectar mapa 2d en ventana
 	return (0);

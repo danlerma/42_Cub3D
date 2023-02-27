@@ -6,8 +6,7 @@
 # define WIN_HEIGHT 1080
 // # define WIN_WIDTH 1080
 // # define WIN_HEIGHT 720
-# define SPEED 0.04
-# define ROTATION 0.05
+# define SPEED 0.05
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -19,7 +18,7 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
-# define SCALE 1 // poner 5
+# define SCALE 1.5 // poner 5
 # define TDMAP_FLOOR 13157810
 # define TDMAP_WALL 5066061
 # define TDMAP_PLAYER 13905262
@@ -59,6 +58,7 @@ typedef struct s_player
 	float	x;
 	float	y;
 	float	dir;
+	float	view;
 	t_keys	keys;
 }	t_player;
 
