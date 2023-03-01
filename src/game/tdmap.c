@@ -11,50 +11,82 @@ void	pixel_put(t_img *img, int i, int j, int color)
 	}
 }
 
-void	draw_player(t_img tdmap, t_player player, float tile, t_coord origin)
+void draw_rays(t_play *game, t_img tdmap, float tile)
+{
+	t_coord	coll;	// collision point
+	// t_coord	coord;
+	// float	ray_len;
+	// int	i;
+
+	(void)game;
+	(void)tile;
+	pixel_put(&tdmap, 0, 0, 0);
+	coll.x = 0;
+	coll.y = 0;
+	printf("p -> %f - %f\n", game->player.x, game->player.y);
+	while(1)
+	{
+		if(game->map->map[(int)game->player.y][(int)game->player.x + (int)coll.x] != '1')
+			coll.x += 0.01;
+		if(game->map->map[(int)game->player.y + (int)coll.y][(int)game->player.x] != '1')
+			coll.y += 0.01;
+		if (game->map->map[(int)game->player.y + (int)coll.y][(int)game->player.x] == '1'
+			&& game->map->map[(int)game->player.y][(int)game->player.x + (int)coll.x] == '1')
+			break;
+	}
+	printf(YELLOW"c -> %f - %f\n"RESET, coll.x, coll.y);
+	printf(GREEN"%d - %d\n"RESET, ft_double_len(game->map->map), (int)ft_strlen(game->map->map[0]));
+	pixel_put(&tdmap, game->player.x*tile, coll.y*tile, 0);
+	pixel_put(&tdmap, coll.x*tile, game->player.y*tile, 0);
+	// pixel_put(&tdmap, ft_double_len(game->map->map)* tile, (int)ft_strlen(game->map->map[0]) * tile, 16711680);
+
+
+}
+
+void	draw_player(t_play *game, t_img tdmap, t_player player, float tile)
 {
 	t_coord	iter;
+	t_coord	pos;
 	int		size;
 
 	iter.y = -1;
 	size = 5;
-	player.x = player.x * tile + origin.x - size / 2;
-	player.y = player.y * tile + origin.y - size / 2;
+	pos.x = player.x * tile - size / 2;
+	pos.y = player.y * tile - size / 2;
+	pixel_put(&tdmap, (tile * ft_strlen(game->map->map[0])), 0, 16711680);
 	while (++iter.y < size)
 	{
 		iter.x = -1;
 		while (++iter.x < size)
-			pixel_put(&tdmap, iter.x + player.x, iter.y + player.y, TDMAP_PLAYER);
+			pixel_put(&tdmap, iter.x + pos.x, iter.y + pos.y, TDMAP_PLAYER);
 	}
+	draw_rays(game, tdmap, tile);
 }
 
-void	draw_tdmap(t_img tdmap, t_map *map, t_player player)
+void	draw_tdmap(t_play *game, t_img tdmap, t_map *map, t_player player)
 {
-	t_coord	origin;
 	t_coord	iter;
 	float	tile;
 
 	tile = tdmap.width / ft_strlen(map->map[0]);
-	origin.y = tdmap.height / 2 - (tdmap.height / 2);
-	origin.x = tdmap.width / 2 - (tdmap.width / 2);
 	iter.y = 0;
-	while (iter.y < (origin.y + tdmap.height))
+	while (iter.y < tdmap.height)
 	{
 		iter.x = 0;
-		while (iter.x < (origin.x + tdmap.width))
+		while (iter.x < tdmap.width)
 		{
 			if (map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == '0')
-				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_FLOOR);
+				pixel_put(&tdmap, iter.x, iter.y, TDMAP_FLOOR);
 			else if (map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == '1'
 				|| map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == 32)
-				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_WALL);
+				pixel_put(&tdmap, iter.x, iter.y, TDMAP_WALL);
 			else
-				pixel_put(&tdmap, iter.x + origin.x, iter.y + origin.y, TDMAP_FLOOR);
+				pixel_put(&tdmap, iter.x, iter.y, TDMAP_FLOOR);
 			iter.x++;
 		}
 		iter.y++;
 	}
-	draw_player(tdmap, player, tile, origin);
+	draw_player(game, tdmap, player, tile);
 }
 
 void	draw_background(t_img background, int floor, int sky)

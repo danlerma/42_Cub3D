@@ -6,7 +6,7 @@ void	move_player(int key, t_play *game, float angle)
 	t_coord	new;
 
 	dir = 1;
-	if (key == KEY_A || key == KEY_W)
+	if (key == KEY_W || key == KEY_A)
 		dir = -1;
 	new.x = game->player.x + (cos(angle) * dir * SPEED);
 	new.y = game->player.y + (sin(angle) * dir * SPEED);
@@ -21,7 +21,7 @@ void move_view(int key, t_play *game)
 	int dir;
 
 	dir = 1;
-	if (key == KEY_LEFT)
+	if (key == KEY_RIGHT)
 		dir = -1;
 	game->player.view += (dir * SPEED);
 }
@@ -52,7 +52,7 @@ static int play_game(t_play *game)
 	draw_background(game->background, game->map->floor, game->map->sky);
 	check_view(game);
 	// draw_walls(game);
-	draw_tdmap(game->tdmap, game->map, game->player);
+	draw_tdmap(game, game->tdmap, game->map, game->player);
 	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	// proyectar dibujo en ventana
 	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - game->tdmap.width, 10);	//proyectar mapa 2d en ventana
 	return (0);

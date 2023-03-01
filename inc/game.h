@@ -6,7 +6,7 @@
 # define WIN_HEIGHT 1080
 // # define WIN_WIDTH 1080
 // # define WIN_HEIGHT 720
-# define SPEED 0.05
+# define SPEED 0.15 //0.05
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -108,8 +108,8 @@ int		k_released(int key, t_play *game);
 int	ft_double_len(char **str);
 
 /* tdmap.c */
-void draw_tdmap(t_img tdmap, t_map *map, t_player player);
-void draw_player(t_img tdmap, t_player player, float tile, t_coord origin);
+void draw_tdmap(t_play *game, t_img tdmap, t_map *map, t_player player);
+void draw_player(t_play *game, t_img tdmap, t_player player, float tile);
 void	pixel_put(t_img *img, int i, int j, int color);
 void draw_background(t_img background, int floor, int sky);
 
