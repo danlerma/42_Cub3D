@@ -58,7 +58,6 @@ typedef struct s_player
 	float	x;
 	float	y;
 	float	dir;
-	float	view;
 	t_keys	keys;
 }	t_player;
 

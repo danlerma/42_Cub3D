@@ -20,10 +20,12 @@ void draw_rays(t_play *game, t_img tdmap, float tile)
 
 	(void)game;
 	(void)tile;
+	// ray = get_dist();		//en ese ángulo concreto define principio y fin del rayo
+	// draw_line()				//dibuja la línea del rayo con las coordenadas conseguidas en ese ángulo
 	pixel_put(&tdmap, 0, 0, 0);
 	coll.x = 0;
 	coll.y = 0;
-	printf("p -> %f - %f\n", game->player.x, game->player.y);
+	// printf("p -> %f - %f\n", game->player.x, game->player.y);
 	while(1)
 	{
 		if(game->map->map[(int)game->player.y][(int)game->player.x + (int)coll.x] != '1')
@@ -34,8 +36,8 @@ void draw_rays(t_play *game, t_img tdmap, float tile)
 			&& game->map->map[(int)game->player.y][(int)game->player.x + (int)coll.x] == '1')
 			break;
 	}
-	printf(YELLOW"c -> %f - %f\n"RESET, coll.x, coll.y);
-	printf(GREEN"%d - %d\n"RESET, ft_double_len(game->map->map), (int)ft_strlen(game->map->map[0]));
+	// printf(YELLOW"c -> %f - %f\n"RESET, coll.x, coll.y);
+	// printf(GREEN"%d - %d\n"RESET, ft_double_len(game->map->map), (int)ft_strlen(game->map->map[0]));
 	pixel_put(&tdmap, game->player.x*tile, coll.y*tile, 0);
 	pixel_put(&tdmap, coll.x*tile, game->player.y*tile, 0);
 	// pixel_put(&tdmap, ft_double_len(game->map->map)* tile, (int)ft_strlen(game->map->map[0]) * tile, 16711680);

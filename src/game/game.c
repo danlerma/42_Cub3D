@@ -23,7 +23,7 @@ void move_view(int key, t_play *game)
 	dir = 1;
 	if (key == KEY_RIGHT)
 		dir = -1;
-	game->player.view += (dir * SPEED);
+	game->player.dir += (dir * SPEED);
 }
 
 void	check_view(t_play *game)
