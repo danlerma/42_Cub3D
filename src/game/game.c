@@ -62,7 +62,6 @@ void	do_game(t_map *map, t_play *game)
 {
 	init_game(game, map);			//variables mlx + datos estructura general
 	mlx_loop_hook(game->mlx, play_game, game);	//función juego + struct juego
-	// play_game(game);
 	mlx_hook(game->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
 	mlx_hook(game->win, 3, 1L << 1, k_released, game);	//función gestión soltar teclas + struct juego
 	mlx_hook(game->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
