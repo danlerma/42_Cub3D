@@ -121,7 +121,7 @@ t_player	init_player(t_map *map);
 t_keys	init_keys(void);
 
 /* draw */
-void draw_walls(t_play *game);
-
+void do_walls(t_play *game);
+void draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color);
 
 #endif

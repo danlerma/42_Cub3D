@@ -28,46 +28,6 @@ void draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color) // cambiar
 	}
 }
 
-// void draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color)
-// {
-// 	t_coord	slope;
-// 	t_coord	dir;
-// 	t_coord	point;
-// 	float	diff;
-// 	float	aux;
-
-// 	slope.x = coll.x - pos.x;
-// 	slope.y = coll.y - pos.y;
-// 	if (slope.x < 0)
-// 		slope.x *= -1;
-// 	if (slope.y < 0)
-// 		slope.y *= -1;
-// 	dir.x = 1;
-
-
-	// if (pos.x > coll.x)
-	// 	dir.x = -1;
-	// dir.y = 1;
-	// if (pos.y > coll.y)
-	// 	dir.y = -1;
-	// diff = slope.x - slope.y;
-	// while (point.x != coll.x || point.y != coll.y)
-	// {
-	// 	pixel_put(&tdmap, point.y, point.y, color);
-	// 	aux = diff * 2;
-	// 	if (aux > -slope.y)
-	// 	{
-	// 		diff -= slope.y;
-	// 		point.x += dir.x;
-	// 	}
-	// 	if (aux < slope.x)
-	// 	{
-	// 		diff += slope.y;
-	// 		point.x += dir.x;
-	// 	}
-	// }
-}
-
 void draw_rays(t_play *game, t_img tdmap, float tile)
 {
 	t_coord	coll;
@@ -94,7 +54,7 @@ void draw_rays(t_play *game, t_img tdmap, float tile)
 		coll.x = round(coll.x);
 		coll.y = round(coll.y);
 		draw_line_ray(tdmap, pos, coll, TDMAP_RAYS);
-		pixel_put(&tdmap, coll.x, coll.y, 0);
+		// pixel_put(&tdmap, coll.x, coll.y, 0);
 		ang += ANGLE;
 	}
 }

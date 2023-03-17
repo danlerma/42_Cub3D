@@ -37,13 +37,13 @@ void	check_view(t_play *game)
 	if (game->player.keys.right)
 		move_view(KEY_RIGHT, game);
 	if (game->player.keys.w)
-		move_player(KEY_W, game, game->player.dir + M_PI_2);
+		move_player(KEY_W, game, game->player.dir + M_PI);
 	if (game->player.keys.a)
-		move_player(KEY_A, game, game->player.dir);
+		move_player(KEY_A, game, game->player.dir + M_PI_2);
 	if (game->player.keys.s)
-		move_player(KEY_S, game, game->player.dir + M_PI_2);
+		move_player(KEY_S, game, game->player.dir + M_PI);
 	if (game->player.keys.d)
-		move_player(KEY_D, game, game->player.dir);
+		move_player(KEY_D, game, game->player.dir + M_PI_2);
 }
 
 static int play_game(t_play *game)
@@ -51,7 +51,7 @@ static int play_game(t_play *game)
 	mlx_clear_window(game->mlx, game->win);
 	draw_background(game->background, game->map->floor, game->map->sky);
 	check_view(game);
-	// draw_walls(game);
+	do_walls(game);
 	draw_tdmap(game, game->tdmap, game->map, game->player);
 	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);	// proyectar dibujo en ventana
 	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - game->tdmap.width, 10);	//proyectar mapa 2d en ventana
@@ -67,3 +67,5 @@ void	do_game(t_map *map, t_play *game)
 	mlx_hook(game->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
 	mlx_loop(game->mlx);				//comprobar si hace falta
 }
+
+
