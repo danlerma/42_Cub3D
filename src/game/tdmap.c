@@ -42,13 +42,13 @@ void draw_rays(t_play *game, t_img tdmap, float tile)
 	while (ang < M_PI/6)
 	{
 		point = 0;
-		coll.x = pos.x + point * cos(game->player.dir + ang);
-		coll.y = pos.y + point * sin(game->player.dir + ang);
+		coll.x = pos.x + point * cos(game->player.ang + ang);
+		coll.y = pos.y + point * sin(game->player.ang + ang);
 		while (game->map->map[(int)((pos.y + (int)coll.y - (int)pos.y) / tile)]
 				[(int)((pos.x + (int)coll.x - (int)pos.x) / tile)] != '1')
 		{
-			coll.x = pos.x + point * cos(game->player.dir + ang);
-			coll.y = pos.y + point * sin(game->player.dir + ang);
+			coll.x = pos.x + point * cos(game->player.ang + ang);
+			coll.y = pos.y + point * sin(game->player.ang + ang);
 			point += 0.1;
 		}
 		coll.x = round(coll.x);
@@ -69,6 +69,7 @@ void	draw_player(t_play *game, t_img tdmap, t_player player, float tile)
 	size = 5;
 	pos.x = player.x * tile - size / 2;
 	pos.y = player.y * tile - size / 2;
+	// (void)game;
 	draw_rays(game, tdmap, tile);
 	while (++iter.y < size)
 	{

@@ -15,10 +15,37 @@ t_keys	init_keys(void)
 	return (keys);
 }
 
+void def_dir(t_player *player, char dir)
+{
+		if (dir == 'N')
+	{
+		player->dir.x = 0;
+		player->dir.y = -1;
+	}
+	if (dir == 'S')
+	{
+		player->dir.x = 0;
+		player->dir.y = 1;
+	}
+	if (dir == 'E')
+	{
+		player->dir.x = 1;
+		player->dir.y = 0;
+	}
+	if (dir == 'W')
+	{
+		player->dir.x = -1;
+		player->dir.y = 0;
+	}
+	player->plane.x = player->dir.y * -0.66;
+	player->plane.y = player->dir.x * -0.66;
+}
+
 t_player	init_player(t_map *map)
 {
 	int			i;
 	int			j;
+	char		dir;
 	t_player	player;
 
 	i = -1;
@@ -30,42 +57,52 @@ t_player	init_player(t_map *map)
 			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
 			|| map->map[i][j] == 'E' || map->map[i][j] == 'W')
 			{
-				player.x = (float)j;
-				player.y = (float)i;
+				player.x = (float)j + 0.5;
+				player.y = (float)i + 0.5;
+				dir = map->map[i][j];
 			}
 		}
 	}
-	player.dir = (float)0;
-	if (map->map[(int)player.y][(int)player.x] == 'N')
-		player.dir += (M_PI_2);
-	else if (map->map[(int)player.y][(int)player.x] == 'S')
-		player.dir += (3 * M_PI_2);
-	else if (map->map[(int)player.y][(int)player.x] == 'W')
-		player.dir += M_PI;
+	def_dir(&player, dir);
 	player.keys = init_keys();
+	// ft_bzero(&player.next, sizeof(t_coord));
 	return (player);
 }
 
-void	get_sprites(t_play *game, t_map *map)
+// t_img	init_img(t_play *game, char *dir)
+// {
+// 	t_img	img;
+
+// 	img.img = mlx_xpm_file_to_image(game->mlx, dir, &img.width, &img.height);
+// 	if (!img.img)
+// 		return (img);
+// 	img.data_addr = mlx_get_data_addr(img.img, &img.bpp, &img.size_line, &img.endian);
+// 	return (img);
+// }
+
+t_sprites	get_sprites(t_play *game, t_map *map)
 {
-	game->sprites.north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
-			&game->sprites.north.width, &game->sprites.north.height);
-	game->sprites.south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
-			&game->sprites.south.width, &game->sprites.south.height);
-	game->sprites.east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
-			&game->sprites.east.width, &game->sprites.east.height);
-	game->sprites.west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
-			&game->sprites.west.width, &game->sprites.west.height);
-	game->sprites.north.data_addr = mlx_get_data_addr(game->sprites.north.img, &game->sprites.north.bpp,
-			&game->sprites.north.size_line, &game->sprites.north.endian);
-	game->sprites.south.data_addr = mlx_get_data_addr(game->sprites.south.img, &game->sprites.south.bpp,
-			&game->sprites.south.size_line, &game->sprites.south.endian);
-	game->sprites.east.data_addr = mlx_get_data_addr(game->sprites.east.img, &game->sprites.east.bpp,
-			&game->sprites.east.size_line, &game->sprites.east.endian);
-	game->sprites.west.data_addr = mlx_get_data_addr(game->sprites.west.img, &game->sprites.west.bpp,
-			&game->sprites.west.size_line, &game->sprites.west.endian);
-	game->sprites.floor = map->floor; // sprites->floor = get_color(map->floor);
-	game->sprites.sky = map->sky; // sprites->sky = get_color(map->sky);
+	t_sprites	sprites;
+
+	sprites.north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
+			&sprites.north.width, &sprites.north.height);
+	sprites.south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
+			&sprites.south.width, &sprites.south.height);
+	sprites.east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
+			&sprites.east.width, &sprites.east.height);
+	sprites.west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
+			&sprites.west.width, &sprites.west.height);
+	sprites.north.data_addr = mlx_get_data_addr(sprites.north.img, &sprites.north.bpp,
+			&sprites.north.size_line, &sprites.north.endian);
+	sprites.south.data_addr = mlx_get_data_addr(sprites.south.img, &sprites.south.bpp,
+			&sprites.south.size_line, &sprites.south.endian);
+	sprites.east.data_addr = mlx_get_data_addr(sprites.east.img, &sprites.east.bpp,
+			&sprites.east.size_line, &sprites.east.endian);
+	sprites.west.data_addr = mlx_get_data_addr(sprites.west.img, &sprites.west.bpp,
+			&sprites.west.size_line, &sprites.west.endian);
+	sprites.floor = map->floor; // sprites->floor = get_color(map->floor);
+	sprites.sky = map->sky; // sprites->sky = get_color(map->sky);
+	return (sprites);
 }
 
 void	init_game(t_play *game, t_map *map)
@@ -74,9 +111,12 @@ void	init_game(t_play *game, t_map *map)
 
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
+	game->raycast.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->raycast.data_addr = mlx_get_data_addr(game->raycast.img,
+			&game->raycast.bpp, &game->raycast.size_line, &game->raycast.endian);
 	game->map = map;
 	game->player = init_player(map);
-	get_sprites(game, map);
+	game->sprites = get_sprites(game, map);
 	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->background.size_line = game->background.width * (game->background.bpp / 8);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,

@@ -2,12 +2,13 @@
 
 # define GAME_H
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
-// # define WIN_WIDTH 1080
-// # define WIN_HEIGHT 720
+// # define WIN_WIDTH 1920
+// # define WIN_HEIGHT 1080
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
 # define SPEED 0.15 //0.05
 # define ANGLE 0.0174533
+# define ROT_ANGLE 0.15
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -59,8 +60,11 @@ typedef struct s_player
 {
 	float	x;
 	float	y;
-	float	dir;
+	float	ang;
+	t_coord	next;
+	t_coord	dir;
 	t_keys	keys;
+	t_coord	plane;
 }	t_player;
 
 typedef struct s_img
@@ -73,6 +77,33 @@ typedef struct s_img
 	int		width;
 	int		height;
 }	t_img;
+
+typedef struct s_rayc
+{
+	double	side_dist_x;
+	double	side_dist_y;
+	int		map_x;
+	int		map_y;
+	int		side;
+	int		coll;
+	int		line;
+	int		start;
+	int		end;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	int		step_x;
+	int		step_y;
+	double	view;
+	double	dir_x;
+	double	dir_y;
+	double	wall_x;
+	double	wall_y;
+	int		text_x;
+	int		text_y;
+	double	wall_dist;
+	double	next;
+	double	sprite_start;
+}	t_rayc;
 
 typedef struct s_sprites
 {
@@ -93,8 +124,7 @@ typedef struct s_play
 	t_sprites	sprites;
 	t_img		background;
 	t_img		tdmap;		// eliminar después, solo para visualización de movimiento
-	t_img		minimap;
-
+	t_img		raycast;
 }	t_play;
 
 // main_game.c
@@ -116,7 +146,7 @@ void draw_background(t_img background, int floor, int sky);
 
 /* init_game.c */
 void	init_game(t_play *game, t_map *map);
-void	get_sprites(t_play *game, t_map *map);
+t_sprites	get_sprites(t_play *game, t_map *map);
 t_player	init_player(t_map *map);
 t_keys	init_keys(void);
 
