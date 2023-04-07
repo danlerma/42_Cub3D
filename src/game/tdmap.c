@@ -69,7 +69,6 @@ void	draw_player(t_play *game, t_img tdmap, t_player player, float tile)
 	size = 5;
 	pos.x = player.x * tile - size / 2;
 	pos.y = player.y * tile - size / 2;
-	// (void)game;
 	draw_rays(game, tdmap, tile);
 	while (++iter.y < size)
 	{

@@ -111,9 +111,9 @@ void	init_game(t_play *game, t_map *map)
 
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
-	game->raycast.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->raycast.data_addr = mlx_get_data_addr(game->raycast.img,
-			&game->raycast.bpp, &game->raycast.size_line, &game->raycast.endian);
+	// game->raycast.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	// game->raycast.data_addr = mlx_get_data_addr(game->raycast.img,
+	// 		&game->raycast.bpp, &game->raycast.size_line, &game->raycast.endian);
 	game->map = map;
 	game->player = init_player(map);
 	game->sprites = get_sprites(game, map);

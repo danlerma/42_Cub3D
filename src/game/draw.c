@@ -173,10 +173,10 @@ void draw_texture(t_play *game, t_rayc *ray, int num)
 		ray->text_x = sprite.width - ray->text_x - 1;
 	ray->next = 1.0 * sprite.height / ray->line;
 	ray->sprite_start = (ray->start - WIN_HEIGHT / 2 + ray->line / 2) * ray->next;
-	printf("llego aquii 111111\n");
+	// printf("llego aquii 111111\n");
 
-	printf("%d\n", ray->start);
-	printf("%d\n", ray->end);
+	// printf("%d\n", ray->start);
+	// printf("%d\n", ray->end);
 	while (y < ray->start)
 	// 	pixel_put(frame, num, y, SKY);
 		y++;
@@ -188,18 +188,23 @@ void draw_texture(t_play *game, t_rayc *ray, int num)
 		// printf("111111111\n");
 		// // ray->text_y = (int)ray->sprite_start & (sprite.height - 1);
 		// printf("2222222222\n");
+		// printf("-----------------> %d    %d\n", ray->text_x, ray->text_y);
 		color = pixel_get(&sprite, ray->text_x, ray->text_y);
-		printf("33333333333\n");
+		// printf("33333333333\n");
+		// printf(""; )
 		pixel_put(&game->raycast, num, y, color);
+		// printf("4444444444\n");
 		// sprite_pixel_put(game->raycast, num, y, color);
 		y++;
 	}
+	// printf("55555555555\n");
 	while (y < WIN_HEIGHT)
 	// {
 	// 	pixel_put(frame, num, y, FLOOR);
 		y++;	
 	// }
-	printf("llego aqui\n");
+	// printf("%d - %d\n", y, WIN_HEIGHT);
+	// printf("llego aqui\n");
 }
 
 void get_frame_height(t_play *game, t_rayc *ray)
@@ -271,10 +276,10 @@ t_img	init_draw(t_play *game)
 	t_img	frame;
 
 	mlx_clear_window(game->mlx, game->win);
-	// frame.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	frame.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	frame.width = WIN_WIDTH;
 	frame.height = WIN_HEIGHT;
-	// frame.data_addr = mlx_get_data_addr(frame.img, &frame.bpp, &frame.size_line, &frame.endian);
+	frame.data_addr = mlx_get_data_addr(frame.img, &frame.bpp, &frame.size_line, &frame.endian);
 	return (frame);
 }
 
@@ -309,14 +314,10 @@ void do_walls(t_play *game)
 	while (num_frame < WIN_WIDTH)
 	{
 		ray = init_ray(game, num_frame);
-		printf("%f\n", ray.view);
-		printf("ray -> %f - %f\n", ray.dir_x, ray.dir_y);
-		printf("side -> %f - %f\n", ray.side_dist_x, ray.side_dist_y);
-		printf("\n");
 		check_collision(game, &ray);
 		get_frame_height(game, &ray);
 		draw_texture(game, &ray, num_frame);
-		printf("2222222222\n");
+		// printf("2222222222\n");
 		num_frame++;
 	}
 	// mlx_put_image_to_window(game->mlx, game->win, game->raycast.img, 0, 0);
