@@ -11,7 +11,7 @@ void	pixel_put(t_img *img, int i, int j, int color)
 	}
 }
 
-void draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color) // cambiar por bresenham real
+void	draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color)
 {
 	int		i;
 	float	dist;
@@ -23,12 +23,12 @@ void draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color) // cambiar
 	i = 0;
 	while (i < dist)
 	{
-		pixel_put(&tdmap, (pos.x + new.x * i), (pos.y + new.y * i),color);
+		pixel_put(&tdmap, (pos.x + new.x * i), (pos.y + new.y * i), color);
 		i++;
 	}
 }
 
-void draw_rays(t_play *game, t_img tdmap, float tile)
+void	draw_rays(t_play *game, t_img tdmap, float tile)
 {
 	t_coord	coll;
 	t_coord	pos;
@@ -38,8 +38,8 @@ void draw_rays(t_play *game, t_img tdmap, float tile)
 	pos.x = tile * game->player.x;
 	pos.y = tile * game->player.y;
 	point = 1;
-	ang = -M_PI/6;
-	while (ang < M_PI/6)
+	ang = -M_PI / 6;
+	while (ang < M_PI / 6)
 	{
 		point = 0;
 		coll.x = pos.x + point * cos(game->player.ang + ang);
@@ -54,7 +54,6 @@ void draw_rays(t_play *game, t_img tdmap, float tile)
 		coll.x = round(coll.x);
 		coll.y = round(coll.y);
 		draw_line_ray(tdmap, pos, coll, TDMAP_RAYS);
-		// pixel_put(&tdmap, coll.x, coll.y, 0);
 		ang += ANGLE;
 	}
 }
@@ -92,14 +91,11 @@ void	draw_tdmap(t_play *game, t_img tdmap, t_map *map, t_player player)
 		{
 			if (map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == '0')
 				pixel_put(&tdmap, iter.x, iter.y, TDMAP_FLOOR);
-				// pixel_put(&tdmap, iter.x, iter.y, 16381677);
 			else if (map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == '1'
 				|| map->map[(int)(iter.y / tile)][(int)(iter.x / tile)] == 32)
 				pixel_put(&tdmap, iter.x, iter.y, TDMAP_WALL);
-				// pixel_put(&tdmap, iter.x, iter.y, 15395562);
 			else
 				pixel_put(&tdmap, iter.x, iter.y, TDMAP_FLOOR);
-				// pixel_put(&tdmap, iter.x, iter.y, 16381677);
 			iter.x++;
 		}
 		iter.y++;

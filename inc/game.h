@@ -2,13 +2,13 @@
 
 # define GAME_H
 
-// # define WIN_WIDTH 1920
-// # define WIN_HEIGHT 1080
-# define WIN_WIDTH 1080
-# define WIN_HEIGHT 720
-# define SPEED 0.15 //0.05
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+// # define WIN_WIDTH 1080
+// # define WIN_HEIGHT 720
+# define SPEED 0.10 //0.05
 # define ANGLE 0.0174533
-# define ROT_ANGLE 0.15
+# define ROT_ANGLE 0.15 //0.1
 
 # define KEY_UP 126
 # define KEY_DOWN 125
@@ -20,7 +20,7 @@
 # define KEY_D 2
 # define KEY_ESC 53
 
-# define SCALE 1.5 // poner 5
+# define SCALE 5
 # define TDMAP_FLOOR 13157810
 # define TDMAP_WALL 5066061
 # define TDMAP_PLAYER 13905262
@@ -49,11 +49,10 @@ typedef struct s_pos
 	float	dir_y;
 }	t_pos;
 
-
 typedef struct s_coord
 {
-	float x;
-	float y;
+	float	x;
+	float	y;
 }	t_coord;
 
 typedef struct s_player
@@ -123,35 +122,38 @@ typedef struct s_play
 	t_player	player;
 	t_sprites	sprites;
 	t_img		background;
-	t_img		tdmap;		// eliminar después, solo para visualización de movimiento
+	t_img		tdmap;
 	t_img		raycast;
 }	t_play;
 
-// main_game.c
-void	do_game(t_map *map, t_play *game);
+/* game.c */
+void		do_game(t_map *map, t_play *game);
 
-// hooks.c
-int		close_window(t_play *game);
-int		k_pressed(int key, t_play *game);
-int		k_released(int key, t_play *game);
+/* hooks.c */
+int			close_window(t_play *game);
+int			k_pressed(int key, t_play *game);
+int			k_released(int key, t_play *game);
 
 /* utils.c */
-int	ft_double_len(char **str);
+int			ft_double_len(char **str);
 
 /* tdmap.c */
-void draw_tdmap(t_play *game, t_img tdmap, t_map *map, t_player player);
-void draw_player(t_play *game, t_img tdmap, t_player player, float tile);
-void	pixel_put(t_img *img, int i, int j, int color);
-void draw_background(t_img background, int floor, int sky);
+void		draw_tdmap(t_play *game, t_img tdmap, t_map *map, t_player player);
+void		draw_player(t_play *game, t_img tdmap, t_player player, float tile);
+void		pixel_put(t_img *img, int i, int j, int color);
+void		draw_background(t_img background, int floor, int sky);
 
 /* init_game.c */
-void	init_game(t_play *game, t_map *map);
+void		init_game(t_play *game, t_map *map);
 t_sprites	get_sprites(t_play *game, t_map *map);
 t_player	init_player(t_map *map);
-t_keys	init_keys(void);
+t_keys		init_keys(void);
 
-/* draw */
-void do_walls(t_play *game);
-void draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color);
+/* draw.c */
+void		do_walls(t_play *game);
+void		draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color);
+
+/* sprites_draw.c */
+void	draw_texture(t_play *game, t_rayc *ray, int num);
 
 #endif

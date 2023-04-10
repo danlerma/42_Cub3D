@@ -3,13 +3,7 @@
 int	close_window(t_play *game)
 {
 	mlx_destroy_image(game->mlx, game->background.img);
-	// mlx_destroy_image(game->mlx, game->minimap.img);
-	// mlx_destroy_image(game->mlx, &game->sprites.north);
-	// mlx_destroy_image(game->mlx, &game->sprites.south);
-	// mlx_destroy_image(game->mlx, &game->sprites.east);
-	// mlx_destroy_image(game->mlx, &game->sprites.west);
 	mlx_destroy_window(game->mlx, game->win);
-	// ft_free_malloc(game->map);
 	exit(0);
 	return (0);
 }
@@ -49,5 +43,3 @@ int	k_released(int key, t_play *game)
 		game->player.keys.right = 0;
 	return (0);
 }
-
-

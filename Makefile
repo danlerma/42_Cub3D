@@ -6,7 +6,7 @@
 #    By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/08 10:12:01 by dlerma-c          #+#    #+#              #
-#    Updated: 2023/01/11 12:31:54 by pdel-pin         ###   ########.fr        #
+#    Updated: 2023/04/10 11:51:32 by pdel-pin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,6 +53,7 @@ SRCS_GAME = game.c \
 			init_game.c \
 			tdmap.c \
 			draw.c \
+			sprites_draw.c \
 			hooks.c \
 			utils.c \
 

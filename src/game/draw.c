@@ -1,213 +1,6 @@
 #include <cub3d.h>
 
-
-
-
-
-
-
-// int get_sprite_pixel(t_play *game, t_img *sprite, t_coord ray, int j)
-// {
-// 	int color;
-// 	int i;
-// 	// char *pixel;
-
-// 	color = 0;
-// 	i =  (int)(sprite->width * (ray.y + ray.y)) % sprite->width;
-// 	if (game->map->map[(int)ray.y][(int)ray.x] == '1')
-// 	{
-// 		color = *(unsigned int *)(sprite->data_addr + (i * sprite->size_line + j * (sprite->bpp / 8)));
-// 	}
-// 	return (color);
-// }
-
-// t_img get_sprite(t_play *game, t_coord ray, float ang)
-// {
-// 	t_img	sprite;
-// 	t_coord	next;
-
-// 	next.x = cos(ang) / 90;
-// 	next.y = sin(ang) / 90;
-// 	ft_bzero(&sprite, sizeof(t_img));
-// 	if (next.x < 0)
-// 		next.x *= -1;
-// 	if (next.y < 0)
-// 		next.y *= -1;
-// 	if (game->map->map[(int)(ray.y - next.y)][(int)ray.x] != '1')
-// 		sprite = game->sprites.north;
-// 	else if (game->map->map[(int)(ray.y + next.y)][(int)ray.x] != '1')
-// 		sprite = game->sprites.south;
-// 	else if(game->map->map[(int)(ray.y)][(int)(ray.x - next.x)] != '1')
-// 		sprite = game->sprites.west;
-// 	else if (game->map->map[(int)(ray.y)][(int)(ray.x + next.x)] != '1')
-// 		sprite = game->sprites.east;
-// 	return(sprite);
-// }
-
-// float get_dist(t_play *game, t_coord ray, float ang)
-// {
-// 	float	dist;
-// 	float	wall_height;
-
-// 	dist = sqrt(pow(ray.x - game->player.x, 2) + pow(ray.y - game->player.y, 2));
-// 	dist = dist * cos(ang - game->player.dir);
-// 	wall_height = WIN_HEIGHT/2/dist;
-// 	return (wall_height);
-// }
-
-// void define_pos(t_play *game, t_coord *ray, t_coord *arit, float ang)
-// {
-// 	ray->x = game->player.x;
-// 	ray->y = game->player.y;
-// 	arit->x = cos(ang) / 90;
-// 	arit->y = sin(ang) / 90;
-// 	while (game->map->map[(int)ray->y][(int)ray->x] != '1')
-// 	{
-// 		ray->x += arit->x;
-// 		ray->y += arit->y;
-// 	}
-// }
-
-// void draw_walls(t_play *game, t_img sprite, t_coord ray, float frame, float wall_height)
-// {
-// 	int i;
-// 	int j;
-// 	float next;
-// 	t_coord	start;
-// 	t_coord	end;
-// 	int color;
-
-// 	next = wall_height * 2 / sprite.height;
-// 	start.x = frame;
-// 	end.x = frame;
-// 	start.y = WIN_HEIGHT/2 - wall_height;
-// 	i = 0;
-// 	while (i < sprite.height)
-// 	{
-// 		color = get_sprite_pixel(game, &sprite, ray, i);
-// 		j = start.y;
-// 		while (j < start.y + next)
-// 			j++;
-// 		end.y = j;
-// 		draw_line_ray(game->background, start, end, color);
-// 		start.y += next;
-// 		i++;
-// 	}
-// }
-
-// void do_walls(t_play *game)
-// {
-// 	float	ang;
-// 	t_coord	ray;
-// 	t_coord	arit;
-// 	int		frame;
-// 	float	wall_height;
-// 	t_img	sprite;
-
-// 	ang = game->player.dir - (M_PI / 6);
-// 	frame = 0;
-// 	while (frame < WIN_WIDTH)
-// 	{
-// 		// ray.x = game->player.x;
-// 		// ray.y = game->player.y;
-// 		// arit.x = cos(ang) / 90;
-// 		// arit.y = sin(ang) / 90;
-// 		// while (game->map->map[(int)ray.y][(int)ray.x] != '1')
-// 		// {
-// 		// 	ray.x += arit.x;
-// 		// 	ray.y += arit.y;
-// 		// }
-// 		// ammend_fisheye(game, ray, ang, frame);
-// 		define_pos(game, &ray, &arit, ang);
-// 		wall_height = get_dist(game, ray, ang);
-// 		sprite = get_sprite(game, ray, ang);
-// 		draw_walls(game, sprite, ray, frame, wall_height);
-// 		ang += (M_PI/3)/WIN_WIDTH;
-// 		frame++;	
-// 	}
-// }
-
-t_img get_sprite(t_play *game, t_rayc *ray)
-{
-	if (ray->side == 0 && ray->dir_x < 0)
-		return (game->sprites.north);
-	else if (ray->side == 0 && ray->dir_x > 0)
-		return (game->sprites.south);
-	else if (ray->side == 1 && ray->dir_y < 0)
-		return (game->sprites.west);
-	else
-		return (game->sprites.east);
-}
-
-unsigned long	rgb_to_hex(int r, int g, int b, int a)
-{
-	unsigned long	hex;
-
-	hex = ((a & 0xff) << 24) + ((r & 0xff) << 16) + ((g & 0xff) << 8)
-		+ (b & 0xff);
-	return (hex);
-}
-
-uint32_t	pixel_get(t_img *sprite, int x, int y)
-{
-	unsigned int	dst;
-	uint32_t		color;
-
-	dst = *(unsigned int *)(sprite->data_addr
-			+ (y * sprite->size_line + x * (sprite->bpp / 8)));
-	color = rgb_to_hex((dst >> 16) & 0xFF,
-			(dst >> 8) & 0xFF, (dst) & 0xFF, (dst >> 24) & 0xFF);
-	return (color);
-}
-
-void draw_texture(t_play *game, t_rayc *ray, int num)
-{
-	int			y;
-	t_img		sprite;
-	uint32_t	color;
-
-	y = -1;
-	sprite = get_sprite(game, ray);
-	ray->text_x = (int)(ray->wall_x * (double)sprite.width);
-	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
-		ray->text_x = sprite.width - ray->text_x - 1;
-	ray->next = 1.0 * sprite.height / ray->line;
-	ray->sprite_start = (ray->start - WIN_HEIGHT / 2 + ray->line / 2) * ray->next;
-	// printf("llego aquii 111111\n");
-
-	// printf("%d\n", ray->start);
-	// printf("%d\n", ray->end);
-	while (y < ray->start)
-	// 	pixel_put(frame, num, y, SKY);
-		y++;
-	while(y <= ray->end)
-	{
-		ray->text_y = (int)ray->sprite_start;
-		// ray->text_y = (double)ray->sprite_start + ray->next;
-		ray->sprite_start += ray->next;
-		// printf("111111111\n");
-		// // ray->text_y = (int)ray->sprite_start & (sprite.height - 1);
-		// printf("2222222222\n");
-		// printf("-----------------> %d    %d\n", ray->text_x, ray->text_y);
-		color = pixel_get(&sprite, ray->text_x, ray->text_y);
-		// printf("33333333333\n");
-		// printf(""; )
-		pixel_put(&game->raycast, num, y, color);
-		// printf("4444444444\n");
-		// sprite_pixel_put(game->raycast, num, y, color);
-		y++;
-	}
-	// printf("55555555555\n");
-	while (y < WIN_HEIGHT)
-	// {
-	// 	pixel_put(frame, num, y, FLOOR);
-		y++;	
-	// }
-	// printf("%d - %d\n", y, WIN_HEIGHT);
-	// printf("llego aqui\n");
-}
-
-void get_frame_height(t_play *game, t_rayc *ray)
+void	get_frame_height(t_play *game, t_rayc *ray)
 {
 	if (ray->side == 0)
 	{
@@ -283,9 +76,9 @@ t_img	init_draw(t_play *game)
 	return (frame);
 }
 
-void check_collision(t_play *game, t_rayc *ray)
+void	check_collision(t_play *game, t_rayc *ray)
 {
-	while  (ray->coll == 0)
+	while (ray->coll == 0)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
@@ -304,7 +97,7 @@ void check_collision(t_play *game, t_rayc *ray)
 	}
 }
 
-void do_walls(t_play *game)
+void	do_walls(t_play *game)
 {
 	t_rayc	ray;
 	int		num_frame;
@@ -317,9 +110,6 @@ void do_walls(t_play *game)
 		check_collision(game, &ray);
 		get_frame_height(game, &ray);
 		draw_texture(game, &ray, num_frame);
-		// printf("2222222222\n");
 		num_frame++;
 	}
-	// mlx_put_image_to_window(game->mlx, game->win, game->raycast.img, 0, 0);
-	// mlx_destroy_image(game->mlx, frame.img);
 }
