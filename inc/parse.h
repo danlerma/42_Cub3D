@@ -31,6 +31,7 @@ typedef struct s_parse
 	int		frst_chr;
 	int		pj;
 	int		max_len;
+	int		*check;
 	int		*color;
 	char	*hex;
 }t_parse;
@@ -42,8 +43,8 @@ t_map	check_file(char *file);
 void	check_map(t_map *map, t_parse *parse);
 
 //check_img.c
-int		assing_colors(char *line, t_parse *parse);
-char	*assing_walls(char *line);
+int		assing_colors(char *line, t_parse *parse, int check);
+char	*assing_walls(char *line, int check);
 
 //to_hex.c
 int		transform_numbers(t_parse *parse);

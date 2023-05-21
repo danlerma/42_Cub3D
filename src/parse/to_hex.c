@@ -19,7 +19,7 @@ static int	num_characters(unsigned int nb)
 	i = 0;
 	if (nb != 0)
 	{
-		if (nb < 0)
+		if ((int)nb < 0)
 			i = i + 1;
 		while (nb != 0)
 		{

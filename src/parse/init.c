@@ -35,8 +35,9 @@ void	init(t_map *map, t_parse *parse, char *file)
 	parse->num_map = 0;
 	parse->pos_map = 0;
 	parse->frst_chr = 0;
+	parse->check = (int *)ft_calloc(6 + 1, sizeof(int));
 	parse->color = (int *)ft_calloc(3 + 1, sizeof(int));
-	if (parse->color == NULL)
+	if (parse->color == NULL || parse->check == NULL)
 		error_exit("Malloc failed.");
 }
 

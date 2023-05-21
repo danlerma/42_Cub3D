@@ -69,11 +69,13 @@ static int	check_colors(char *color, char *name, char *chk, t_parse *parse)
 	return (nbr);
 }
 
-char	*assing_walls(char *line)
+char	*assing_walls(char *line, int check)
 {
 	char	**split;
 	char	*aux;
 
+	if (check == -1)
+		ft_print_errors("Same data\n.");
 	split = ft_split(line, ' ');
 	if (ft_strchr(split[1], '\n'))
 		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
@@ -84,12 +86,14 @@ char	*assing_walls(char *line)
 	return (aux);
 }
 
-int	assing_colors(char *line, t_parse *parse)
+int	assing_colors(char *line, t_parse *parse, int check)
 {
 	char	**split;
 	char	*aux;
 	int		nbr;
 
+	if (check == -1)
+		ft_print_errors("Same data.\n");
 	split = ft_split(line, ' ');
 	if (ft_strchr(split[1], '\n'))
 		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);

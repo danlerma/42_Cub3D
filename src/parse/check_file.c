@@ -15,17 +15,35 @@
 static int	identify_firs_char(char *line, t_map *map, t_parse *parse, int i)
 {
 	if (line[i] == 'F')
-		map->floor = assing_colors(line, parse);
+	{
+		map->floor = assing_colors(line, parse, parse->check[4]);
+		parse->check[4] = -1;
+	}
 	else if (line[i] == 'C')
-		map->sky = assing_colors(line, parse);
+	{
+		map->sky = assing_colors(line, parse, parse->check[5]);
+		parse->check[5] = -1;
+	}
 	else if (line[i] == 'N' && line[i + 1] == 'O')
-		map->nsew[0] = assing_walls(line);
+	{
+		map->nsew[0] = assing_walls(line, parse->check[0]);
+		parse->check[0] = -1;
+	}
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		map->nsew[1] = assing_walls(line);
+	{
+		map->nsew[1] = assing_walls(line, parse->check[1]);
+		parse->check[1] = -1;
+	}
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		map->nsew[2] = assing_walls(line);
+	{
+		map->nsew[2] = assing_walls(line, parse->check[2]);
+		parse->check[2] = -1;
+	}
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		map->nsew[3] = assing_walls(line);
+	{
+		map->nsew[3] = assing_walls(line, parse->check[3]);
+		parse->check[3] = -1;
+	}
 	else
 		error_exit("Wrong map.");
 	return (0);

@@ -32,11 +32,9 @@ static int	collapse(char this, char up, char down, char next)
 
 static void	loop_middle_rows(t_parse *parse, char *row, char *prev, char *next)
 {
-	int	start;
 	int	i;
 
 	i = 0;
-	start = 0;
 	while (row[i])
 	{
 		if (row[i] == ' ' && parse->frst_chr == 0)
