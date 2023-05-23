@@ -1,159 +1,105 @@
 #include <cub3d.h>
 
-void	pixel_put(t_img *background, int i, int j, int color)
+int	check_movement(t_play *game)
 {
-	char	*dst;
+	double	i;
+	double	j;
 
-	if (i >= 0 && i < background->width && j >= 0 && j < background->height)
+	modf((double)game->player.next.x, &i);
+	modf((double)game->player.next.y, &j);
+	if (game->map->map[(int)j][(int)i] != '1')
 	{
-		dst = background->data_addr + (j * background->size_line
-				+ i * (background->bbp / 8));
-		*(unsigned int *)dst = color;
+		game->player.x = game->player.next.x;
+		game->player.y = game->player.next.y;
+		return (1);
 	}
-}
-
-void	draw_background(t_play *game, t_img background, int floor, int sky)
-{
-	int	i;
-	int	j;
-	int	color;
-
-	j = 0;
-	color = sky;
-	while (j < WIN_HEIGHT)
-	{
-		if (j == WIN_HEIGHT / 2)
-			color = floor;
-		i = 0;
-		while (i < WIN_WIDTH)
-		{
-			mlx_pixel_put(game->mlx, game->win, i, j, color);
-			(void)background;
-			// pixel_put(&background, i, j, color);
-			i++;
-		}
-		j++;
-	}
-}
-
-int	play_game(t_play *game)
-{
-	// t_play *game = g;
-	mlx_clear_window(game->mlx, game->win);
-	draw_background(game, game->background, game->sprites.floor, game->sprites.sky);
-	// draw_walls();				//pinta paredes
-	// draw_minimap();				//pinta minimapa
-	// mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);
-	// mlx_put_image_to_window();	//pproyectar dibujo en ventana
 	return (0);
 }
 
-t_keys	*init_keys(void)
+
+void	move_player(int key, t_play *game)
 {
-	t_keys	*keys;
-
-	keys = malloc(sizeof(t_keys) * 1);
-	if (keys == NULL)
-		return (keys);
-	keys->up = 0;
-	keys->down = 0;
-	keys->left = 0;
-	keys->right = 0;
-	keys->w = 0;
-	keys->a = 0;
-	keys->s = 0;
-	keys->d = 0;
-	return (keys);
-}
-
-t_player	*init_player(t_map *map)
-{
-	int			i;
-	int			j;
-	t_player	*player;
-
-	player = malloc(sizeof(t_player) * 1);
-	if (player == NULL)
-		return (player);
-	i = -1;
-	while (map->map[++i])
+	if (key == KEY_W)
 	{
-		j = -1;
-		while (map->map[i][++j])
-		{
-			if (map->map[i][j] == 'N' || map->map[i][j] == 'S'
-			|| map->map[i][j] == 'E' || map->map[i][j] == 'W')
-			{
-				player->x = (float)j;
-				player->y = (float)i;
-			}
-		}
+		game->player.next.x += game->player.dir.x * SPEED;
+		game->player.next.y += game->player.dir.y * SPEED;
 	}
-	player->dir = (float)0;
-	if (map->map[(int)player->y][(int)player->x] == 'E')
-		player->dir += (M_PI_2);
-	else if (map->map[(int)player->y][(int)player->x] == 'S')
-		player->dir += M_PI;
-	else if (map->map[(int)player->y][(int)player->x] == 'W')
-		player->dir += (3 * M_PI_2);
-	player->keys = init_keys();
-	return (player);
+	if (key == KEY_A)
+	{
+		game->player.next.x += game->player.dir.y * SPEED;
+		game->player.next.y -= game->player.dir.x * SPEED;
+	}
+	if (key == KEY_S)
+	{
+		game->player.next.x -= game->player.dir.x * SPEED;
+		game->player.next.y -= game->player.dir.y * SPEED;
+	}
+	if (key == KEY_D)
+	{
+		game->player.next.x -= game->player.dir.y * SPEED;
+		game->player.next.y += game->player.dir.x * SPEED;
+	}
 }
 
-void	get_sprites(t_play *game, t_map *map)
+void	move_view(int key, t_play *game)
 {
-	// game->sprites = ft_calloc(sizeof(t_sprites), 1);
-	// if(game->sprites == NULL)
-	// 	error_exit("Calloc failure");	// (void)map;
-	game->sprites.north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
-			&game->sprites.north.width, &game->sprites.north.height);
-	game->sprites.south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
-			&game->sprites.south.width, &game->sprites.south.height);
-	game->sprites.east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
-			&game->sprites.east.width, &game->sprites.east.height);
-	game->sprites.west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
-			&game->sprites.west.width, &game->sprites.west.height); 		// gestionar tamaños cuando sepa que cojones
+	double	start_dir;
+	double	start_plane;
+	int		dir;
 
-	game->sprites.north.data_addr = mlx_get_data_addr(game->sprites.north.img, &game->sprites.north.bbp,
-			&game->sprites.north.size_line, &game->sprites.north.endian);
-	game->sprites.south.data_addr = mlx_get_data_addr(game->sprites.south.img, &game->sprites.south.bbp,
-			&game->sprites.south.size_line, &game->sprites.south.endian);
-	game->sprites.east.data_addr = mlx_get_data_addr(game->sprites.east.img, &game->sprites.east.bbp,
-			&game->sprites.east.size_line, &game->sprites.east.endian);
-	game->sprites.west.data_addr = mlx_get_data_addr(game->sprites.west.img, &game->sprites.west.bbp,
-			&game->sprites.west.size_line, &game->sprites.west.endian);
-	game->sprites.floor = map->floor; // sprites->floor = get_color(map->floor);
-	game->sprites.sky = map->sky; // sprites->sky = get_color(map->sky);
+	dir = 1;
+	if (key == KEY_RIGHT)
+		dir = -1;
+	start_dir = game->player.dir.x;
+	start_plane = game->player.plane.x;
+	game->player.dir.x = game->player.dir.x * cos(ROT_ANGLE * dir) - game->player.dir.y * sin(ROT_ANGLE * dir);
+	game->player.dir.y = start_dir * sin(ROT_ANGLE * dir) + game->player.dir.y * cos(ROT_ANGLE * dir);
+	game->player.plane.x = game->player.plane.x * cos(ROT_ANGLE * dir) - game->player.plane.y * sin(ROT_ANGLE * dir);
+	game->player.plane.y = start_plane * sin(ROT_ANGLE * dir) + game->player.plane.y * cos(ROT_ANGLE * dir);
+	game->player.ang += (ROT_ANGLE * dir);
 }
 
-void	init_game(t_play *game, t_map *map)
+void	check_view(t_play *game)
 {
-	game->mlx = mlx_init();
-	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
-	game->map = map;
-	game->player = init_player(map);
-	get_sprites(game, map);
-	game->background.width = WIN_WIDTH;
-	game->background.height = WIN_HEIGHT;
-	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->background.data_addr = mlx_get_data_addr(game->background.img,
-			&game->background.bbp, &game->background.size_line, &game->background.endian);
-	// game->minimap.width = MINIMAP_WIDTH;
-	// game->minimap.height = MINIMAP_HEIGHT;
-	// game->minimap.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	// game->minimap.data_addr = mlx_get_data_addr(game->minimap.img,
-	// 		game->minimap.bbp, game->minimap.size_line, game->minimap.endian);
+	game->player.next.x = game->player.x;
+	game->player.next.y = game->player.y;
+	if (game->player.keys.left)
+		move_view(KEY_LEFT, game);
+	if (game->player.keys.right)
+		move_view(KEY_RIGHT, game);
+	if (game->player.keys.w)
+		move_player(KEY_W, game);
+	if (game->player.keys.a)
+		move_player(KEY_A, game);
+	if (game->player.keys.s)
+		move_player(KEY_S, game);
+	if (game->player.keys.d)
+		move_player(KEY_D, game);
+	if (check_movement(game))
+	{
+		game->player.x = game->player.next.x;
+		game->player.y = game->player.next.y;
+	}
 }
 
-void	game(t_map *map)
+static int	play_game(t_play *game)
 {
-	t_play game;
+	draw_background(game->background, game->map->floor, game->map->sky);
+	check_view(game);
+	do_walls(game);
+	draw_tdmap(game, game->tdmap, game->map, game->player);
+	mlx_put_image_to_window(game->mlx, game->win, game->background.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->raycast.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->tdmap.img, WIN_WIDTH - 10 - game->tdmap.width, 10);
+	return (0);
+}
 
-	ft_bzero(&game, sizeof(t_play));
-	init_game(&game, map);			//variables mlx + datos estructura general
-	mlx_loop_hook(game.mlx, play_game, &game);	//función juego + struct juego
-	// mlx_hook(mlx->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
-	// mlx_hook(mlx->win, 2, 1L << 0, k_released, game);	//función gestión soltar teclas + struct juego
-	// mlx_hook(mlx->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
-	mlx_loop(game.mlx);				//comprobar si hace falta
+void	do_game(t_map *map, t_play *game)
+{
+	init_game(game, map);			//variables mlx + datos estructura general
+	mlx_loop_hook(game->mlx, play_game, game);	//función juego + struct juego
+	mlx_hook(game->win, 2, 1L << 0, k_pressed, game);	//función gestión apretar teclas + struct juego
+	mlx_hook(game->win, 3, 1L << 1, k_released, game);	//función gestión soltar teclas + struct juego
+	mlx_hook(game->win, 17, 0, close_window, game);		//función cierre redcross + struct juego
+	mlx_loop(game->mlx);				//comprobar si hace falta
 }

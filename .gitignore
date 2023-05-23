@@ -52,7 +52,9 @@ Mkfile.old
 dkms.conf
 
 .DS_Store
+.vscode
 *.png
 cub3D
+
 42_Printf
 .vscode

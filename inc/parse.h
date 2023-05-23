@@ -14,9 +14,11 @@
 
 # define PARSE_H
 
-# define FLOOR 1295376
-# define SKY 4431833
+
+# define FLOOR 15396333
+# define SKY 15990683
 # define HEX "0123456789abcdef"
+
 # define NO "./img/wall_north.xpm"
 # define SO "./img/wall_south.xpm"
 # define EA "./img/wall_east.xpm"

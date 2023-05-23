@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/08 10:12:01 by dlerma-c          #+#    #+#              #
-#    Updated: 2022/03/21 13:23:04 by dlerma-c         ###   ########.fr        #
+#    Updated: 2023/04/10 11:51:32 by pdel-pin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ OBJ_PATH = obj
 SRC_PATH = src
 INC_PATH = inc
 LBFT_PATH = lbft
+MLX_PATH = mlx
 
 #··············································································#
 #                                    LIBS                                      #
@@ -50,7 +51,13 @@ SRCS_PARSE =	check_map.c \
 				save.c
 
 SRCS_GAME_PATH = game
-SRCS_GAME = game.c
+SRCS_GAME = game.c \
+			init_game.c \
+			tdmap.c \
+			draw.c \
+			sprites_draw.c \
+			hooks.c \
+			utils.c \
 
 SRCS = main.c
 SRCS_NAME = $(addprefix $(SRCS_PARSE_PATH)/, $(SRCS_PARSE)) \
@@ -69,7 +76,18 @@ OBJS = $(addprefix $(OBJ_PATH)/, $(OBJS_NAME))
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -g3
 #include <xx.h> // path of .h
-CFLAGS += -I $(INC_PATH) -I $(LBFT_PATH)
+INC = -I $(INC_PATH) -I $(LBFT_PATH)
+
+#··············································································#
+#                                     MLX                                      #
+#··············································································#
+
+ifeq ($(shell uname -s), Darwin)
+	LDFLAGS += -L $(MLX_PATH)/mlx_mac
+	LDLIBS += -lmlx
+	INC += -I $(MLX_PATH)/mlx_mac
+# CFLAGS += -framework OpenGL -framework AppKitk
+endif
 
 #··············································································#
 #                                    RULES                                     #
@@ -81,13 +99,14 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C $(LBFT_PATH)
-	$(CC) $^ -o $@ $(CFLAGS) $(LDFLAGS) $(LDLIBS) -lmlx -framework OpenGL -framework AppKit
+	make -C $(MLX_PATH)/mlx_mac
+	$(CC) $^ -o $@ $(CFLAGS) $(INC) $(LDFLAGS) $(LDLIBS) -framework OpenGL -framework AppKit
 
 debug: CFLAGS += -fsanitize=address -g3
 debug: $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 $(OBJS): | $(OBJ_PATH) $(OBJS_PATH)
 
