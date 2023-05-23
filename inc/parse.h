@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pauladelpinoramirez <pauladelpinoramire    +#+  +:+       +#+        */
+/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2023/01/04 10:48:56 by pauladelpin      ###   ########.fr       */
+/*   Updated: 2022/11/22 16:54:58 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 # define PARSE_H
 
+
 # define FLOOR 15396333
 # define SKY 15990683
+# define HEX "0123456789abcdef"
+
 # define NO "./img/wall_north.xpm"
 # define SO "./img/wall_south.xpm"
 # define EA "./img/wall_east.xpm"
@@ -24,12 +27,15 @@
 
 typedef struct s_parse
 {
-	int	init_map;
-	int	num_map;
-	int	pos_map;
-	int	frst_chr;
-	int	pj;
-	int	max_len;
+	int		init_map;
+	int		num_map;
+	int		pos_map;
+	int		frst_chr;
+	int		pj;
+	int		max_len;
+	int		*check;
+	int		*color;
+	char	*hex;
 }t_parse;
 
 //check_file.c
@@ -39,8 +45,14 @@ t_map	check_file(char *file);
 void	check_map(t_map *map, t_parse *parse);
 
 //check_img.c
-void	check_textures(char *texture, char *name, char *check);
-void	check_colors(char *color, char *name, char *check);
+int		assing_colors(char *line, t_parse *parse, int check);
+char	*assing_walls(char *line, int check);
+
+//to_hex.c
+int		transform_numbers(t_parse *parse);
+
+//to_int.c
+int		ft_atoi_base(char *str, char *base);
 
 //init.c
 void	init(t_map *map, t_parse *parse, char *file);

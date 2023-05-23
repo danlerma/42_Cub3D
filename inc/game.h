@@ -2,6 +2,7 @@
 
 # define GAME_H
 
+
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 // # define WIN_WIDTH 1080
@@ -28,6 +29,7 @@
 
 # define ANGLE_SIXTY 1.0472
 # define ANGLE_THIRTY 0.523599
+
 
 typedef struct s_keys
 {

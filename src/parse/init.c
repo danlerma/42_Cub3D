@@ -6,7 +6,7 @@
 /*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 15:42:43 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/21 15:14:38 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2022/11/22 13:14:59 by dlerma-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ void	init(t_map *map, t_parse *parse, char *file)
 	parse->num_map = 0;
 	parse->pos_map = 0;
 	parse->frst_chr = 0;
+	parse->check = (int *)ft_calloc(6 + 1, sizeof(int));
+	parse->color = (int *)ft_calloc(3 + 1, sizeof(int));
+	if (parse->color == NULL || parse->check == NULL)
+		error_exit("Malloc failed.");
 }
 
 void	init_map(t_map *map, t_parse *parse, char *line)
@@ -52,7 +56,7 @@ void	init_map(t_map *map, t_parse *parse, char *line)
 					sizeof(char));
 			ft_memset(map->map[parse->pos_map], ' ', parse->max_len - 1);
 			ft_memcpy(map->map[parse->pos_map], line,
-					count_last_char(line, '1'));
+				count_last_char(line, '1'));
 			parse->pos_map++;
 			break ;
 		}

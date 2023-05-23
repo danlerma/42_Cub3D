@@ -16,6 +16,7 @@ int	check_movement(t_play *game)
 	return (0);
 }
 
+
 void	move_player(int key, t_play *game)
 {
 	if (key == KEY_W)
