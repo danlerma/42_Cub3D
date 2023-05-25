@@ -6,7 +6,7 @@
 /*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:08:29 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:20:09 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:22:25 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ static int	identify_firs_char(char *line, t_map *map, t_parse *parse, int i)
 		map->sky = assing_colors(line, parse, parse->check[5]);
 		parse->check[5] = -1;
 	}
-	else if (line[i] == 'N' && line[i + 1] == 'O')
+	return (0);
+}
+
+static int	identify_first_char(char *line, t_map *map, t_parse *parse, int i)
+{
+	if (line[i] == 'N' && line[i + 1] == 'O')
 	{
 		map->nsew[0] = assing_walls(line, parse->check[0]);
 		parse->check[0] = -1;
@@ -44,6 +49,8 @@ static int	identify_firs_char(char *line, t_map *map, t_parse *parse, int i)
 		map->nsew[3] = assing_walls(line, parse->check[3]);
 		parse->check[3] = -1;
 	}
+	else if (line[i] == 'F' || line[i] == 'C')
+		identify_firs_char(line, map, parse, i);
 	else
 		error_exit("Wrong map.");
 	return (0);
@@ -65,7 +72,7 @@ static void	identify_line(char *line, t_map *map, t_parse *parse, int num)
 			parse->max_len = count_last_char(line, '1');
 			break ;
 		}
-		else if (identify_firs_char(line, map, parse, i) == 0)
+		else if (identify_first_char(line, map, parse, i) == 0)
 			break ;
 	}
 }

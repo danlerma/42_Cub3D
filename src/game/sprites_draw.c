@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprites_draw.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/25 13:19:15 by pdel-pin          #+#    #+#             */
+/*   Updated: 2023/05/25 19:05:48 by pdel-pin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 t_img	get_sprite(t_play *game, t_rayc *ray)
@@ -39,29 +51,25 @@ void	draw_texture(t_play *game, t_rayc *ray, int num)
 	t_img		sprite;
 	uint32_t	color;
 
-	y = -1;
 	sprite = get_sprite(game, ray);
 	ray->text_x = (int)(ray->wall_x * (double)sprite.width);
-	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1 && ray->dir_y < 0))
+	if ((ray->side == 0 && ray->dir_x > 0)
+		|| (ray->side == 1 && ray->dir_y < 0))
 		ray->text_x = sprite.width - ray->text_x - 1;
 	ray->next = 1.0 * sprite.height / ray->line;
-	ray->sprite_start = (ray->start - WIN_HEIGHT / 2 + ray->line / 2) * ray->next;
-	while (y < ray->start)
-	{
+	ray->sprite_start = (ray->start - WIN_HEIGHT / 2
+			+ ray->line / 2) * ray->next;
+	y = -2;
+	while (++y < ray->start + 1)
 		pixel_put(&game->raycast, num, y, SKY);
-		y++;
-	}
 	while (y <= ray->end)
 	{
 		ray->text_y = (int)ray->sprite_start;
 		ray->sprite_start += ray->next;
-		color = pixel_get(&sprite, ray->text_x, ray->text_y);
+		color = pixel_get(&sprite, sprite.width - ray->text_x - 1, ray->text_y);
 		pixel_put(&game->raycast, num, y, color);
 		y++;
 	}
-	while (y < WIN_HEIGHT)
-	{
-		pixel_put(&game->raycast, num, y, FLOOR);
-		y++;
-	}
+	while (y++ < WIN_HEIGHT)
+		pixel_put(&game->raycast, num, y - 1, FLOOR);
 }

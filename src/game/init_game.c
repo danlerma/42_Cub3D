@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_game.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/25 13:19:18 by pdel-pin          #+#    #+#             */
+/*   Updated: 2023/05/25 18:37:46 by pdel-pin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 t_keys	init_keys(void)
@@ -72,13 +84,13 @@ t_sprites	get_sprites(t_play *game, t_map *map)
 {
 	t_sprites	s;
 
-	s.north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
+	s.north.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
 			&s.north.width, &s.north.height);
-	s.south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
+	s.south.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
 			&s.south.width, &s.south.height);
-	s.east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[2],
+	s.east.img = mlx_xpm_file_to_image(game->mlx, map->nsew[1],
 			&s.east.width, &s.east.height);
-	s.west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[3],
+	s.west.img = mlx_xpm_file_to_image(game->mlx, map->nsew[0],
 			&s.west.width, &s.west.height);
 	s.north.data_addr = mlx_get_data_addr(s.north.img, &s.north.bpp,
 			&s.north.size_line, &s.north.endian);
@@ -103,13 +115,17 @@ void	init_game(t_play *game, t_map *map)
 	game->player = init_player(map);
 	game->sprites = get_sprites(game, map);
 	game->background.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->background.size_line = game->background.width * (game->background.bpp / 8);
+	game->background.size_line = game->background.width
+		* (game->background.bpp / 8);
 	game->background.data_addr = mlx_get_data_addr(game->background.img,
-			&game->background.bpp, &game->background.size_line, &game->background.endian);
-	size = fmin(WIN_WIDTH / SCALE / ft_strlen(map->map[0]), WIN_HEIGHT / SCALE / ft_double_len(map->map));
+			&game->background.bpp, &game->background.size_line,
+			&game->background.endian);
+	size = fmin(WIN_WIDTH / SCALE / ft_strlen(map->map[0]),
+			WIN_HEIGHT / SCALE / ft_double_len(map->map));
 	game->tdmap.width = size * ft_strlen(map->map[0]);
 	game->tdmap.height = size * ft_double_len(map->map);
-	game->tdmap.img = mlx_new_image(game->mlx, game->tdmap.width, game->tdmap.height);
+	game->tdmap.img = mlx_new_image(game->mlx, game->tdmap.width,
+			game->tdmap.height);
 	game->tdmap.size_line = game->tdmap.width * (game->tdmap.bpp / 8);
 	game->tdmap.data_addr = mlx_get_data_addr(game->tdmap.img,
 			&game->tdmap.bpp, &game->tdmap.size_line, &game->tdmap.endian);

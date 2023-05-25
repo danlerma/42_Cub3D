@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 12:06:28 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:54:58 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:34:22 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 
 # define PARSE_H
-
 
 # define FLOOR 15396333
 # define SKY 15990683
