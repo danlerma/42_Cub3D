@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/25 13:50:55 by pdel-pin          #+#    #+#             */
+/*   Updated: 2023/05/25 18:34:13 by pdel-pin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GAME_H
 
 # define GAME_H
-
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
@@ -29,7 +40,6 @@
 
 # define ANGLE_SIXTY 1.0472
 # define ANGLE_THIRTY 0.523599
-
 
 typedef struct s_keys
 {
@@ -131,6 +141,9 @@ typedef struct s_play
 /* game.c */
 void		do_game(t_map *map, t_play *game);
 
+/* movement.c */
+void		check_view(t_play *game);
+
 /* hooks.c */
 int			close_window(t_play *game);
 int			k_pressed(int key, t_play *game);
@@ -152,10 +165,13 @@ t_player	init_player(t_map *map);
 t_keys		init_keys(void);
 
 /* draw.c */
-void		do_walls(t_play *game);
+t_img		init_draw(t_play *game);
+t_rayc		init_ray(t_play *game, int frame);
+void		check_collision(t_play *game, t_rayc *ray);
+void		get_frame_height(t_play *game, t_rayc *ray);
 void		draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color);
 
 /* sprites_draw.c */
-void	draw_texture(t_play *game, t_rayc *ray, int num);
+void		draw_texture(t_play *game, t_rayc *ray, int num);
 
 #endif

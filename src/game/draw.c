@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/25 13:10:43 by pdel-pin          #+#    #+#             */
+/*   Updated: 2023/05/25 16:24:49 by pdel-pin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 void	get_frame_height(t_play *game, t_rayc *ray)
@@ -22,6 +34,34 @@ void	get_frame_height(t_play *game, t_rayc *ray)
 		ray->end = WIN_HEIGHT - 1;
 }
 
+static void	def_dir(t_play *game, t_rayc *ray)
+{
+	if (ray->dir_x < 0)
+	{
+		ray->step_x = -1;
+		ray->side_dist_x = (game->player.x - ray->map_x)
+			* ray->delta_dist_x;
+	}
+	else
+	{
+		ray->step_x = 1;
+		ray->side_dist_x = (ray->map_x + 1.0 - game->player.x)
+			* ray->delta_dist_x;
+	}
+	if (ray->dir_y < 0)
+	{
+		ray->step_y = -1;
+		ray->side_dist_y = (game->player.y - ray->map_y)
+			* ray->delta_dist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.y)
+			* ray->delta_dist_y;
+	}
+}
+
 t_rayc	init_ray(t_play *game, int frame)
 {
 	t_rayc	ray;
@@ -41,26 +81,7 @@ t_rayc	init_ray(t_play *game, int frame)
 		ray.delta_dist_y = fabs(1 / ray.dir_y);
 	ray.coll = 0;
 	ray.side = 0;
-	if (ray.dir_x < 0)
-	{
-		ray.step_x = -1;
-		ray.side_dist_x = (game->player.x - ray.map_x) * ray.delta_dist_x;
-	}
-	else
-	{
-		ray.step_x = 1;
-		ray.side_dist_x = (ray.map_x + 1.0 - game->player.x) * ray.delta_dist_x;
-	}
-	if (ray.dir_y < 0)
-	{
-		ray.step_y = -1;
-		ray.side_dist_y = (game->player.y - ray.map_y) * ray.delta_dist_y;
-	}
-	else
-	{
-		ray.step_y = 1;
-		ray.side_dist_y = (ray.map_y + 1.0 - game->player.y) * ray.delta_dist_y;
-	}
+	def_dir(game, &ray);
 	return (ray);
 }
 
@@ -72,7 +93,8 @@ t_img	init_draw(t_play *game)
 	frame.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	frame.width = WIN_WIDTH;
 	frame.height = WIN_HEIGHT;
-	frame.data_addr = mlx_get_data_addr(frame.img, &frame.bpp, &frame.size_line, &frame.endian);
+	frame.data_addr = mlx_get_data_addr(frame.img,
+			&frame.bpp, &frame.size_line, &frame.endian);
 	return (frame);
 }
 
@@ -94,22 +116,5 @@ void	check_collision(t_play *game, t_rayc *ray)
 		}
 		if (game->map->map[(int)ray->map_y][(int)ray->map_x] == '1')
 			ray->coll = 1;
-	}
-}
-
-void	do_walls(t_play *game)
-{
-	t_rayc	ray;
-	int		num_frame;
-
-	game->raycast = init_draw(game);
-	num_frame = 0;
-	while (num_frame < WIN_WIDTH)
-	{
-		ray = init_ray(game, num_frame);
-		check_collision(game, &ray);
-		get_frame_height(game, &ray);
-		draw_texture(game, &ray, num_frame);
-		num_frame++;
 	}
 }

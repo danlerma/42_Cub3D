@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tdmap.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/25 13:19:13 by pdel-pin          #+#    #+#             */
+/*   Updated: 2023/05/25 18:34:50 by pdel-pin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <cub3d.h>
 
 void	pixel_put(t_img *img, int i, int j, int color)
@@ -11,24 +23,7 @@ void	pixel_put(t_img *img, int i, int j, int color)
 	}
 }
 
-void	draw_line_ray(t_img tdmap, t_coord pos, t_coord coll, int color)
-{
-	int		i;
-	float	dist;
-	t_coord	new;
-
-	dist = sqrt(pow(pos.x - coll.x, 2) + pow(pos.y - coll.y, 2));
-	new.x = (coll.x - pos.x) / dist;
-	new.y = (coll.y - pos.y) / dist;
-	i = 0;
-	while (i < dist)
-	{
-		pixel_put(&tdmap, (pos.x + new.x * i), (pos.y + new.y * i), color);
-		i++;
-	}
-}
-
-void	draw_rays(t_play *game, t_img tdmap, float tile)
+void	draw_rays(t_play *game, float tile)
 {
 	t_coord	coll;
 	t_coord	pos;
@@ -51,9 +46,6 @@ void	draw_rays(t_play *game, t_img tdmap, float tile)
 			coll.y = pos.y + point * sin(game->player.ang + ang);
 			point += 0.1;
 		}
-		coll.x = round(coll.x);
-		coll.y = round(coll.y);
-		draw_line_ray(tdmap, pos, coll, TDMAP_RAYS);
 		ang += ANGLE;
 	}
 }
@@ -68,7 +60,7 @@ void	draw_player(t_play *game, t_img tdmap, t_player player, float tile)
 	size = 5;
 	pos.x = player.x * tile - size / 2;
 	pos.y = player.y * tile - size / 2;
-	draw_rays(game, tdmap, tile);
+	draw_rays(game, tile);
 	while (++iter.y < size)
 	{
 		iter.x = -1;

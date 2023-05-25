@@ -6,7 +6,7 @@
 #    By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/08 10:12:01 by dlerma-c          #+#    #+#              #
-#    Updated: 2023/04/10 11:51:32 by pdel-pin         ###   ########.fr        #
+#    Updated: 2023/05/25 14:30:49 by pdel-pin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS_PARSE =	check_map.c \
 
 SRCS_GAME_PATH = game
 SRCS_GAME = game.c \
+			movement.c \
 			init_game.c \
 			tdmap.c \
 			draw.c \
