@@ -95,26 +95,28 @@ static char	*cond_hex(int y, char *hex)
 int	transform_numbers(t_parse *parse)
 {
 	char	*hex;
+	char	*tmp;
 	char	*aux;
 	int		y;
 	int		i;
 
-	i = 0;
-	parse->hex = ft_strdup("");
-	while (i < 3)
+	i = -1;
+	tmp = ft_strdup("");
+	while (++i < 3)
 	{
 		hex = hex_char(parse->color[i], HEX);
 		y = ft_strlen(hex);
 		aux = cond_hex(y, hex);
-		// printf("\t1->  %p\n", aux);
-		
-			printf("\t2-> %s  %p\n", parse->hex, parse->hex);
-		free(parse->hex);
-		parse->hex = ft_strjoin(parse->hex, aux);
+		parse->hex = ft_strjoin(tmp, aux);
+		free(tmp);
+		tmp = ft_strdup(parse->hex);
+		if (i != 2)
+			free(parse->hex);
 		free(hex);
 		free(aux);
-		i++;
 	}
-		printf("%p\t%s\n", parse->hex, parse->hex);
-	return (ft_atoi_base(parse->hex, HEX));
+	free(tmp);
+	y = ft_atoi_base(parse->hex, HEX);
+	free(parse->hex);
+	return (y);
 }

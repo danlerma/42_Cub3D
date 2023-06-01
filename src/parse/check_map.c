@@ -11,8 +11,6 @@
 /* ************************************************************************** */
 
 #include<cub3d.h>
-//caracter de en la posicion exacta antes , el caracter
-//tengo ue comprobar arriba y abajo
 
 static int	collapse(char this, char up, char down, char next)
 {

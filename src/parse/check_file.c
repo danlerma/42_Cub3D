@@ -114,13 +114,6 @@ t_map	check_file(char *file)
 	if (point == NULL || ft_strncmp(point, ".cub", ft_strlen(file)) != 0)
 		error_exit("Invalid format.");
 	init(&map, &parse, file);
-	// printf("----------->%p\n", &parse.check[0]);
-	// printf("----------->%p\n", &parse.check[1]);
-	// printf("----------->%p\n", &parse.check[2]);
-	// printf("----------->%p\n", &parse.check[3]);
-	// printf("----------->%p\n", &parse.check[4]);
-	// printf("----------->%p\n", &parse.check[5]);
-	// printf("----------->%p\n", &parse.check);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		error_exit("Something went wrong opening the file.");
@@ -130,15 +123,7 @@ t_map	check_file(char *file)
 		save_map(&map, &parse, file);
 	save_other_data(&map);
 	check_map(&map, &parse);
-	// printf("---------------------------------------->%p\n", &parse.check[0]);
-	// printf("---------------------------------------->%p\n", &parse.check[1]);
-	// printf("---------------------------------------->%p\n", &parse.check[2]);
-	// printf("---------------------------------------->%p\n", &parse.check[3]);
-	// printf("---------------------------------------->%p\n", &parse.check[4]);
-	// printf("---------------------------------------->%p\n", &parse.check[5]);
-	// printf("---------------------------------------->%p\n", &parse.check);
 	free(parse.color);
-	free(parse.hex);
 	free(parse.check);
 	return (map);
 }
