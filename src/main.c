@@ -20,12 +20,13 @@ void	leaks(void)
 int	main(int argc, char **argv)
 {
 	t_map	map;
-	t_play	game;
+	// t_play	game;
 
+	atexit(leaks);
 	if (argc != 2)
 		error_exit("Wrong arguments");
 	map = check_file(argv[1]);
-	do_game(&map, &game);
+	// do_game(&map, &game);
 	free_map(&map);
 	return (0);
 }

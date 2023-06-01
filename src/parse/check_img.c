@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_img.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:32:30 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:15:54 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:25:06 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*assing_walls(char *line, int check)
 	char	*aux;
 
 	if (check == -1)
-		ft_print_errors("Same data\n.");
+		error_exit("Same data.");
 	split = ft_split(line, ' ');
 	if (ft_strchr(split[1], '\n'))
 		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);
@@ -93,7 +93,7 @@ int	assing_colors(char *line, t_parse *parse, int check)
 	int		nbr;
 
 	if (check == -1)
-		ft_print_errors("Same data.\n");
+		error_exit("Same data.");
 	split = ft_split(line, ' ');
 	if (ft_strchr(split[1], '\n'))
 		aux = ft_substr(split[1], 0, ft_strlen(split[1]) - 1);

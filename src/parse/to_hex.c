@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   to_hex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dlerma-c <dlerma-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 13:25:54 by dlerma-c          #+#    #+#             */
-/*   Updated: 2022/11/22 16:18:21 by dlerma-c         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:31:27 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,15 @@ int	transform_numbers(t_parse *parse)
 		hex = hex_char(parse->color[i], HEX);
 		y = ft_strlen(hex);
 		aux = cond_hex(y, hex);
+		// printf("\t1->  %p\n", aux);
+		
+			printf("\t2-> %s  %p\n", parse->hex, parse->hex);
 		free(parse->hex);
 		parse->hex = ft_strjoin(parse->hex, aux);
 		free(hex);
 		free(aux);
 		i++;
 	}
+		printf("%p\t%s\n", parse->hex, parse->hex);
 	return (ft_atoi_base(parse->hex, HEX));
 }

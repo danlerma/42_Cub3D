@@ -6,7 +6,7 @@
 /*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:19:15 by pdel-pin          #+#    #+#             */
-/*   Updated: 2023/05/25 19:05:48 by pdel-pin         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:07:14 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	draw_texture(t_play *game, t_rayc *ray, int num)
 			+ ray->line / 2) * ray->next;
 	y = -2;
 	while (++y < ray->start + 1)
-		pixel_put(&game->raycast, num, y, SKY);
+		pixel_put(&game->raycast, num, y, game->map->sky);
 	while (y <= ray->end)
 	{
 		ray->text_y = (int)ray->sprite_start;
@@ -71,5 +71,5 @@ void	draw_texture(t_play *game, t_rayc *ray, int num)
 		y++;
 	}
 	while (y++ < WIN_HEIGHT)
-		pixel_put(&game->raycast, num, y - 1, FLOOR);
+		pixel_put(&game->raycast, num, y - 1, game->map->floor);
 }
