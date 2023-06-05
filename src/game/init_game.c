@@ -6,7 +6,7 @@
 /*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:19:18 by pdel-pin          #+#    #+#             */
-/*   Updated: 2023/05/25 18:37:46 by pdel-pin         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:57:07 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ void	def_dir(t_player *player, char dir)
 	}
 	if (dir == 'W')
 	{
-		player->dir.x = -1;
-		player->dir.y = 0;
+		player->dir.x = 0;
+		player->dir.y = 1;
 	}
 	player->plane.x = player->dir.y * -0.66;
-	player->plane.y = player->dir.x * -0.66;
+	player->plane.y = player->dir.x * 0.66;
 }
 
 t_player	init_player(t_map *map)

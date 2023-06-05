@@ -6,7 +6,7 @@
 /*   By: pdel-pin <pdel-pin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 13:19:26 by pdel-pin          #+#    #+#             */
-/*   Updated: 2023/05/25 16:24:55 by pdel-pin         ###   ########.fr       */
+/*   Updated: 2023/06/05 17:58:28 by pdel-pin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	do_walls(t_play *game)
 
 static int	play_game(t_play *game)
 {
-	draw_background(game->background, game->map->floor, game->map->sky);
+	// draw_background(game->background, game->map->floor, game->map->sky);
 	check_view(game);
 	do_walls(game);
 	draw_tdmap(game, game->tdmap, game->map, game->player);
