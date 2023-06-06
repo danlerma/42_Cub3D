@@ -1,4 +1,4 @@
-NO ./img/wall_north.xpm
+NO ./img/north.xpm
 WE ./img/wall_west.xpm
 SO ./img/wall_south.xpm
 EA ./img/wall_east.xpm
